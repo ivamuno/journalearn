@@ -1,0 +1,51 @@
+<div class="modal" [ngClass]="isActive ? 'is-active' : ''">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">New Journal</p>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">Author</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="text" placeholder="Iván Muñoz Mozo">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="text" placeholder="My first journal">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-heading"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Text</label>
+                <div class="control">
+                    <textarea class="textarea"></textarea>
+                </div>
+            </div>
+
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" (click)="save()">
+                <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span>Save</span>
+            </button>
+            <button class="button is-error" (click)="cancel()">
+                <span class="icon is-small">
+                    <i class="fas fa-times"></i>
+                </span>
+                <span>Cancel</span>
+            </button>
+        </footer>
+    </div>
+</div>
