@@ -1,6 +1,34 @@
-<app-home></app-home>
-<section class="section">
-  <div class="container is-widescreen">
-    <app-journals-list></app-journals-list>
+<nav class="navbar is-fixed-top is-dark">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" [routerLink]="['/']">
+        <img src="assets/icon.png" alt="" class="d-inline-block align-text-top">
+        <span style="padding-left: 10px;">Journalearn</span>
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu" id="navMenu">
+      <div class="navbar-start">
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            English
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              Español
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+</nav>
+<router-outlet></router-outlet>
