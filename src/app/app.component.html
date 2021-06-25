@@ -1,7 +1,7 @@
 <nav class="navbar is-fixed-top is-dark">
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item" [routerLink]="['/']">
+      <a class="navbar-item">
         <img src="assets/icon.png" alt="" class="d-inline-block align-text-top">
         <span style="padding-left: 10px;">Journalearn</span>
       </a>
@@ -14,6 +14,15 @@
     </div>
     <div class="navbar-menu" id="navMenu">
       <div class="navbar-start">
+        <a class="navbar-item" [routerLink]="['/home']" routerLinkActive="is-active">
+          Home
+        </a>
+        <a class="navbar-item" [routerLink]="['/new']" routerLinkActive="is-active">
+          New
+        </a>
+        <a class="navbar-item" [routerLink]="['/journals']" routerLinkActive="is-active">
+          List
+        </a>
       </div>
       <div class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable">

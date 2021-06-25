@@ -21,8 +21,6 @@ enum JournalStatus {
   styleUrls: ['./journals-list.component.css'],
 })
 export class JournalsListComponent implements OnInit {
-  isNewJournalActive = false;
-
   journals: {
     author: string;
     language: { name: Languages; path: string };
@@ -54,9 +52,5 @@ export class JournalsListComponent implements OnInit {
     this.journals.forEach(
       (l) => (l.language.path = languagePaths[l.language.name])
     );
-  }
-
-  createNewJournal(): void {
-    this.isNewJournalActive = true;
   }
 }

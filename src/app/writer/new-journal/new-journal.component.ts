@@ -6,18 +6,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./new-journal.component.css'],
 })
 export class NewJournalComponent implements OnInit {
-  @Input() isActive = false;
-  @Output() isActiveChange = new EventEmitter<boolean>();
-
   constructor() {}
 
   ngOnInit(): void {}
 
-  save(): void {
-    this.isActiveChange.emit(false);
-  }
+  save(): void {}
 
-  cancel(): void {
-    this.isActiveChange.emit(false);
-  }
+  cancel(): void {}
 }
