@@ -3,19 +3,20 @@
         <h1 class="title">View Journal</h1>
         <h2 class="subtitle">Lorem Ipsum.</h2>
 
-        <div class="field">
-            <label class="label">Author</label>
-            <span>{{journal.author}}</span>
+        <div class="block">
+            <strong>Author: </strong>{{journal.author}}
         </div>
 
-        <div class="field">
-            <label class="label">Language</label>
-            <span>{{journal.language.name}}</span>
+        <div class="block">
+            <strong>Language: </strong>{{journal.language.name}}
         </div>
 
-        <div class="field">
-            <label class="label">Title</label>
-            <span>{{journal.title}}</span>
+        <div class="block">
+            <strong>Date: </strong>{{journal.date | date:'fullDate'}}
+        </div>
+
+        <div class="block">
+            <strong>Title: </strong>{{journal.title}}
         </div>
 
         <div class="tabs is-fullwidth">
