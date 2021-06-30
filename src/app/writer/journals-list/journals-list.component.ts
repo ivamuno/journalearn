@@ -1,56 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-
-enum Languages {
-  Spanish = 'Spanish',
-  English = 'English',
-}
-
-const languagePaths: Record<Languages, string> = {
-  Spanish: 'assets/ESP.png',
-  English: 'assets/GBR.png',
-};
-
-enum JournalStatus {
-  Pending = 'Pending',
-  Reviewed = 'Reviewed',
-}
+import { Component, Injectable, OnInit } from '@angular/core';
+import { Journal } from 'src/model/journal';
+import { JournalStoreService } from 'src/services/journal-store.service';
 
 @Component({
   selector: 'app-journals-list',
   templateUrl: './journals-list.component.html',
   styleUrls: ['./journals-list.component.css'],
 })
+@Injectable()
 export class JournalsListComponent implements OnInit {
-  journals: {
-    author: string;
-    language: { name: Languages; path: string };
-    date: Date;
-    title: string;
-    status: JournalStatus;
-  }[] = [];
+  journals: Journal[] = [];
 
-  constructor() {}
+  constructor(private journalStoreService: JournalStoreService) {}
 
-  ngOnInit(): void {
-    this.journals = [
-      {
-        author: 'Iván',
-        date: new Date(2021, 6, 21),
-        title: 'My first journal, long title',
-        language: { name: Languages.Spanish, path: '' },
-        status: JournalStatus.Pending,
-      },
-      {
-        author: 'María',
-        date: new Date(2021, 6, 22),
-        title: 'My journal',
-        language: { name: Languages.English, path: '' },
-        status: JournalStatus.Reviewed,
-      },
-    ];
-
-    this.journals.forEach(
-      (l) => (l.language.path = languagePaths[l.language.name])
-    );
+  ngOnInit() {
+    this.journals = this.journalStoreService.getAll();
   }
 }

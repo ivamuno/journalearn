@@ -34,18 +34,19 @@
                         </td>
                         <td>
                             <div class="buttons are-small">
-                                <button class="button is-dark is-outlined">
+                                <a class="button is-dark is-outlined" *ngIf="item.status !== 'Pending'"
+                                    [routerLink]="['/view', item.id]">
                                     <span class="icon is-small">
                                         <i class="fas fa-eye"></i>
                                     </span>
                                     <span>View</span>
-                                </button>
-                                <button class="button is-dark is-outlined" *ngIf="item.status == 'Pending'">
-                                    <span class="icon is-small">
+                                </a>
+                                <a class="button is-dark is-outlined" *ngIf="item.status == 'Pending'"
+                                    [routerLink]="['/review', item.id]"> <span class="icon is-small">
                                         <i class="fas fa-clipboard-check"></i>
                                     </span>
                                     <span>Review</span>
-                                </button>
+                                </a>
                             </div>
                         </td>
                     </tr>

@@ -1,67 +1,79 @@
 <section class="section">
     <div class="container is-widescreen">
-        <h1 class="title">New Journal</h1>
-        <h2 class="subtitle">Lorem Ipsum.</h2>
+        <form [formGroup]="createForm">
+            <h1 class="title">New Journal</h1>
+            <h2 class="subtitle">Lorem Ipsum.</h2>
 
-        <div class="field">
-            <label class="label">Author</label>
-            <div class="control has-icons-left">
-                <input class="input" type="text" placeholder="Iván Muñoz Mozo">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-user"></i>
-                </span>
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Language</label>
-            <div class="control has-icons-left">
-                <div class="select">
-                    <select>
-                        <option selected>English</option>
-                        <option>Español</option>
-                    </select>
-                </div>
-                <div class="icon is-small is-left">
-                    <i class="fas fa-globe"></i>
+            <div class="field">
+                <label class="label">Author</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="text" placeholder="Iván Muñoz Mozo" formControlName="author">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
                 </div>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label">Title</label>
-            <div class="control has-icons-left">
-                <input class="input" type="text" placeholder="My first journal">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-heading"></i>
-                </span>
+            <div class="field">
+                <label class="label">Language</label>
+                <div class="control has-icons-left">
+                    <div class="select">
+                        <select formControlName="language">
+                            <option [ngValue]="null" disabled>Choose your language</option>
+                            <option *ngFor="let language of languages" [ngValue]="language">
+                                {{language}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="icon is-small is-left">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label">Text</label>
-            <div class="control">
-                <textarea class="textarea"></textarea>
-            </div>
-        </div>
-
-        <div class="field is-grouped">
-            <div class="control">
-                <button class="button is-success">
-                    <span class="icon is-small">
-                        <i class="fas fa-check"></i>
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="text" placeholder="My first journal" formControlName="title">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-heading"></i>
                     </span>
-                    <span>Save</span>
-                </button>
+                </div>
             </div>
-            <div class="control">
-                <button class="button is-error">
-                    <span class="icon is-small">
-                        <i class="fas fa-times"></i>
-                    </span>
-                    <span>Cancel</span>
-                </button>
+
+            <div class="field">
+                <label class="label">Text</label>
+                <div class="control">
+                    <textarea class="textarea" formControlName="text"></textarea>
+                </div>
             </div>
-        </div>
+
+            <div [style.display]="!isSaved ? 'block' : 'none'">
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
+                            <span class="icon is-small">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span>Save</span>
+                        </button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-error" [disabled]="isSaving ? 'disabled' : ''" (click)="cancel()">
+                            <span class="icon is-small">
+                                <i class="fas fa-times"></i>
+                            </span>
+                            <span>Cancel</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div [style.display]="isSaved ? 'block' : 'none'">
+                <div class="notification is-success">
+                    The journal has been saved successfully!
+                </div>
+            </div>
+        </form>
     </div>
 </section>
