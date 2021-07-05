@@ -1,1 +1,61 @@
-<p>review-journal works!</p>
+<section class="section">
+    <div class="container is-widescreen">
+        <form [formGroup]="reviewForm" [ngClass]="isLoading ? 'is-hidden' : ''">
+            <h1 class="title">Review Journal</h1>
+            <h2 class="subtitle">Lorem Ipsum.</h2>
+
+            <div class="block">
+                <strong>Author: </strong>{{journal.author}}
+            </div>
+
+            <div class="block">
+                <strong>Language: </strong>{{journal.language.name}}
+            </div>
+
+            <div class="block">
+                <strong>Date: </strong>{{journal.date | date:'EEE, LLL d, YYYY'}}
+            </div>
+
+            <div class="block">
+                <strong>Title: </strong>{{journal.title}}
+            </div>
+
+            <div class="field">
+                <label class="label">Text</label>
+                <div class="control">
+                    <textarea class="textarea" formControlName="text">{{journal.text}}</textarea>
+                </div>
+            </div>
+
+            <div [style.display]="!isSaved ? 'block' : 'none'">
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
+                            <span class="icon is-small">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span>Save</span>
+                        </button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-error" [disabled]="isSaving ? 'disabled' : ''" (click)="cancel()">
+                            <span class="icon is-small">
+                                <i class="fas fa-times"></i>
+                            </span>
+                            <span>Reset</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div [style.display]="isSaved ? 'block' : 'none'">
+                <div class="notification is-success">
+                    The reviews has been saved successfully!
+                </div>
+            </div>
+        </form>
+
+        <progress class="progress is-large is-info is-overlay" max="100"
+            [ngClass]="isLoading ? '' : 'is-hidden'"></progress>
+    </div>
+</section>

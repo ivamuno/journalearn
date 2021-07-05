@@ -19,7 +19,7 @@
             <strong>Title: </strong>{{journal.title}}
         </div>
 
-        <div class="tabs is-fullwidth">
+        <div id="tab-header" class="tabs is-boxed is-fullwidth">
             <ul>
                 <li [ngClass]="{'is-active': activeDataTab == 1 }" data-tab="1" (click)="activeDataTab=1">
                     <a>
@@ -35,13 +35,14 @@
                 </li>
             </ul>
         </div>
+        
         <div id="tab-content">
-            <p [style.display]="activeDataTab == 1 ? 'block' : 'none'">
+            <div [style.display]="activeDataTab == 1 ? 'block' : 'none'">
                 {{journal.text}}
-            </p>
-            <p [style.display]="activeDataTab == 2 ? 'block' : 'none'">
+            </div>
+            <div [style.display]="activeDataTab == 2 ? 'block' : 'none'">
                 {{journal.review}}
-            </p>
+            </div>
         </div>
     </div>
 </section>

@@ -1,0 +1,11 @@
+#tab-header {
+  margin-bottom: 0px;
+}
+
+#tab-content {
+  border-color: hsl(0, 0%, 86%);
+  border-style: solid;
+  border-width: 0px 1px 1px 1px;
+  padding: 10px;
+  margin-bottom: 0px;
+}

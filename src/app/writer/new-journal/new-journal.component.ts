@@ -29,7 +29,6 @@ export class NewJournalComponent implements OnInit {
   async submit(): Promise<void> {
     this.isSaving = true;
     this.createForm.disable();
-    console.log(this.isSaving)
     const newJournal: Journal = {
       id: uuidv4(),
       author: this.createForm.value.author,
@@ -41,12 +40,11 @@ export class NewJournalComponent implements OnInit {
       status: JournalStatus.Pending,
       title: this.createForm.value.title,
       text: this.createForm.value.text,
-      review: ''
+      review: '',
     };
     await this.journalStoreService.add(newJournal);
     this.isSaving = false;
     this.isSaved = true;
-    console.log(this.isSaving)
   }
 
   cancel(): void {

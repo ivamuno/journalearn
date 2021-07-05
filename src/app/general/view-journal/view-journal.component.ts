@@ -1,5 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { from } from 'rxjs';
 import { Journal } from 'src/model/journal';
 import { JournalStoreService } from 'src/services/journal-store.service';
 
@@ -20,6 +21,8 @@ export class ViewJournalComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this.journal = this.journalStoreService.get(id) || new Journal();
+    from(this.journalStoreService.get(id)).subscribe((result) => {
+      this.journal = result;
+    });
   }
 }

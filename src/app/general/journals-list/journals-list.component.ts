@@ -1,4 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
+import { from } from 'rxjs';
 import { Journal } from 'src/model/journal';
 import { JournalStoreService } from 'src/services/journal-store.service';
 
@@ -13,7 +14,9 @@ export class JournalsListComponent implements OnInit {
 
   constructor(private journalStoreService: JournalStoreService) {}
 
-  ngOnInit() {
-    this.journals = this.journalStoreService.getAll();
+  async ngOnInit() {
+    from(this.journalStoreService.getAll()).subscribe(result => {
+      this.journals = result;
+    });
   }
 }
