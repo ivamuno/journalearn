@@ -28,9 +28,11 @@ const languagePaths: Record<Languages, string> = {
   English: 'assets/GBR.png',
 };
 
+const journalCollectionKey = 'journals';
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: 'AIzaSyAMpiHHTURYj-yrzrozfebeaeexzuy3EM8',
   authDomain: 'journa-l-earn.firebaseapp.com',
   databaseURL:
@@ -50,36 +52,13 @@ export class JournalStoreService {
 
   constructor() {
     this.db = getFirestore();
-
-    /*this.journals = [
-      {
-        id: '11111111-1111-1111-1111-111111111111',
-        author: 'Iván',
-        date: new Date(2021, 6, 21),
-        title: 'My first journal, long title',
-        language: { name: Languages.Spanish, path: '' },
-        status: JournalStatus.Pending,
-        text: 'My first journal, long title Text',
-        review: '',
-      },
-      {
-        id: '22222222-2222-2222-2222-222222222222',
-        author: 'María',
-        date: new Date(2021, 6, 22),
-        title: 'My journal',
-        language: { name: Languages.English, path: '' },
-        status: JournalStatus.Reviewed,
-        text: 'My journal Text',
-        review: 'My journal Text (reviwed)',
-      },
-    ];*/
   }
 
   public async getAll(): Promise<Journal[]> {
     const journals: Journal[] = [];
 
     const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(
-      collection(this.db, 'journals')
+      collection(this.db, journalCollectionKey)
     );
     querySnapshot.forEach((doc) => {
       const journal = this.convertTo(doc.id, doc.data() as JournalDb);
@@ -93,7 +72,10 @@ export class JournalStoreService {
     const journalDb = this.convertFrom(journal);
 
     try {
-      const docRef = await addDoc(collection(this.db, 'journals'), journalDb);
+      const docRef = await addDoc(
+        collection(this.db, journalCollectionKey),
+        journalDb
+      );
       console.log('Document written with ID: ', docRef.id, journalDb);
     } catch (e) {
       console.error('Error adding document: ', e);
@@ -101,26 +83,16 @@ export class JournalStoreService {
   }
 
   public async review(journal: Journal): Promise<void> {
-    const docRef = doc(this.db, 'journals', journal.id);
+    const docRef = doc(this.db, journalCollectionKey, journal.id);
 
     await updateDoc(docRef, {
       review: journal.review,
       status: journal.status,
     });
-
-    /*this.journals
-      .filter((j) => j.id == journal.id)
-      .map((j) => {
-        console.log(j);
-        j.review = journal.review;
-        j.status = journal.status;
-      });
-    console.log(this.journals);
-    await this.timeout(3000);*/
   }
 
   public async get(id: string): Promise<Journal> {
-    const docRef = doc(this.db, 'journals', id);
+    const docRef = doc(this.db, journalCollectionKey, id);
     const docSnap = await getDoc(docRef);
 
     return this.convertTo(docSnap.id, docSnap.data() as JournalDb);
