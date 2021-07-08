@@ -1,36 +1,86 @@
 <section class="section">
     <div class="container is-widescreen">
-        <form [formGroup]="reviewForm" [ngClass]="isLoading ? 'is-hidden' : ''">
+        <form [formGroup]="reviewForm">
             <h1 class="title">Review Journal</h1>
             <h2 class="subtitle">Lorem Ipsum.</h2>
 
-            <div class="block">
-                <strong>Author: </strong>{{journal.author}}
+            <div class="field">
+                <label class="label">Author</label>
+                <div class="control has-icons-left">
+                    <div [ngClass]="{'is-invisible': isLoading}">
+                        <input class="input" type="text" [value]="journal.author" disabled>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                        <progress class="progress is-large is-light" max="100">60%</progress>
+                    </div>
+                </div>
             </div>
 
-            <div class="block">
-                <strong>Language: </strong>{{journal.language.name}}
+            <div class="field">
+                <label class="label">Language</label>
+                <div class="control has-icons-left">
+                    <div [ngClass]="{'is-invisible': isLoading}">
+                        <input class="input" type="text" [value]="journal.language.name" disabled>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-globe"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                        <progress class="progress is-large is-light" max="100">60%</progress>
+                    </div>
+                </div>
             </div>
 
-            <div class="block">
-                <strong>Date: </strong>{{journal.date | date:'EEE, LLL d, YYYY'}}
+            <div class="field">
+                <label class="label">Date</label>
+                <div class="control has-icons-left">
+                    <div [ngClass]="{'is-invisible': isLoading}">
+                        <input class="input" type="text" [value]="journal.date | date:'EEE, LLL d, YYYY'" disabled>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-calendar-day"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                        <progress class="progress is-large is-light" max="100">60%</progress>
+                    </div>
+                </div>
             </div>
 
-            <div class="block">
-                <strong>Title: </strong>{{journal.title}}
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control has-icons-left">
+                    <div [ngClass]="{'is-invisible': isLoading}">
+                        <input class="input" type="text" [value]="journal.title" disabled>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-heading"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                        <progress class="progress is-large is-light" max="100">60%</progress>
+                    </div>
+                </div>
             </div>
 
             <div class="field">
                 <label class="label">Text</label>
                 <div class="control">
-                    <textarea class="textarea" formControlName="text">{{journal.text}}</textarea>
+                    <div [ngClass]="{'is-invisible': isLoading}">
+                        <textarea class="textarea" formControlName="text">{{journal.text}}</textarea>
+                    </div>
+                    <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                        <progress class="progress is-large is-light" max="100">60%</progress>
+                    </div>
                 </div>
             </div>
 
             <div [style.display]="!isSaved ? 'block' : 'none'">
                 <div class="field is-grouped">
                     <div class="control">
-                        <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
+                        <button class="button is-success" [ngClass]="{'is-loading': isSaving}"
+                            [disabled]="isLoading ? 'disabled' : ''" (click)="submit()">
                             <span class="icon is-small">
                                 <i class="fas fa-check"></i>
                             </span>
@@ -38,7 +88,8 @@
                         </button>
                     </div>
                     <div class="control">
-                        <button class="button is-error" [disabled]="isSaving ? 'disabled' : ''" (click)="cancel()">
+                        <button class="button is-error" [disabled]="isLoading || isSaving ? 'disabled' : ''"
+                            (click)="cancel()">
                             <span class="icon is-small">
                                 <i class="fas fa-times"></i>
                             </span>
@@ -54,8 +105,5 @@
                 </div>
             </div>
         </form>
-
-        <progress class="progress is-large is-info is-overlay" max="100"
-            [ngClass]="isLoading ? '' : 'is-hidden'"></progress>
     </div>
 </section>

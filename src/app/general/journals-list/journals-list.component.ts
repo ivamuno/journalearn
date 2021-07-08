@@ -1,7 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { from } from 'rxjs';
 import { Journal } from 'src/model/journal';
-import { JournalStoreService } from 'src/services/journal-store.service';
+import { JournalStoreService } from 'src/services/journal-service';
 
 @Component({
   selector: 'app-journals-list',
@@ -10,13 +9,16 @@ import { JournalStoreService } from 'src/services/journal-store.service';
 })
 @Injectable()
 export class JournalsListComponent implements OnInit {
+  isLoading: boolean;
   journals: Journal[] = [];
 
   constructor(private journalStoreService: JournalStoreService) {}
 
   async ngOnInit() {
-    from(this.journalStoreService.getAll()).subscribe(result => {
+    this.isLoading = true;
+    this.journalStoreService.getAll().subscribe((result) => {
       this.journals = result;
+      this.isLoading = false;
     });
   }
 }

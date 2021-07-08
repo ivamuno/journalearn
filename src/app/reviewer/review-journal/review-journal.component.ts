@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
 import { Journal, JournalStatus, Languages } from 'src/model/journal';
-import { JournalStoreService } from 'src/services/journal-store.service';
+import { JournalStoreService } from 'src/services/journal-service';
 
 @Component({
   selector: 'app-review-journal',
@@ -31,7 +31,7 @@ export class ReviewJournalComponent implements OnInit {
     this.journal.language = { name: Languages.English, path: '' };
 
     const id = this.route.snapshot.params['id'];
-    from(this.journalStoreService.get(id)).subscribe((result) => {
+    this.journalStoreService.get(id).subscribe((result) => {
       this.journal = result;
       this.reviewForm = new FormGroup({
         text: new FormControl(this.journal.text),

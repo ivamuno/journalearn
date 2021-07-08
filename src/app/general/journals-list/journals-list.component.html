@@ -7,50 +7,74 @@
             <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                 <thead>
                     <tr>
-                        <th>Author</th>
-                        <th>Language</th>
-                        <th>Date</th>
-                        <th>Title</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th [width]="'10%'">Author</th>
+                        <th [width]="'10%'">Language</th>
+                        <th [width]="'15%'">Date</th>
+                        <th [width]="'45%'">Title</th>
+                        <th [width]="'10%'">Status</th>
+                        <th [width]="'10%'">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr *ngFor="let item of journals">
-                        <td>{{item.author}}</td>
+                <tbody *ngIf="isLoading;else elseJournals">
+                    <tr>
                         <td>
-                            <div class="icon-text">
-                                <figure class="icon">
-                                    <img [src]="item.language.path">
-                                </figure>
-                                <span>{{item.language.name}}</span>
-                            </div>
-                        </td>
-                        <td>{{item.date | date:'EEE, LLL d, YYYY'}}</td>
-                        <td>{{item.title}}</td>
-                        <td>
-                            <span class="tag"
-                                [ngClass]="item.status == 'Pending' ? 'is-warning' : 'is-success'">{{item.status}}</span>
+                            <progress class="progress is-large is-light" max="100">60%</progress>
                         </td>
                         <td>
-                            <div class="buttons are-small">
-                                <a class="button is-dark is-outlined" *ngIf="item.status !== 'Pending'"
-                                    [routerLink]="['/view', item.id]">
-                                    <span class="icon is-small">
-                                        <i class="fas fa-eye"></i>
-                                    </span>
-                                    <span>View</span>
-                                </a>
-                                <a class="button is-dark is-outlined" *ngIf="item.status == 'Pending'"
-                                    [routerLink]="['/review', item.id]"> <span class="icon is-small">
-                                        <i class="fas fa-clipboard-check"></i>
-                                    </span>
-                                    <span>Review</span>
-                                </a>
-                            </div>
+                            <progress class="progress is-large is-light" max="100">60%</progress>
+                        </td>
+                        <td>
+                            <progress class="progress is-large is-light" max="100">60%</progress>
+                        </td>
+                        <td>
+                            <progress class="progress is-large is-light" max="100">60%</progress>
+                        </td>
+                        <td>
+                            <progress class="progress is-large is-light" max="100">60%</progress>
+                        </td>
+                        <td>
+                            <progress class="progress is-large is-light" max="100">60%</progress>
                         </td>
                     </tr>
                 </tbody>
+                <ng-template #elseJournals>
+                    <tbody>
+                        <tr *ngFor="let item of journals">
+                            <td>{{item.author}}</td>
+                            <td>
+                                <div class="icon-text">
+                                    <figure class="icon">
+                                        <img [src]="item.language.path">
+                                    </figure>
+                                    <span>{{item.language.name}}</span>
+                                </div>
+                            </td>
+                            <td>{{item.date | date:'EEE, LLL d, YYYY'}}</td>
+                            <td>{{item.title}}</td>
+                            <td>
+                                <span class="tag"
+                                    [ngClass]="item.status == 'Pending' ? 'is-warning' : 'is-success'">{{item.status}}</span>
+                            </td>
+                            <td>
+                                <div class="buttons are-small">
+                                    <a class="button is-dark is-outlined" *ngIf="item.status !== 'Pending'"
+                                        [routerLink]="['/view', item.id]">
+                                        <span class="icon is-small">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                        <span>View</span>
+                                    </a>
+                                    <a class="button is-dark is-outlined" *ngIf="item.status == 'Pending'"
+                                        [routerLink]="['/review', item.id]"> <span class="icon is-small">
+                                            <i class="fas fa-clipboard-check"></i>
+                                        </span>
+                                        <span>Review</span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </ng-template>
             </table>
         </div>
 

@@ -93,7 +93,8 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/styles/bulma.io.vendor.fontawesome-free-5.15.2-web.min.css"
             ],
             "scripts": []
           }

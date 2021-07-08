@@ -1,3 +1,4 @@
+<app-auth></app-auth>
 <nav class="navbar is-fixed-top is-dark">
   <div class="container">
     <div class="navbar-brand">
@@ -25,27 +26,18 @@
         </a>
       </div>
       <div class="navbar-end">
-        <div class="navbar-item has-dropdown is-hoverable">
-          
-          <a class="navbar-link">
-            <div class="icon is-small is-left">
-              <i class="fas fa-globe">Language</i>
-            </div>
-          </a>
-
-          <div class="navbar-dropdown">
-            <a class="navbar-item">
-              English
-            </a>
-            <a class="navbar-item">
-              Español
-            </a>
-          </div>
-        </div>
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-white is-outlined">
+            <a class="button is-white is-outlined" *ngIf="!isLogin" (click)="openModal()">
               <strong>Log in</strong>
+            </a>
+            <a class="button is-white is-outlined" *ngIf="!isLogin">
+              <span class="icon is-small">
+                <i class="fas fa-globe"></i>
+              </span>
+            </a>
+            <a class="button is-white is-outlined" *ngIf="isLogin" (click)="logout()">
+              <strong>Log out</strong>
             </a>
           </div>
         </div>

@@ -1,7 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Journal, JournalStatus, Languages } from 'src/model/journal';
-import { JournalStoreService } from 'src/services/journal-store.service';
+import { JournalStoreService } from 'src/services/journal-service';
+
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
