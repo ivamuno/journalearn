@@ -8,12 +8,12 @@ import { AuthService } from 'src/services/auth.service';
 })
 @Injectable()
 export class AppComponent {
-  isLogin = false;
+  isAuthenticated = false;
   title = 'journal-me';
 
   constructor(private authService: AuthService) {
     this.authService.isAuthenticated.subscribe((value) => {
-      this.isLogin = value;
+      this.isAuthenticated = value;
     });
   }
 

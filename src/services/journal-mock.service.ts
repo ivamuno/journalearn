@@ -35,7 +35,15 @@ export class JournalMockService extends JournalStoreService {
     );
   }
 
-  public getAll(): Observable<Journal[]> {
+  public getByUser(userId: string): Observable<Journal[]> {
+    const promise = new Promise<Journal[]>((resolve, reject) => {
+      setTimeout(resolve, 3000);
+      return resolve(this.journals);
+    });
+    return from(promise);
+  }
+
+  public getPending(): Observable<Journal[]> {
     const promise = new Promise<Journal[]>((resolve, reject) => {
       setTimeout(resolve, 3000);
       return resolve(this.journals);

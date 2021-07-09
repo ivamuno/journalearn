@@ -7,7 +7,9 @@ export abstract class JournalStoreService {
     English: 'assets/GBR.png',
   };
 
-  public abstract getAll(): Observable<Journal[]>;
+  public abstract getByUser(userId: string): Observable<Journal[]>;
+
+  public abstract getPending(): Observable<Journal[]>;
 
   public abstract add(journal: Journal): Promise<void>;
 

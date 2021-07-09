@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { from } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { Journal, JournalStatus, Languages } from 'src/model/journal';
 import { JournalStoreService } from 'src/services/journal-service';
 
@@ -31,7 +31,7 @@ export class ReviewJournalComponent implements OnInit {
     this.journal.language = { name: Languages.English, path: '' };
 
     const id = this.route.snapshot.params['id'];
-    this.journalStoreService.get(id).subscribe((result) => {
+    this.journalStoreService.get(id).pipe(first()).subscribe((result) => {
       this.journal = result;
       this.reviewForm = new FormGroup({
         text: new FormControl(this.journal.text),

@@ -68,7 +68,8 @@
                 <label class="label">Text</label>
                 <div class="control">
                     <div [ngClass]="{'is-invisible': isLoading}">
-                        <textarea class="textarea" formControlName="text">{{journal.text}}</textarea>
+                        <textarea class="textarea" formControlName="text"
+                            [value]="journal.review || journal.text"></textarea>
                     </div>
                     <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
                         <progress class="progress is-large is-light" max="100">60%</progress>

@@ -5,6 +5,7 @@ import { ViewJournalComponent } from './general/view-journal/view-journal.compon
 import { JournalsListComponent } from './general/journals-list/journals-list.component';
 import { NewJournalComponent } from './writer/new-journal/new-journal.component';
 import { ReviewJournalComponent } from './reviewer/review-journal/review-journal.component';
+import { ReviewListComponent } from './reviewer/review-list/review-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'view/:id', component: ViewJournalComponent },
   { path: 'review/:id', component: ReviewJournalComponent },
   { path: 'journals', component: JournalsListComponent },
+  { path: 'reviews', component: ReviewListComponent },
 ];
 
 @NgModule({

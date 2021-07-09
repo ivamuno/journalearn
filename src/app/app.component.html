@@ -18,25 +18,28 @@
         <a class="navbar-item" [routerLink]="['/home']" routerLinkActive="is-active">
           Home
         </a>
-        <a class="navbar-item" [routerLink]="['/new']" routerLinkActive="is-active">
+        <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/new']" routerLinkActive="is-active">
           New
         </a>
-        <a class="navbar-item" [routerLink]="['/journals']" routerLinkActive="is-active">
+        <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/journals']" routerLinkActive="is-active">
           List
+        </a>
+        <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/reviews']" routerLinkActive="is-active">
+          Reviews
         </a>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-white is-outlined" *ngIf="!isLogin" (click)="openModal()">
+            <a class="button is-white is-outlined" *ngIf="!isAuthenticated" (click)="openModal()">
               <strong>Log in</strong>
             </a>
-            <a class="button is-white is-outlined" *ngIf="!isLogin">
+            <a class="button is-white is-outlined" *ngIf="!isAuthenticated">
               <span class="icon is-small">
                 <i class="fas fa-globe"></i>
               </span>
             </a>
-            <a class="button is-white is-outlined" *ngIf="isLogin" (click)="logout()">
+            <a class="button is-white is-outlined" *ngIf="isAuthenticated" (click)="logout()">
               <strong>Log out</strong>
             </a>
           </div>

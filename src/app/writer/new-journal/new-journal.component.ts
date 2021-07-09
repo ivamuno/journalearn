@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Journal, JournalStatus, Languages } from 'src/model/journal';
+import { AuthService } from 'src/services/auth.service';
 import { JournalStoreService } from 'src/services/journal-service';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -15,6 +16,7 @@ export class NewJournalComponent implements OnInit {
   isSaving: boolean;
   isSaved: boolean;
   languages: string[] = Object.keys(Languages);
+  author: string;
 
   createForm: FormGroup = new FormGroup({
     author: new FormControl(null),
@@ -23,16 +25,23 @@ export class NewJournalComponent implements OnInit {
     text: new FormControl(null),
   });
 
-  constructor(private journalStoreService: JournalStoreService) {}
+  constructor(
+    private journalStoreService: JournalStoreService,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.user.subscribe((u) => {
+      this.author = u.uid;
+    });
+  }
 
   async submit(): Promise<void> {
     this.isSaving = true;
     this.createForm.disable();
     const newJournal: Journal = {
       id: uuidv4(),
-      author: this.createForm.value.author,
+      author: this.author,
       language: {
         name: this.createForm.value.language,
         path: '',

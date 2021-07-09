@@ -23,10 +23,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       if (open) {
         this.afAuth.app.then((app) => {
           const uiConfig: firebaseui.auth.Config = {
-            signInOptions: [
-              firebase.auth.EmailAuthProvider.PROVIDER_ID,
-              firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-            ],
+            signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
             callbacks: {
               signInSuccessWithAuthResult: this.onLoginSuccessful.bind(this),
             },

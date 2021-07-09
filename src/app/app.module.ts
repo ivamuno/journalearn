@@ -17,6 +17,7 @@ import { JournalFirestoreService } from 'src/services/journal-firestore.service'
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { JournalStoreService } from 'src/services/journal-service';
+import { ReviewListComponent } from './reviewer/review-list/review-list.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { JournalStoreService } from 'src/services/journal-service';
     ViewJournalComponent,
     ReviewJournalComponent,
     AuthComponent,
+    ReviewListComponent
   ],
   imports: [
     BrowserModule,

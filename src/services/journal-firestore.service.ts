@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { JournalStoreService } from './journal-service';
+import { AuthService } from './auth.service';
 
 class JournalDb {
   public author: string;
@@ -23,9 +24,28 @@ export class JournalFirestoreService extends JournalStoreService {
     super();
   }
 
-  public getAll(): Observable<Journal[]> {
+  public getByUser(userId: string): Observable<Journal[]> {
     return this.firestore
-      .collection<JournalDb>(journalCollectionKey)
+      .collection<JournalDb>(journalCollectionKey, (ref) =>
+        ref.where('author', '==', userId)
+      )
+      .snapshotChanges()
+      .pipe(
+        map((x) => {
+          return x.map((doc) => {
+            return this.convertTo(
+              doc.payload.doc.id,
+              doc.payload.doc.data() as JournalDb
+            );
+          });
+        })
+      );
+  }
+  public getPending(): Observable<Journal[]> {
+    return this.firestore
+      .collection<JournalDb>(journalCollectionKey, (ref) =>
+        ref.where('status', '==', 'Pending')
+      )
       .snapshotChanges()
       .pipe(
         map((x) => {
