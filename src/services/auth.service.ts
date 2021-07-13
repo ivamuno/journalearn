@@ -26,7 +26,7 @@ export class AuthService {
     );
 
     this.user.subscribe(async (u) => {
-      this.isAuthenticated.emit(!!u);
+      this.isAuthenticated.emit(u.uid !== '');
     });
   }
 
