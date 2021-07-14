@@ -1,10 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Journal, JournalStatus, Languages } from 'src/model/journal';
 import { AuthService } from 'src/app/shared/services/auth.service';
-
-import { v4 as uuidv4 } from 'uuid';
 import { JournalStoreService } from 'src/app/shared/services/journal-service';
+import { Journal, JournalStatus, Languages } from 'src/model/journal';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-new-journal',
@@ -26,8 +25,8 @@ export class NewJournalComponent implements OnInit {
   });
 
   constructor(
-    private journalStoreService: JournalStoreService,
-    private authService: AuthService
+    private readonly journalStoreService: JournalStoreService,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {

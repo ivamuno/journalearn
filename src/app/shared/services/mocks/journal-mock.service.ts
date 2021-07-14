@@ -1,9 +1,10 @@
-import { from, Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { Journal, JournalStatus, Languages } from 'src/model/journal';
+
 import { JournalStoreService } from '../journal-service';
 
 export class JournalMockService extends JournalStoreService {
-  private journals: Journal[] = [];
+  private readonly journals: Journal[] = [];
 
   constructor() {
     super();

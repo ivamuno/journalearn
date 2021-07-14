@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { AuthService } from 'src/app/shared/services/auth.service';
+
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from '@angular/fire';
-import { environment } from '../environments/environment';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import {
   AuthComponent,
   HomeComponent,
@@ -18,8 +19,8 @@ import {
   ReviewListComponent,
   ViewJournalComponent,
 } from './components';
-import { JournalStoreService } from './shared/services/journal-service';
 import { JournalFirestoreService } from './shared/services/journal-firestore.service';
+import { JournalStoreService } from './shared/services/journal-service';
 
 @NgModule({
   declarations: [

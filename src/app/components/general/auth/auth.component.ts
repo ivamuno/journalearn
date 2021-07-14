@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, Injectable } from '@angular/core';
-import * as firebaseui from 'firebaseui';
-import firebase from 'firebase/app';
+import { Component, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
+import * as firebaseui from 'firebaseui';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -16,8 +16,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   ui: firebaseui.auth.AuthUI;
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private authService: AuthService
+    private readonly afAuth: AngularFireAuth,
+    private readonly authService: AuthService
   ) {
     authService.isAuthenticatingEvent.subscribe((open) => {
       if (open) {
@@ -50,7 +50,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  close(): void  {
+  close(): void {
     this.authService.closeModal();
     this.ui.delete();
   }

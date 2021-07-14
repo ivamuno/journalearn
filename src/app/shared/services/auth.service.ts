@@ -1,8 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map } from 'rxjs/operators';
-import { Router, UrlTree } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export class UserInfo {
   displayName: string;
@@ -21,7 +21,10 @@ export class AuthService {
   isAuthenticated: boolean;
   user = new Observable<UserInfo | undefined>();
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) {
+  constructor(
+    private readonly afAuth: AngularFireAuth,
+    private readonly router: Router
+  ) {
     this.user = afAuth.authState.pipe(
       map((u) => {
         if (u) {

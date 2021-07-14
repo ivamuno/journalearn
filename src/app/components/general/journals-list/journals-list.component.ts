@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { Journal } from 'src/model/journal';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { JournalStoreService } from 'src/app/shared/services/journal-service';
+import { Journal } from 'src/model/journal';
 
 @Component({
   selector: 'app-journals-list',
@@ -14,8 +14,8 @@ export class JournalsListComponent implements OnInit {
   journals: Journal[] = [];
 
   constructor(
-    private journalStoreService: JournalStoreService,
-    private authService: AuthService
+    private readonly journalStoreService: JournalStoreService,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {

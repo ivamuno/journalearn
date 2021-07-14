@@ -1,8 +1,9 @@
-import { Journal, JournalStatus, Languages } from 'src/model/journal';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Journal, JournalStatus, Languages } from 'src/model/journal';
+
 import { JournalStoreService } from './journal-service';
 
 class JournalDb {
@@ -19,7 +20,7 @@ const journalCollectionKey = 'journals';
 
 @Injectable()
 export class JournalFirestoreService extends JournalStoreService {
-  constructor(private firestore: AngularFirestore) {
+  constructor(private readonly firestore: AngularFirestore) {
     super();
   }
 
@@ -40,6 +41,7 @@ export class JournalFirestoreService extends JournalStoreService {
         })
       );
   }
+
   public getPending(): Observable<Journal[]> {
     return this.firestore
       .collection<JournalDb>(journalCollectionKey, (ref) =>

@@ -12,7 +12,7 @@ export class ReviewListComponent implements OnInit {
   isLoading: boolean;
   journals: Journal[] = [];
 
-  constructor(private journalStoreService: JournalStoreService) {}
+  constructor(private readonly journalStoreService: JournalStoreService) {}
 
   ngOnInit(): void {
     this.isLoading = true;

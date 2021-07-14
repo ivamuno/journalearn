@@ -14,8 +14,8 @@ export class ViewJournalComponent implements OnInit {
   journal: Journal;
 
   constructor(
-    private journalStoreService: JournalStoreService,
-    private route: ActivatedRoute
+    private readonly journalStoreService: JournalStoreService,
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {

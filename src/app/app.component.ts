@@ -11,7 +11,7 @@ export class AppComponent {
   isAuthenticated = false;
   title = 'journal-me';
 
-  constructor(private authService: AuthService) {
+  constructor(private readonly authService: AuthService) {
     this.authService.isAuthenticatedEvent.subscribe((value) => {
       this.isAuthenticated = value;
     });
