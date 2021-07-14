@@ -1,0 +1,60 @@
+import { EventEmitter, Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { map } from 'rxjs/operators';
+import { Router, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+
+export class UserInfo {
+  displayName: string;
+  email: string;
+  phoneNumber: string;
+  photoURL: string;
+  providerId: string;
+  uid: string;
+}
+
+@Injectable()
+export class AuthService {
+  isAuthenticatingEvent = new EventEmitter<boolean>();
+  isAuthenticatedEvent = new EventEmitter<boolean>();
+
+  isAuthenticated: boolean;
+  user = new Observable<UserInfo | undefined>();
+
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
+    this.user = afAuth.authState.pipe(
+      map((u) => {
+        if (u) {
+          return {
+            displayName: u.displayName || '',
+            email: u.email || '',
+            phoneNumber: u.phoneNumber || '',
+            photoURL: u.photoURL || '',
+            providerId: u.providerId || '',
+            uid: u.uid || '',
+          };
+        }
+
+        return undefined;
+      })
+    );
+
+    this.user.subscribe(async (u) => {
+      this.isAuthenticatedEvent.emit(!!u);
+      this.isAuthenticated = !!u;
+    });
+  }
+
+  public openModal(): void {
+    this.isAuthenticatingEvent.emit(true);
+  }
+
+  public closeModal(): void {
+    this.isAuthenticatingEvent.emit(false);
+  }
+
+  public async logout(): Promise<void> {
+    this.router.navigate(['/home']);
+    await this.afAuth.signOut();
+  }
+}

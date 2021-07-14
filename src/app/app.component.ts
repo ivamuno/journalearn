@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { AuthService } from 'src/services/auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,16 +12,16 @@ export class AppComponent {
   title = 'journal-me';
 
   constructor(private authService: AuthService) {
-    this.authService.isAuthenticated.subscribe((value) => {
+    this.authService.isAuthenticatedEvent.subscribe((value) => {
       this.isAuthenticated = value;
     });
   }
 
-  openModal() {
+  openModal(): void {
     this.authService.openModal();
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
   }
 }
