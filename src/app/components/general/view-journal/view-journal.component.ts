@@ -2,6 +2,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JournalStoreService } from 'src/app/shared/services';
 import { Journal } from 'src/model/journal';
+import { ServiceError } from '../../../shared/services/service-error.model';
 
 @Component({
   selector: 'app-view-journal',
@@ -11,17 +12,19 @@ import { Journal } from 'src/model/journal';
 @Injectable()
 export class ViewJournalComponent implements OnInit {
   activeDataTab = 2;
-  journal: Journal;
+  journal: Journal = new Journal();
+  error: ServiceError;
 
   constructor(
     private readonly journalStoreService: JournalStoreService,
     private readonly route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
-    this.journalStoreService.get(id).subscribe((result) => {
-      this.journal = result;
-    });
+    this.journalStoreService.get(id).subscribe(
+      (result: Journal) => { this.journal = result },
+      (err: ServiceError) => { this.error = err; }
+    );
   }
 }

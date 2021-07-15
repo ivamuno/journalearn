@@ -13,12 +13,13 @@ export class UserInfo {
   uid: string;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
   isAuthenticatingEvent = new EventEmitter<boolean>();
   isAuthenticatedEvent = new EventEmitter<boolean>();
 
-  isAuthenticated: boolean;
   user = new Observable<UserInfo | undefined>();
 
   constructor(
@@ -44,7 +45,6 @@ export class AuthService {
 
     this.user.subscribe(async (u) => {
       this.isAuthenticatedEvent.emit(!!u);
-      this.isAuthenticated = !!u;
     });
   }
 

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Journal, JournalStatus, Languages } from 'src/model/journal';
 
 import { JournalStoreService } from './journal-service';
+import { ServiceError } from './service-error.model';
 
 class JournalDb {
   public author: string;
@@ -14,6 +15,28 @@ class JournalDb {
   public status: JournalStatus;
   public text: string;
   public review: string;
+}
+
+class FirestoreError {
+  public code: "cancelled"
+    | "unknown"
+    | "invalid-argument"
+    | "deadline-exceeded"
+    | "not-found"
+    | "already-exists"
+    | "permission-denied"
+    | "resource-exhausted"
+    | "failed-precondition"
+    | "aborted"
+    | "out-of-range"
+    | "unimplemented"
+    | "internal"
+    | "unavailable"
+    | "data-loss"
+    | "unauthenticated";
+  public message: string;
+  public name: string;
+  public stack: string;
 }
 
 const journalCollectionKey = 'journals';
@@ -87,6 +110,9 @@ export class JournalFirestoreService extends JournalStoreService {
       .pipe(
         map((x) => {
           return this.convertTo(x.payload.id, x.payload.data() as JournalDb);
+        }),
+        catchError((error: FirestoreError) => {
+          throw this.convertFirestoreError2ServiceError(error);
         })
       );
   }
@@ -116,6 +142,15 @@ export class JournalFirestoreService extends JournalStoreService {
       status: journal.status,
       text: journal.text,
       review: journal.review,
+    };
+  }
+
+  private convertFirestoreError2ServiceError(error: FirestoreError): ServiceError {
+    return {
+      code: error.code,
+      message: error.message,
+      name: error.name,
+      stack: error.stack
     };
   }
 }

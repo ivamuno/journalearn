@@ -20,4 +20,18 @@ export class Journal {
   public status: JournalStatus;
   public text: string;
   public review: string;
+
+  constructor() {
+    this.id = '';
+    this.author = '';
+    this.language = {
+      name: Languages.English,
+      path: ''
+    };
+    this.date = new Date();
+    this.title = '';
+    this.status = JournalStatus.Pending;
+    this.text = '';
+    this.review = '';
+  }
 }

@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   AuthComponent,
+  ErrorComponent,
   HomeComponent,
   JournalsListComponent,
   NewJournalComponent,
@@ -32,6 +33,7 @@ import { JournalStoreService } from './shared/services/journal-service';
     ReviewJournalComponent,
     AuthComponent,
     ReviewListComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
