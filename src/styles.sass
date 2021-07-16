@@ -1,24 +1,56 @@
+@import "~bulma/sass/utilities/initial-variables.sass"
+
 // Set your brand colors
-$purple: #8A4D76
+$evening-sea: #266150
+$matterhorn: #4F4846
 $brown: #757763
-$beige-light: #D0D1CD
-$beige-lighter: #EFF0EB
+$pancho: #DDAF94
+$solitaire: #E8CEBF
+$linen: #FDF8F5
+$beige-light: #D0D1CD 
+$sangria: #922b05
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif
 $grey-dark: $brown
 $grey-light: $beige-light
-$primary: $brown
-$widescreen-enabled: false
-$fullhd-enabled: false
+$primary: $pancho
+$info: $solitaire
+$dark: $matterhorn
+$light: $linen
+$success: $evening-sea
+$link: $matterhorn
+$danger: $sangria
 
 // Update some of Bulma's component variables
-$body-background-color: $beige-lighter
+$body-background-color: $light
 $control-border-width: 2px
 $input-border-color: transparent
 $input-shadow: none
 
+$table-head-background-color: $primary
+$table-background-color: $body-background-color
+$table-striped-row-even-background-color: #00000005
+
+$navbar-background-color: $dark
+$navbar-item-color: $light
+$navbar-item-hover-background-color: $light
+$navbar-item-active-background-color: $light
+
 @import "~bulma/bulma.sass"
 
-@import "~firebaseui/dist/firebaseui.css"
 @import "~@fortawesome/fontawesome-free/css/all.min.css"
+
+@import "~firebaseui/dist/firebaseui.css"
+.mdl-button--raised.mdl-button--colored,
+.mdl-button--raised.mdl-button--colored:active,
+.mdl-button--raised.mdl-button--colored:focus:not(:active),
+.mdl-button--raised.mdl-button--colored:hover
+  background: $evening-sea
+  color: #fff
+
+.firebaseui-container
+  background: $body-background-color
+
+.firebaseui-textfield.mdl-textfield .firebaseui-label::after
+  background-color: $evening-sea
