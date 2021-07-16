@@ -1,48 +1,51 @@
-<section class="section">
+<app-error [error]="error" *ngIf="error;else elseError"></app-error>
+<ng-template #elseError>
+  <section class="section">
     <div class="container is-widescreen">
-        <h1 class="title">View Journal</h1>
-        <h2 class="subtitle">Lorem Ipsum.</h2>
+      <h1 class="title">View Journal</h1>
+      <h2 class="subtitle">Lorem Ipsum.</h2>
 
-        <div class="block">
-            <strong>Author: </strong>{{journal.author}}
-        </div>
+      <div class="block">
+        <strong>Author: </strong>{{journal.author}}
+      </div>
 
-        <div class="block">
-            <strong>Language: </strong>{{journal.language.name}}
-        </div>
+      <div class="block">
+        <strong>Language: </strong>{{journal.language.name}}
+      </div>
 
-        <div class="block">
-            <strong>Date: </strong>{{journal.date | date:'EEE, LLL d, YYYY'}}
-        </div>
+      <div class="block">
+        <strong>Date: </strong>{{journal.date | date:'EEE, LLL d, YYYY'}}
+      </div>
 
-        <div class="block">
-            <strong>Title: </strong>{{journal.title}}
-        </div>
+      <div class="block">
+        <strong>Title: </strong>{{journal.title}}
+      </div>
 
-        <div id="tab-header" class="tabs is-boxed is-fullwidth">
-            <ul>
-                <li [ngClass]="{'is-active': activeDataTab == 1 }" data-tab="1" (click)="activeDataTab=1">
-                    <a>
-                        <span class="icon is-small"><i class="fas fa-eye" aria-hidden="true"></i></span>
-                        <span>Original</span>
-                    </a>
-                </li>
-                <li [ngClass]="{'is-active': activeDataTab == 2 }" data-tab="2" (click)="activeDataTab=2">
-                    <a>
-                        <span class="icon is-small"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
-                        <span>Review</span>
-                    </a>
-                </li>
-            </ul>
+      <div id="tab-header" class="tabs is-boxed is-fullwidth">
+        <ul>
+          <li [ngClass]="{'is-active': activeDataTab == 1 }" data-tab="1" (click)="activeDataTab=1">
+            <a>
+              <span class="icon is-small"><i class="fas fa-eye" aria-hidden="true"></i></span>
+              <span>Original</span>
+            </a>
+          </li>
+          <li [ngClass]="{'is-active': activeDataTab == 2 }" data-tab="2" (click)="activeDataTab=2">
+            <a>
+              <span class="icon is-small"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+              <span>Review</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div id="tab-content">
+        <div [style.display]="activeDataTab == 1 ? 'block' : 'none'">
+          {{journal.text}}
         </div>
-        
-        <div id="tab-content">
-            <div [style.display]="activeDataTab == 1 ? 'block' : 'none'">
-                {{journal.text}}
-            </div>
-            <div [style.display]="activeDataTab == 2 ? 'block' : 'none'">
-                {{journal.review}}
-            </div>
+        <div [style.display]="activeDataTab == 2 ? 'block' : 'none'">
+          {{journal.review}}
         </div>
+      </div>
     </div>
-</section>
+  </section>
+</ng-template>

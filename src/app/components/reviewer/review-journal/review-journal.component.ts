@@ -3,7 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { JournalStoreService } from 'src/app/shared/services';
-import { Journal, JournalStatus, Languages } from 'src/model/journal';
+import { Journal, JournalStatus } from 'src/model/journal';
+import { ServiceError } from '../../../shared/services/service-error.model';
 
 @Component({
   selector: 'app-review-journal',
@@ -18,26 +19,28 @@ export class ReviewJournalComponent implements OnInit {
   reviewForm: FormGroup = new FormGroup({
     text: new FormControl(null),
   });
-  journal: Journal;
+  journal: Journal = new Journal();
+  error: ServiceError;
 
   constructor(
     private readonly journalStoreService: JournalStoreService,
     private readonly route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isLoading = true;
     this.journal = new Journal();
-    this.journal.language = { name: Languages.English, path: '' };
 
     const id = this.route.snapshot.params.id;
-    this.journalStoreService.get(id).pipe(first()).subscribe((result) => {
-      this.journal = result;
-      this.reviewForm = new FormGroup({
-        text: new FormControl(this.journal.text),
-      });
-      this.isLoading = false;
-    });
+    this.journalStoreService.get(id).pipe(first()).subscribe(
+      (result: Journal) => {
+        this.journal = result;
+        this.reviewForm = new FormGroup({
+          text: new FormControl(this.journal.text),
+        });
+        this.isLoading = false;
+      }, (err: ServiceError) => { this.error = err; }
+    );
   }
 
   async submit(): Promise<void> {
