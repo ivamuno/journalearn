@@ -1,5 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { JournalStoreService } from 'src/app/shared/services/journal-service';
 import { Journal, JournalStatus, Languages } from 'src/model/journal';
@@ -14,15 +14,10 @@ import { v4 as uuidv4 } from 'uuid';
 export class NewJournalComponent implements OnInit {
   isSaving: boolean;
   isSaved: boolean;
-  languages: string[] = Object.keys(Languages);
+  availableLanguages: string[] = Object.keys(Languages);
   author: string;
 
-  createForm: FormGroup = new FormGroup({
-    author: new FormControl(null),
-    language: new FormControl(null),
-    title: new FormControl(null),
-    text: new FormControl(null),
-  });
+  createForm: FormGroup;
 
   constructor(
     private readonly journalStoreService: JournalStoreService,
@@ -31,11 +26,20 @@ export class NewJournalComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user.subscribe((u) => {
-      this.author = u?.uid || '';
+      this.author = u?.displayName || '';
+    });
+    this.createForm = new FormGroup({
+      'language': new FormControl('', Validators.required),
+      'title': new FormControl('', Validators.required),
+      'text': new FormControl('', Validators.required),
     });
   }
 
   async submit(): Promise<void> {
+    if(!this.createForm.valid){
+      return
+    }
+
     this.isSaving = true;
     this.createForm.disable();
     const newJournal: Journal = {

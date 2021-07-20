@@ -17,10 +17,10 @@
             <div class="field">
                 <label class="label">Language</label>
                 <div class="control has-icons-left">
-                    <div class="select">
+                    <div  [ngClass]="!createForm.controls.language.touched ? '' : createForm.controls.language.valid ? 'is-success' : 'is-danger'" class="select">
                         <select formControlName="language">
                             <option [ngValue]="null" disabled>Choose your language</option>
-                            <option *ngFor="let language of languages" [ngValue]="language">
+                            <option *ngFor="let language of availableLanguages" [ngValue]="language">
                                 {{language}}
                             </option>
                         </select>
@@ -34,21 +34,41 @@
             <div class="field">
                 <label class="label">Title</label>
                 <div class="control has-icons-left">
-                    <input class="input" type="text" placeholder="My first journal" formControlName="title">
+                    <input 
+                        [ngClass]="!createForm.controls.title.touched ? '' : createForm.controls.title.valid ? 'is-success' : 'is-danger'"
+                        class="input"
+                        type="text"
+                        placeholder="My first journal"
+                        formControlName="title">
                     <span class="icon is-small is-left">
                         <i class="fas fa-heading"></i>
                     </span>
+                    <span
+                        *ngIf="!createForm.controls.title.valid && createForm.controls.title.touched"
+                        class="help is-danger"
+                        >Please enter a title.</span>
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Text</label>
                 <div class="control">
-                    <textarea class="textarea" formControlName="text"></textarea>
+                    <textarea 
+                        [ngClass]="!createForm.controls.text.touched ? '' : createForm.controls.text.valid ? 'is-success' : 'is-danger'"
+                        class="textarea"
+                        formControlName="text"></textarea>
                 </div>
+                <span
+                    *ngIf="!createForm.controls.text.valid && createForm.controls.text.touched"
+                    class="help is-danger"
+                    >Please enter a text.</span>
             </div>
 
             <div [style.display]="!isSaved ? 'block' : 'none'">
+                <span
+                    *ngIf="!createForm.valid && createForm.touched"
+                    class="help is-danger"
+                    >Please enter valid data.</span>
                 <div class="field is-grouped">
                     <div class="control">
                         <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
