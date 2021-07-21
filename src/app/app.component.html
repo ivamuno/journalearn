@@ -1,45 +1,49 @@
 <app-auth></app-auth>
-<nav class="navbar is-fixed-top is-dark">
+<nav class="navbar is-fixed-top">
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item">
+      <div class="navbar-item">
         <img src="assets/icon.png" alt="" class="d-inline-block align-text-top">
         <span style="padding-left: 10px;">Journalearn</span>
-      </a>
+      </div>
 
-      <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+      <a id="navBurger" role="button" class="navbar-burger" data-target="navMenu" aria-label="menu"
+        aria-expanded="false" (click)="isNavBurgerActive=true" [ngClass]="{'is-active': isNavBurgerActive }">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <div class="navbar-menu" id="navMenu">
+    <div class="navbar-menu" id="navMenu" [ngClass]="{'is-active': isNavBurgerActive }">
       <div class="navbar-start">
-        <a class="navbar-item" [routerLink]="['/home']" routerLinkActive="is-active">
+        <a class="navbar-item" [routerLink]="['/home']" routerLinkActive="is-active" (click)="isNavBurgerActive=false">
           Home
         </a>
-        <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/new']" routerLinkActive="is-active">
+        <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/new']" routerLinkActive="is-active"
+          (click)="isNavBurgerActive=false">
           New
         </a>
-        <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/journals']" routerLinkActive="is-active">
+        <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/journals']" routerLinkActive="is-active"
+          (click)="isNavBurgerActive=false">
           List
         </a>
-        <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/reviews']" routerLinkActive="is-active">
+        <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/reviews']" routerLinkActive="is-active"
+          (click)="isNavBurgerActive=false">
           Reviews
         </a>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-white is-outlined" *ngIf="!isAuthenticated" (click)="openModal()">
+            <a class="button is-light is-outlined" *ngIf="!isAuthenticated" (click)="openModal()">
               <strong>Log in</strong>
             </a>
-            <a class="button is-white is-outlined" *ngIf="!isAuthenticated">
+            <a class="button is-light is-outlined" *ngIf="!isAuthenticated">
               <span class="icon is-small">
                 <i class="fas fa-globe"></i>
               </span>
             </a>
-            <a class="button is-white is-outlined" *ngIf="isAuthenticated" (click)="logout()">
+            <a class="button is-light is-outlined" *ngIf="isAuthenticated" (click)="logout()">
               <strong>Log out</strong>
             </a>
           </div>
@@ -48,4 +52,17 @@
     </div>
   </div>
 </nav>
-<router-outlet></router-outlet>
+
+<div class="columns is-flex-direction-column is-fullheight-100vh">
+  <div class="column">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer class="footer column is-narrow has-background-dark">
+    <div class="content has-text-centered">
+      <div class="content has-text-light">
+        All content © Iván Muñoz
+      </div>
+    </div>
+  </footer>
+</div>

@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 @Injectable()
 export class AppComponent {
   isAuthenticated = false;
+  isNavBurgerActive = false;
   title = 'journal-me';
 
   constructor(private readonly authService: AuthService) {
