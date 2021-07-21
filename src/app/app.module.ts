@@ -20,7 +20,7 @@ import {
   ReviewListComponent,
   ViewJournalComponent,
 } from './components';
-import { JournalFirestoreService } from './shared/services/journal-firestore.service';
+import { JournalMockService } from './shared/services';
 import { JournalStoreService } from './shared/services/journal-service';
 
 @NgModule({
@@ -44,7 +44,7 @@ import { JournalStoreService } from './shared/services/journal-service';
     AngularFirestoreModule,
   ],
   providers: [
-    { provide: JournalStoreService, useClass: JournalFirestoreService },
+    { provide: JournalStoreService, useClass: JournalMockService },
     AuthService,
   ],
   bootstrap: [AppComponent],

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { JournalStoreService } from 'src/app/shared/services/journal-service';
 import { Journal, JournalStatus, Languages } from 'src/model/journal';
 import { v4 as uuidv4 } from 'uuid';
+import { ServiceError } from '../../../shared/services/service-error.model';
 
 @Component({
   selector: 'app-new-journal',
@@ -16,6 +17,7 @@ export class NewJournalComponent implements OnInit {
   isSaved: boolean;
   languages: string[] = Object.keys(Languages);
   author: string;
+  error: ServiceError = new ServiceError();
 
   createForm: FormGroup = new FormGroup({
     author: new FormControl(null),
@@ -27,9 +29,11 @@ export class NewJournalComponent implements OnInit {
   constructor(
     private readonly journalStoreService: JournalStoreService,
     private readonly authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.isSaved = false;
+
     this.authService.user.subscribe((u) => {
       this.author = u?.uid || '';
     });
@@ -51,9 +55,13 @@ export class NewJournalComponent implements OnInit {
       text: this.createForm.value.text,
       review: '',
     };
-    await this.journalStoreService.add(newJournal);
+
+    this.journalStoreService
+      .add(newJournal)
+      .then(() => { this.isSaved = true; })
+      .catch((err: ServiceError) => { this.error = err; });
+
     this.isSaving = false;
-    this.isSaved = true;
   }
 
   cancel(): void {

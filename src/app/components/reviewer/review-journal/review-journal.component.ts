@@ -21,6 +21,7 @@ export class ReviewJournalComponent implements OnInit {
   });
   journal: Journal = new Journal();
   error: ServiceError;
+  reviewError: ServiceError;
 
   constructor(
     private readonly journalStoreService: JournalStoreService,
@@ -30,6 +31,7 @@ export class ReviewJournalComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.journal = new Journal();
+    this.reviewError = new ServiceError();
 
     const id = this.route.snapshot.params.id;
     this.journalStoreService.get(id).pipe(first()).subscribe(
@@ -60,9 +62,12 @@ export class ReviewJournalComponent implements OnInit {
       review: this.reviewForm.value.text,
     };
 
-    await this.journalStoreService.review(journal);
+    this.journalStoreService
+      .review(journal)
+      .then(() => { this.isSaved = true; })
+      .catch((err: ServiceError) => { this.reviewError = err; });
+
     this.isSaving = false;
-    this.isSaved = true;
   }
 
   cancel(): void {

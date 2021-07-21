@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div [style.display]="!isSaved ? 'block' : 'none'">
+            <div [ngClass]="{'is-hidden': isSaved}">
                 <div class="field is-grouped">
                     <div class="control">
                         <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
@@ -69,9 +69,15 @@
                 </div>
             </div>
             
-            <div [style.display]="isSaved ? 'block' : 'none'">
+            <div [ngClass]="{'is-hidden': !isSaved}">
                 <div class="notification is-success">
                     The journal has been saved successfully!
+                </div>
+            </div>
+            
+            <div [ngClass]="{'is-hidden': !error.message}">
+                <div class="notification is-danger">
+                  {{ error.code }} - {{ error.message }}
                 </div>
             </div>
         </form>

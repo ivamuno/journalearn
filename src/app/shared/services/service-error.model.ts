@@ -18,4 +18,11 @@ export class ServiceError {
   public message: string;
   public name: string;
   public stack: string;
+
+  constructor() {
+    this.code = "unknown";
+    this.name = "";
+    this.message = "";
+    this.stack = "";
+  }
 }

@@ -61,6 +61,9 @@ export class JournalFirestoreService extends JournalStoreService {
               doc.payload.doc.data() as JournalDb
             );
           });
+        }),
+        catchError((error: FirestoreError) => {
+          throw this.convertFirestoreError2ServiceError(error);
         })
       );
   }
@@ -79,26 +82,30 @@ export class JournalFirestoreService extends JournalStoreService {
               doc.payload.doc.data() as JournalDb
             );
           });
+        }),
+        catchError((error: FirestoreError) => {
+          throw this.convertFirestoreError2ServiceError(error);
         })
       );
   }
 
   public async add(journal: Journal): Promise<void> {
-    try {
-      const journalDb = this.convertFrom(journal);
-      await this.firestore.collection(journalCollectionKey).add(journalDb);
-    } catch (e) {
-      console.error('Error adding document: ', e);
-    }
+    const journalDb = this.convertFrom(journal);
+    await this.firestore.collection(journalCollectionKey)
+      .add(journalDb)
+      .catch((error: FirestoreError) => {
+        throw this.convertFirestoreError2ServiceError(error);
+      });
   }
 
   public async review(journal: Journal): Promise<void> {
-    await this.firestore
-      .collection(journalCollectionKey)
-      .doc(journal.id)
+    await this.firestore.collection(journalCollectionKey).doc(journal.id)
       .update({
         review: journal.review,
         status: journal.status,
+      })
+      .catch((error: FirestoreError) => {
+        throw this.convertFirestoreError2ServiceError(error);
       });
   }
 

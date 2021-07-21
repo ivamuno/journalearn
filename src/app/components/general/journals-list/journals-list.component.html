@@ -120,5 +120,11 @@
                 </tbody>
             </table>
         </div>
+            
+        <div [ngClass]="{'is-hidden': !error.message}">
+            <div class="notification is-danger">
+              {{ error.code }} - {{ error.message }}
+            </div>
+        </div>
     </div>
 </section>
