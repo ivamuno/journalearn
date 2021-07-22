@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Journal, Languages } from 'src/model/journal';
+import { Journal, Languages } from 'src/app/shared/services/interfaces/journal';
 
 export abstract class JournalStoreService {
   languagePaths: Record<Languages, string> = {

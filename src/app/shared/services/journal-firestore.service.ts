@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Journal, JournalStatus, Languages } from 'src/model/journal';
+import { Journal, JournalStatus, Languages } from 'src/app/shared/services/interfaces/journal';
 
-import { JournalStoreService } from './journal-service';
+import { JournalStoreService } from './interfaces/journal-service';
 import { ServiceError } from './service-error.model';
 
 class JournalDb {

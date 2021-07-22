@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ export class AppComponent {
   }
 
   openModal(): void {
-    this.authService.openModal();
+    this.authService.start();
   }
 
   logout(): void {

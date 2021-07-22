@@ -4,7 +4,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { environment } from '../environments/environment';
 
@@ -20,8 +19,10 @@ import {
   ReviewListComponent,
   ViewJournalComponent,
 } from './components';
-import { JournalMockService } from './shared/services';
-import { JournalStoreService } from './shared/services/journal-service';
+
+import { AuthMockService, JournalMockService } from './shared/services';
+import { AuthService } from './shared/services/interfaces/auth.service';
+import { JournalStoreService } from './shared/services/interfaces/journal-service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,10 @@ import { JournalStoreService } from './shared/services/journal-service';
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [{ provide: JournalStoreService, useClass: JournalMockService }, AuthService],
+  providers: [
+    { provide: JournalStoreService, useClass: JournalMockService },
+    { provide: AuthService, useClass: AuthMockService },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

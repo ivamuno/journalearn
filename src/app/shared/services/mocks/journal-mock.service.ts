@@ -1,9 +1,13 @@
+import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
-import { Journal, JournalStatus, Languages } from 'src/model/journal';
+import { Journal, JournalStatus, Languages } from 'src/app/shared/services/interfaces/journal';
 
-import { JournalStoreService } from '../journal-service';
+import { JournalStoreService } from '../interfaces/journal-service';
 import { ServiceError } from '../service-error.model';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class JournalMockService extends JournalStoreService {
   private readonly journals: Journal[] = [];
   private readonly defaultError: ServiceError = { code: 'unknown', message: 'errorMessage', name: 'errorName', stack: 'errorStack' };

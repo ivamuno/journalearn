@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { JournalStoreService } from 'src/app/shared/services';
-import { Journal, JournalStatus } from 'src/model/journal';
+import { Journal, JournalStatus } from 'src/app/shared/services/interfaces/journal';
 import { ServiceError } from '../../../shared/services/service-error.model';
 
 @Component({
