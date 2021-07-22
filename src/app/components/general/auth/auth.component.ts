@@ -15,10 +15,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   ui: firebaseui.auth.AuthUI;
 
-  constructor(
-    private readonly afAuth: AngularFireAuth,
-    private readonly authService: AuthService
-  ) {
+  constructor(private readonly afAuth: AngularFireAuth, private readonly authService: AuthService) {
     authService.isAuthenticatingEvent.subscribe((open) => {
       if (open) {
         this.afAuth.app.then((app) => {

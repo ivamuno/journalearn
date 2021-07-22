@@ -15,16 +15,17 @@ export class ViewJournalComponent implements OnInit {
   journal: Journal = new Journal();
   error: ServiceError;
 
-  constructor(
-    private readonly journalStoreService: JournalStoreService,
-    private readonly route: ActivatedRoute
-  ) { }
+  constructor(private readonly journalStoreService: JournalStoreService, private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
     this.journalStoreService.get(id).subscribe(
-      (result: Journal) => { this.journal = result },
-      (err: ServiceError) => { this.error = err; }
+      (result: Journal) => {
+        this.journal = result;
+      },
+      (err: ServiceError) => {
+        this.error = err;
+      }
     );
   }
 }

@@ -1,5 +1,5 @@
-import { Component, Injectable, Input, OnDestroy, OnInit } from "@angular/core"
-import { ServiceError } from "../../../shared/services/service-error.model"
+import { Component, Injectable, Input, OnDestroy, OnInit } from '@angular/core';
+import { ServiceError } from '../../../shared/services/service-error.model';
 
 @Component({
   selector: 'app-error',
@@ -9,11 +9,11 @@ import { ServiceError } from "../../../shared/services/service-error.model"
 @Injectable()
 export class ErrorComponent implements OnInit, OnDestroy {
   @Input()
-  error : ServiceError;
+  error: ServiceError;
 
-  ngOnInit(): void { 
-    console.log('error', this.error)
+  ngOnInit(): void {
+    console.log('error', this.error);
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {}
 }

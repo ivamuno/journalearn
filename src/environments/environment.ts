@@ -7,8 +7,7 @@ export const environment = {
   firebase: {
     apiKey: 'AIzaSyAMpiHHTURYj-yrzrozfebeaeexzuy3EM8',
     authDomain: 'journa-l-earn.firebaseapp.com',
-    databaseURL:
-      'https://journa-l-earn-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL: 'https://journa-l-earn-default-rtdb.europe-west1.firebasedatabase.app',
     projectId: 'journa-l-earn',
     storageBucket: 'journa-l-earn.appspot.com',
     messagingSenderId: '1057574348493',

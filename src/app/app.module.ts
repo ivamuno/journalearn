@@ -33,7 +33,7 @@ import { JournalStoreService } from './shared/services/journal-service';
     ReviewJournalComponent,
     AuthComponent,
     ReviewListComponent,
-    ErrorComponent
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,10 +43,7 @@ import { JournalStoreService } from './shared/services/journal-service';
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [
-    { provide: JournalStoreService, useClass: JournalMockService },
-    AuthService,
-  ],
+  providers: [{ provide: JournalStoreService, useClass: JournalMockService }, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

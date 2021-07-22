@@ -22,10 +22,7 @@ export class AuthService {
 
   user = new Observable<UserInfo | undefined>();
 
-  constructor(
-    private readonly afAuth: AngularFireAuth,
-    private readonly router: Router
-  ) {
+  constructor(private readonly afAuth: AngularFireAuth, private readonly router: Router) {
     this.user = afAuth.authState.pipe(
       map((u) => {
         if (u) {

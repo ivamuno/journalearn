@@ -23,10 +23,7 @@ export class ReviewJournalComponent implements OnInit {
   error: ServiceError;
   reviewError: ServiceError;
 
-  constructor(
-    private readonly journalStoreService: JournalStoreService,
-    private readonly route: ActivatedRoute
-  ) { }
+  constructor(private readonly journalStoreService: JournalStoreService, private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -34,15 +31,21 @@ export class ReviewJournalComponent implements OnInit {
     this.reviewError = new ServiceError();
 
     const id = this.route.snapshot.params.id;
-    this.journalStoreService.get(id).pipe(first()).subscribe(
-      (result: Journal) => {
-        this.journal = result;
-        this.reviewForm = new FormGroup({
-          text: new FormControl(this.journal.text),
-        });
-        this.isLoading = false;
-      }, (err: ServiceError) => { this.error = err; }
-    );
+    this.journalStoreService
+      .get(id)
+      .pipe(first())
+      .subscribe(
+        (result: Journal) => {
+          this.journal = result;
+          this.reviewForm = new FormGroup({
+            text: new FormControl(this.journal.text),
+          });
+          this.isLoading = false;
+        },
+        (err: ServiceError) => {
+          this.error = err;
+        }
+      );
   }
 
   async submit(): Promise<void> {
@@ -64,8 +67,12 @@ export class ReviewJournalComponent implements OnInit {
 
     this.journalStoreService
       .review(journal)
-      .then(() => { this.isSaved = true; })
-      .catch((err: ServiceError) => { this.reviewError = err; });
+      .then(() => {
+        this.isSaved = true;
+      })
+      .catch((err: ServiceError) => {
+        this.reviewError = err;
+      });
 
     this.isSaving = false;
   }

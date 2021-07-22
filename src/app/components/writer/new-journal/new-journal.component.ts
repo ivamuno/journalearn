@@ -26,10 +26,7 @@ export class NewJournalComponent implements OnInit {
     text: new FormControl(null),
   });
 
-  constructor(
-    private readonly journalStoreService: JournalStoreService,
-    private readonly authService: AuthService
-  ) { }
+  constructor(private readonly journalStoreService: JournalStoreService, private readonly authService: AuthService) {}
 
   ngOnInit(): void {
     this.isSaved = false;
@@ -58,8 +55,12 @@ export class NewJournalComponent implements OnInit {
 
     this.journalStoreService
       .add(newJournal)
-      .then(() => { this.isSaved = true; })
-      .catch((err: ServiceError) => { this.error = err; });
+      .then(() => {
+        this.isSaved = true;
+      })
+      .catch((err: ServiceError) => {
+        this.error = err;
+      });
 
     this.isSaving = false;
   }

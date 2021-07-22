@@ -18,22 +18,23 @@ class JournalDb {
 }
 
 class FirestoreError {
-  public code: "cancelled"
-    | "unknown"
-    | "invalid-argument"
-    | "deadline-exceeded"
-    | "not-found"
-    | "already-exists"
-    | "permission-denied"
-    | "resource-exhausted"
-    | "failed-precondition"
-    | "aborted"
-    | "out-of-range"
-    | "unimplemented"
-    | "internal"
-    | "unavailable"
-    | "data-loss"
-    | "unauthenticated";
+  public code:
+    | 'cancelled'
+    | 'unknown'
+    | 'invalid-argument'
+    | 'deadline-exceeded'
+    | 'not-found'
+    | 'already-exists'
+    | 'permission-denied'
+    | 'resource-exhausted'
+    | 'failed-precondition'
+    | 'aborted'
+    | 'out-of-range'
+    | 'unimplemented'
+    | 'internal'
+    | 'unavailable'
+    | 'data-loss'
+    | 'unauthenticated';
   public message: string;
   public name: string;
   public stack: string;
@@ -49,17 +50,12 @@ export class JournalFirestoreService extends JournalStoreService {
 
   public getByUser(userId: string): Observable<Journal[]> {
     return this.firestore
-      .collection<JournalDb>(journalCollectionKey, (ref) =>
-        ref.where('author', '==', userId)
-      )
+      .collection<JournalDb>(journalCollectionKey, (ref) => ref.where('author', '==', userId))
       .snapshotChanges()
       .pipe(
         map((x) => {
           return x.map((doc) => {
-            return this.convertTo(
-              doc.payload.doc.id,
-              doc.payload.doc.data() as JournalDb
-            );
+            return this.convertTo(doc.payload.doc.id, doc.payload.doc.data() as JournalDb);
           });
         }),
         catchError((error: FirestoreError) => {
@@ -70,17 +66,12 @@ export class JournalFirestoreService extends JournalStoreService {
 
   public getPending(): Observable<Journal[]> {
     return this.firestore
-      .collection<JournalDb>(journalCollectionKey, (ref) =>
-        ref.where('status', '==', 'Pending')
-      )
+      .collection<JournalDb>(journalCollectionKey, (ref) => ref.where('status', '==', 'Pending'))
       .snapshotChanges()
       .pipe(
         map((x) => {
           return x.map((doc) => {
-            return this.convertTo(
-              doc.payload.doc.id,
-              doc.payload.doc.data() as JournalDb
-            );
+            return this.convertTo(doc.payload.doc.id, doc.payload.doc.data() as JournalDb);
           });
         }),
         catchError((error: FirestoreError) => {
@@ -91,7 +82,8 @@ export class JournalFirestoreService extends JournalStoreService {
 
   public async add(journal: Journal): Promise<void> {
     const journalDb = this.convertFrom(journal);
-    await this.firestore.collection(journalCollectionKey)
+    await this.firestore
+      .collection(journalCollectionKey)
       .add(journalDb)
       .catch((error: FirestoreError) => {
         throw this.convertFirestoreError2ServiceError(error);
@@ -99,7 +91,9 @@ export class JournalFirestoreService extends JournalStoreService {
   }
 
   public async review(journal: Journal): Promise<void> {
-    await this.firestore.collection(journalCollectionKey).doc(journal.id)
+    await this.firestore
+      .collection(journalCollectionKey)
+      .doc(journal.id)
       .update({
         review: journal.review,
         status: journal.status,
@@ -157,7 +151,7 @@ export class JournalFirestoreService extends JournalStoreService {
       code: error.code,
       message: error.message,
       name: error.name,
-      stack: error.stack
+      stack: error.stack,
     };
   }
 }

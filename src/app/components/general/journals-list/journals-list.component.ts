@@ -15,10 +15,7 @@ export class JournalsListComponent implements OnInit {
   journals: Journal[] = [];
   error: ServiceError;
 
-  constructor(
-    private readonly journalStoreService: JournalStoreService,
-    private readonly authService: AuthService
-  ) { }
+  constructor(private readonly journalStoreService: JournalStoreService, private readonly authService: AuthService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -26,8 +23,13 @@ export class JournalsListComponent implements OnInit {
 
     this.authService.user.subscribe((u) => {
       this.journalStoreService.getByUser(u?.uid || '').subscribe(
-        (result: Journal[]) => { this.journals = result; this.isLoading = false; },
-        (err: ServiceError) => { this.error = err; }
+        (result: Journal[]) => {
+          this.journals = result;
+          this.isLoading = false;
+        },
+        (err: ServiceError) => {
+          this.error = err;
+        }
       );
     });
   }

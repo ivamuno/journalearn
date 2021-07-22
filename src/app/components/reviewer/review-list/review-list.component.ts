@@ -19,10 +19,15 @@ export class ReviewListComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.error = new ServiceError();
-    
+
     this.journalStoreService.getPending().subscribe(
-      (result: Journal[]) => { this.journals = result; this.isLoading = false; },
-      (err: ServiceError) => { this.error = err; }
+      (result: Journal[]) => {
+        this.journals = result;
+        this.isLoading = false;
+      },
+      (err: ServiceError) => {
+        this.error = err;
+      }
     );
   }
 }

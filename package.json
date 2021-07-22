@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "lint:fix": "npm run lint -- --fix",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "format": "prettier --write \"**/*.ts\""
   },
   "private": true,
   "dependencies": {
@@ -45,6 +46,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "prettier": "2.2.1",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslib": "^2.0.0",

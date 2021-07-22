@@ -55,15 +55,13 @@ export class JournalMockService extends JournalStoreService {
       },
     ];
 
-    this.journals.forEach(
-      (l) => (l.language.path = this.languagePaths[l.language.name])
-    );
+    this.journals.forEach((l) => (l.language.path = this.languagePaths[l.language.name]));
   }
 
   public getByUser(userId: string): Observable<Journal[]> {
     const promise = new Promise<Journal[]>((resolve, reject) => {
       setTimeout(resolve, 3000);
-      if (this.getByUserCounter++ % 2 == 0) {
+      if (this.getByUserCounter++ % 2 === 0) {
         return resolve(this.journals);
       }
 
@@ -75,7 +73,7 @@ export class JournalMockService extends JournalStoreService {
   public getPending(): Observable<Journal[]> {
     const promise = new Promise<Journal[]>((resolve, reject) => {
       setTimeout(resolve, 3000);
-      if (this.getPendingCounter++ % 2 == 0) {
+      if (this.getPendingCounter++ % 2 === 0) {
         return resolve(this.journals);
       }
 

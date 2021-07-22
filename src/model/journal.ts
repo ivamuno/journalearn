@@ -26,7 +26,7 @@ export class Journal {
     this.author = '';
     this.language = {
       name: Languages.English,
-      path: ''
+      path: '',
     };
     this.date = new Date();
     this.title = '';
