@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Inject, Injectable, LOCALE_ID, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
 
 @Component({
@@ -7,15 +7,23 @@ import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
   styleUrls: ['./app.component.css'],
 })
 @Injectable()
-export class AppComponent {
+export class AppComponent implements OnInit {
   isAuthenticated = false;
   isNavBurgerActive = false;
   title = 'journal-me';
 
-  constructor(private readonly authService: AuthService) {
+  constructor(
+    @Inject(LOCALE_ID) protected localeId: string,
+    private readonly authService: AuthService
+  ) {
     this.authService.isAuthenticatedEvent.subscribe((value) => {
       this.isAuthenticated = value;
     });
+  }
+
+  ngOnInit(): void {
+    // Start rolling the ball ...    
+    console.log("Current locale is " + this.localeId);
   }
 
   openModal(): void {

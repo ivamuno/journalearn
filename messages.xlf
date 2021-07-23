@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="6668112067373757476" datatype="html">
+        <source> The most effective way to learn writing in another language </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <note priority="1" from="description">home_title</note>
+      </trans-unit>
+      <trans-unit id="5128648061353556286" datatype="html">
+        <source> Take a while to write about your experiences and feelings. Do not waste your time over-thinking, use the most common vocabulary which you use daily basis. Then, share to obtain reviews from natives and learn. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+        <note priority="1" from="description">home_subtitle</note>
+      </trans-unit>
+      <trans-unit id="2603482535677312633" datatype="html">
+        <source>Write</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <note priority="1" from="description">home_write_title</note>
+      </trans-unit>
+      <trans-unit id="7104074974969858607" datatype="html">
+        <source>These are some of the benefits which you can get from writing about your livings in another language:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">21,22</context>
+        </context-group>
+        <note priority="1" from="description">home_write_description</note>
+      </trans-unit>
+      <trans-unit id="5461782312389384236" datatype="html">
+        <source>Practice with the verbal tense. What did I do yesterday?, What have I done today?, What will I do tomorrow?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <note priority="1" from="description">home_write_li1</note>
+      </trans-unit>
+      <trans-unit id="6222587335663382064" datatype="html">
+        <source>Learn some new words which you uses normally.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <note priority="1" from="description">home_write_li2</note>
+      </trans-unit>
+      <trans-unit id="5571862908496524993" datatype="html">
+        <source>You do not need previous preparation to start writing.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <note priority="1" from="description">home_write_li3</note>
+      </trans-unit>
+      <trans-unit id="9029286143304711365" datatype="html">
+        <source>Reviews</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <note priority="1" from="description">home_review_title</note>
+      </trans-unit>
+      <trans-unit id="5460534262653509177" datatype="html">
+        <source>No excuses, no fears, forget what you do not know. You do not need neither wasting your time searching in the dictionary nor reviewing if what you write is ok or not, a native person will do that for you! In that way you will not feel frustrated because of your lack of knowledge and the writing will be more fluent. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">51,55</context>
+        </context-group>
+        <note priority="1" from="description">home_review_block1</note>
+      </trans-unit>
+      <trans-unit id="4823952021370269305" datatype="html">
+        <source>Collaborate and take part of the community reviewing journals in your own language.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+        <note priority="1" from="description">home_review_block2</note>
+      </trans-unit>
+      <trans-unit id="5663666911446999632" datatype="html">
+        <source>Remember, whatever your write is public. You set the limits, if you are worried about privacy then you should not write about it.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">58,59</context>
+        </context-group>
+        <note priority="1" from="description">home_review_block3</note>
+      </trans-unit>
+      <trans-unit id="6899134966533859260" datatype="html">
+        <source>Learn</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <note priority="1" from="description">home_learn_title</note>
+      </trans-unit>
+      <trans-unit id="3276753598604986939" datatype="html">
+        <source>Have a look at the reviews to complete the learning and improve you skills day by day. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">77,79</context>
+        </context-group>
+        <note priority="1" from="description">home_review_block1</note>
+      </trans-unit>
+      <trans-unit id="260040036207437409" datatype="html">
+        <source>Be humble and embrace corrections/advises, this is the best help you can have when your are learning. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/general/home.component.html</context>
+          <context context-type="linenumber">80,82</context>
+        </context-group>
+        <note priority="1" from="description">home_review_block2</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

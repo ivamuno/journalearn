@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -47,6 +47,7 @@ import { JournalStoreService } from './shared/services/interfaces/journal-servic
   providers: [
     { provide: JournalStoreService, useClass: JournalMockService },
     { provide: AuthService, useClass: AuthMockService },
+    { provide: LOCALE_ID, useValue: 'es' }
   ],
   bootstrap: [AppComponent],
 })

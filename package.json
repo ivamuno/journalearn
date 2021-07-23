@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration=production",
+    "start:es": "ng serve --configuration=es",
     "build": "ng build",
     "test": "ng test",
     "lint": "tslint -p tsconfig.json -c tslint.json",
@@ -34,6 +35,7 @@
     "@angular-devkit/build-angular": "~12.0.1",
     "@angular/cli": "~12.0.1",
     "@angular/compiler-cli": "~12.0.1",
+    "@angular/localize": "^12.0.5",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "@types/uuid": "^8.3.0",
