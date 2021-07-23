@@ -1,0 +1,24 @@
+{
+  "HOME": {
+    "TITLE": "La forma mas efectiva de aprender a escribir en otro idioma",
+    "SUBTITLE": "Tomate unos pocos minutos para escribir tus experiencias y sentimientos, sin perder tiempo pensando y con el vocabulario mas usado, compartelo para que nativos te lo revisen y aprende.",
+    "WRITE": {
+      "TITLE": "Escribe",
+      "DESCRIPTION": "Varios son los beneficios de escribir sobre tus experiencias diarias en otro idioma:",
+      "LI1": "Practica con los tiempos verbales. ¿Qué hice ayer?, ¿Qué he hecho hoy?, ¿Qué haré mañana?",
+      "LI2": "Aprende nuevas palabras que usas habitualmente.",
+      "LI3": "Sin necesidad de preparación previa para empezar a escribir."
+    },
+    "REVIEW": {
+      "TITLE": "Revisiones",
+      "BLOCK1": "Sin excusas, sin miedos, olvidaté de todo lo que no sabes. No necesitas malgastar tiempo buscando en un diccionario, ni revisar si esta bien escrito o no, un nativo lo hará por tí, de esta manera no te sentirás fustrado por tus carencias y la escritura será mucho mas fluida.",
+      "BLOCK2": "Colabora y forma parte de la comunidad revisando diarios en tu propio idioma.",
+      "BLOCK3": "Recuerda que todo lo que escribas será público. Tú marcas los limites, si estas preocupado sobre tu privacidad no escribas sobre ello"
+    },
+    "LEARN": {
+      "TITLE": "Aprende",
+      "BLOCK1": "Echa un vistazo a las revisiones para completar el aprendizaje y mejorar día a día.",
+      "BLOCK2": "Se humilde y abraza las correciones/recomendaciones, es la mejor ayuda a la hora de aprender."
+    }
+  }
+}

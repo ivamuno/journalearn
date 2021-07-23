@@ -1,7 +1,4 @@
-export enum Languages {
-  Spanish = 'Spanish',
-  English = 'English',
-}
+import { LanguageNames } from "../language.service";
 
 export enum JournalStatus {
   Pending = 'Pending',
@@ -12,7 +9,7 @@ export class Journal {
   public id: string;
   public author: string;
   public language: {
-    name: Languages;
+    name: LanguageNames;
     path: string;
   };
   public date: Date;
@@ -25,7 +22,7 @@ export class Journal {
     this.id = '';
     this.author = '';
     this.language = {
-      name: Languages.English,
+      name: LanguageNames.English,
       path: '',
     };
     this.date = new Date();

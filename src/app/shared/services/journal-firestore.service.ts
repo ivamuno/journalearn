@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Journal, JournalStatus, Languages } from 'src/app/shared/services/interfaces/journal';
+import { Journal, JournalStatus } from 'src/app/shared/services/interfaces/journal';
 
 import { JournalStoreService } from './interfaces/journal-service';
+import { LanguageNames, LanguageService } from './language.service';
 import { ServiceError } from './service-error.model';
 
 class JournalDb {
   public author: string;
-  public language: Languages;
+  public language: LanguageNames;
   public date: string;
   public title: string;
   public status: JournalStatus;
@@ -42,7 +43,9 @@ class FirestoreError {
 
 const journalCollectionKey = 'journals';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class JournalFirestoreService extends JournalStoreService {
   constructor(private readonly firestore: AngularFirestore) {
     super();
@@ -138,7 +141,7 @@ export class JournalFirestoreService extends JournalStoreService {
       title: journal.title,
       language: {
         name: journal.language,
-        path: this.languagePaths[journal.language],
+        path: LanguageService.getLanguageByName(journal.language)?.path || '',
       },
       status: journal.status,
       text: journal.text,

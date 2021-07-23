@@ -2,9 +2,10 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
 import { JournalStoreService } from 'src/app/shared/services/interfaces/journal-service';
-import { Journal, JournalStatus, Languages } from 'src/app/shared/services/interfaces/journal';
+import { Journal, JournalStatus } from 'src/app/shared/services/interfaces/journal';
 import { v4 as uuidv4 } from 'uuid';
 import { ServiceError } from '../../../shared/services/service-error.model';
+import { LanguageNames } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-new-journal',
@@ -15,7 +16,7 @@ import { ServiceError } from '../../../shared/services/service-error.model';
 export class NewJournalComponent implements OnInit {
   isSaving: boolean;
   isSaved: boolean;
-  languages: string[] = Object.keys(Languages);
+  languages: string[] = Object.keys(LanguageNames);
   author: string;
   error: ServiceError = new ServiceError();
 

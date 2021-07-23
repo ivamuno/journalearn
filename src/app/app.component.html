@@ -1,4 +1,6 @@
 <app-auth></app-auth>
+<app-language></app-language>
+
 <nav class="navbar is-fixed-top">
   <div class="container">
     <div class="navbar-brand">
@@ -35,10 +37,10 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-light is-outlined" *ngIf="!isAuthenticated" (click)="openModal()">
+            <a class="button is-light is-outlined" *ngIf="!isAuthenticated" (click)="openAuthModal()">
               <strong>Log in</strong>
             </a>
-            <a class="button is-light is-outlined" *ngIf="!isAuthenticated">
+            <a class="button is-light is-outlined" *ngIf="!isAuthenticated" (click)="openLanguageModal()">
               <span class="icon is-small">
                 <i class="fas fa-globe"></i>
               </span>

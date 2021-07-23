@@ -1,5 +1,6 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
+import { LanguageService } from './shared/services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -7,19 +8,28 @@ import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
   styleUrls: ['./app.component.css'],
 })
 @Injectable()
-export class AppComponent {
+export class AppComponent implements OnInit {
   isAuthenticated = false;
   isNavBurgerActive = false;
   title = 'journal-me';
 
-  constructor(private readonly authService: AuthService) {
+  constructor(private readonly authService: AuthService, private readonly languageService: LanguageService) {
     this.authService.isAuthenticatedEvent.subscribe((value) => {
       this.isAuthenticated = value;
     });
   }
 
-  openModal(): void {
+  ngOnInit(): void {
+    this.languageService.set(LanguageService.DefaultLanguage);
+  }
+
+  openAuthModal(): void {
     this.authService.start();
+  }
+
+  openLanguageModal(): void {
+    console.log('openLanguageModal');
+    this.languageService.open();
   }
 
   logout(): void {

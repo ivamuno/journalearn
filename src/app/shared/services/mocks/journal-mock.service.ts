@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
-import { Journal, JournalStatus, Languages } from 'src/app/shared/services/interfaces/journal';
+import { Journal, JournalStatus } from 'src/app/shared/services/interfaces/journal';
 
 import { JournalStoreService } from '../interfaces/journal-service';
+import { LanguageNames, LanguageService } from '../language.service';
 import { ServiceError } from '../service-error.model';
 
 @Injectable({
@@ -22,7 +23,7 @@ export class JournalMockService extends JournalStoreService {
         author: 'Iván',
         date: new Date(2021, 6, 21),
         title: 'Pending Ok',
-        language: { name: Languages.Spanish, path: '' },
+        language: { name: LanguageNames.Spanish, path: '' },
         status: JournalStatus.Pending,
         text: 'My first journal, long title Text',
         review: '',
@@ -32,7 +33,7 @@ export class JournalMockService extends JournalStoreService {
         author: 'María',
         date: new Date(2021, 6, 22),
         title: 'Reviewed Ok',
-        language: { name: Languages.English, path: '' },
+        language: { name: LanguageNames.English, path: '' },
         status: JournalStatus.Reviewed,
         text: 'My journal Text',
         review: 'My journal Text (reviewed)',
@@ -42,7 +43,7 @@ export class JournalMockService extends JournalStoreService {
         author: 'Iván',
         date: new Date(2021, 6, 21),
         title: 'Pending Error',
-        language: { name: Languages.Spanish, path: '' },
+        language: { name: LanguageNames.Spanish, path: '' },
         status: JournalStatus.Pending,
         text: 'My first journal, long title Text Error',
         review: '',
@@ -52,14 +53,14 @@ export class JournalMockService extends JournalStoreService {
         author: 'María',
         date: new Date(2021, 6, 22),
         title: 'Reviewed Error',
-        language: { name: Languages.English, path: '' },
+        language: { name: LanguageNames.English, path: '' },
         status: JournalStatus.Reviewed,
         text: 'My journal Text Error',
         review: 'My journal Text (reviewed)',
       },
     ];
 
-    this.journals.forEach((l) => (l.language.path = this.languagePaths[l.language.name]));
+    this.journals.forEach((l) => (l.language.path = LanguageService.getLanguageByName(l.language.name)?.path || ''));
   }
 
   public getByUser(userId: string): Observable<Journal[]> {
