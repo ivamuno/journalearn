@@ -8,7 +8,7 @@ export enum LanguageKeys {
 }
 
 export enum LanguageNames {
-  Spanish = 'Spanish',
+  Spanish = 'Español',
   English = 'English',
 }
 
@@ -43,7 +43,6 @@ export class LanguageService {
   }
 
   public set(language: string): void {
-    console.log('language', language);
     this.translateService.use(language);
     this.isChangedEvent.next(language);
     this.isChoosingEvent.emit(false);

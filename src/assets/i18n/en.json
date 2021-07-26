@@ -28,5 +28,86 @@
       "BLOCK1": "Have a look at the reviews to complete the learning and improve you skills day by day.",
       "BLOCK2": "Be humble and embrace corrections/advises, this is the best help you can have when your are learning."
     }
+  },
+  "LANGUAGE": {
+    "TITLE": "Choose your language"
+  },
+  "NEW": {
+    "TITLE": "New Journal",
+    "EXAMPLE": "Example: \"Hoy yo [drank] <u>café con leche</u> [with a] amigo.\"",
+    "FIELDS": {
+      "AUTHOR": "Author",
+      "LANGUAGE": "Language",
+      "CHOOSE_LANGUAGE": "Choose your language",
+      "TITLE": "Title",
+      "TEXT": "Text",
+      "SAVE": "Save",
+      "RESET": "Reset",
+      "MESSAGES": {
+        "SUCCESS": "The journal has been saved successfully!"
+      }
+    },
+    "RULES": {
+      "TITLE": "Rules",
+      "RULE1": "Underline words and expressions which you searched in a dictionary.",
+      "RULE2": "Use brackets '[]' to include words and expressions in your own language."
+    }
+  },
+  "REVIEW": {
+    "TITLE": "Review Journal",
+    "EXAMPLE": "Example: \"Hoy yo [drank] <u>café con leche</u> [with a] <strike>amijo</strike>{amigo}.\"",
+    "FIELDS": {
+      "AUTHOR": "Author",
+      "LANGUAGE": "Language",
+      "DATE": "Date",
+      "TITLE": "Title",
+      "TEXT": "Text",
+      "SAVE": "Save",
+      "RESET": "Reset",
+      "MESSAGES": {
+        "SUCCESS": "The review has been saved successfully!"
+      }
+    },
+    "RULES": {
+      "TITLE": "Rules",
+      "RULE1": "Strike incorrect words and expressions and indicate within curly brackets your review."
+    }
+  },
+  "VIEW": {
+    "TITLE": "View Journal",
+    "FIELDS": {
+      "AUTHOR": "Author",
+      "LANGUAGE": "Language",
+      "DATE": "Date",
+      "TITLE": "Title",
+      "ORIGINAL": "Original",
+      "REVIEW": "Review"
+    }
+  },
+  "MY_LIST": {
+    "TITLE": "My Journals",
+    "SUBTITLE": "Here you have your journal history.",
+    "FIELDS": {
+      "AUTHOR": "Author",
+      "LANGUAGE": "Language",
+      "DATE": "Date",
+      "TITLE": "Title",
+      "STATUS": "Status",
+      "ACTIONS": "Actions",
+      "VIEW": "View"
+    }
+  },
+  "REVIEW_LIST": {
+    "TITLE": "Reviews",
+    "SUBTITLE": "Here you have a list with pending reviews.",
+    "FIELDS": {
+      "AUTHOR": "Author",
+      "LANGUAGE": "Language",
+      "DATE": "Date",
+      "TITLE": "Title",
+      "STATUS": "Status",
+      "ACTIONS": "Actions",
+      "REVIEW": "Review"
+    }
   }
 }

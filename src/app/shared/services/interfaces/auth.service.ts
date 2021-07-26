@@ -1,32 +1,31 @@
-import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { UserInfo } from './user-info';
 
 export abstract class AuthService {
-  isAuthenticatingEvent = new EventEmitter<boolean>();
-  isAuthenticatedEvent = new EventEmitter<boolean>();
+  isAuthenticatingEvent = new BehaviorSubject<boolean>(false);
+  isAuthenticatedEvent = new BehaviorSubject<boolean>(false);
 
-  user = new Observable<UserInfo | undefined>();
+  user = new BehaviorSubject<UserInfo | undefined>(undefined);
 
-  constructor(protected readonly router: Router) {}
+  constructor(protected readonly router: Router) { }
 
   protected underlyingInit(): void {
     this.user.subscribe(async (u) => {
-      this.isAuthenticatedEvent.emit(!!u);
+      this.isAuthenticatedEvent.next(!!u);
     });
   }
 
   public async start(): Promise<void> {
-    this.isAuthenticatingEvent.emit(true);
+    this.isAuthenticatingEvent.next(true);
     this.underlyingStart();
   }
 
   protected abstract underlyingStart(): void;
 
   public async cancel(): Promise<void> {
-    this.isAuthenticatingEvent.emit(false);
+    this.isAuthenticatingEvent.next(false);
     this.underlyingCancel();
   }
 

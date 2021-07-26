@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
 
 import { AuthService } from '../interfaces/auth.service';
 
@@ -10,15 +9,6 @@ import { AuthService } from '../interfaces/auth.service';
 export class AuthMockService extends AuthService {
   constructor(router: Router) {
     super(router);
-
-    this.user = of({
-      displayName: 'Display Name',
-      email: 'email@email.com',
-      phoneNumber: '999 66 66 66',
-      photoURL: '',
-      providerId: '',
-      uid: 'FAKE00pndUbBW8W7Xgc51lWNAqC3',
-    });
 
     this.underlyingInit();
   }
@@ -37,14 +27,21 @@ export class AuthMockService extends AuthService {
     }
   }
 
-  protected underlyingCancel(): void {}
+  protected underlyingCancel(): void { }
 
   protected underlyingLogout(): void {
-    this.isAuthenticatedEvent.emit(false);
+    this.isAuthenticatedEvent.next(false);
   }
 
   private onLoginSuccessful(): void {
-    this.isAuthenticatingEvent.emit(false);
-    this.isAuthenticatedEvent.emit(true);
+    this.user.next({
+      displayName: 'Display Name',
+      email: 'email@email.com',
+      phoneNumber: '999 66 66 66',
+      photoURL: '',
+      providerId: '',
+      uid: 'FAKE00pndUbBW8W7Xgc51lWNAqC3',
+    });
+    this.isAuthenticatingEvent.next(false);
   }
 }

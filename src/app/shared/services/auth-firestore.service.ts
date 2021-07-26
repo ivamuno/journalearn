@@ -1,14 +1,12 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import * as firebaseui_es from '@ivamuno/firebaseui-es';
 import firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { AuthService } from './interfaces/auth.service';
-import { UserInfo } from './interfaces/user-info';
 import { LanguageKeys, LanguageService } from './language.service';
 
 @Injectable({
@@ -16,17 +14,12 @@ import { LanguageKeys, LanguageService } from './language.service';
 })
 export class AuthFirestoreService extends AuthService {
   ui: any;
-
-  isAuthenticatingEvent = new EventEmitter<boolean>();
-  isAuthenticatedEvent = new EventEmitter<boolean>();
-
-  user = new Observable<UserInfo | undefined>();
   language: string;
 
   constructor(private readonly afAuth: AngularFireAuth, private readonly languageService: LanguageService, router: Router) {
     super(router);
 
-    this.user = afAuth.authState.pipe(
+    afAuth.authState.pipe(
       map((u) => {
         if (u) {
           return {
@@ -40,6 +33,9 @@ export class AuthFirestoreService extends AuthService {
         }
 
         return undefined;
+      }),
+      tap(u => {
+        this.user.next(u);
       })
     );
 
@@ -76,7 +72,7 @@ export class AuthFirestoreService extends AuthService {
   }
 
   private onLoginSuccessful(authResult: any): boolean {
-    this.isAuthenticatingEvent.emit(false);
+    this.isAuthenticatingEvent.next(false);
     return true;
   }
 }

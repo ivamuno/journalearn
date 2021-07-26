@@ -28,5 +28,87 @@
       "BLOCK1": "Echa un vistazo a las revisiones para completar el aprendizaje y mejorar día a día.",
       "BLOCK2": "Se humilde y abraza las correciones/recomendaciones, es la mejor ayuda a la hora de aprender."
     }
+  },
+  "LANGUAGE": {
+    "TITLE": "Seleccione tu idioma"
+  },
+  "NEW": {
+    "TITLE": "Nuevo Diario",
+    "EXAMPLE": "Ejemplo: \"Today I [bebí] <u>white coffee</u> [con un] friend.\"",
+    "FIELDS": {
+      "AUTHOR": "Autor",
+      "LANGUAGE": "Idioma",
+      "CHOOSE_LANGUAGE": "Seleccione tu idioma",
+      "TITLE": "Título",
+      "TEXT": "Texto",
+      "SAVE": "Guardar",
+      "RESET": "Limpiar",
+      "MESSAGES": {
+        "SUCCESS": "¡El diario se ha guardado correctamente!"
+      }
+    },
+    "RULES": {
+      "TITLE": "Reglas",
+      "RULE1": "Subraya aquellas palabras o expresiones que buscaste en el diccionario.",
+      "RULE2": "Usa corchetes '[]' para incluir palabras o expresiones en tu propio idioma."
+    }
+  },
+  "REVIEW": {
+    "TITLE": "Revisar Diario",
+    "EXAMPLE": "Ejemplo: \"Today I [bebí] <u>white coffee</u> [con un] friend.\"",
+    "FIELDS": {
+      "AUTHOR": "Autor",
+      "LANGUAGE": "Idioma",
+      "CHOOSE_LANGUAGE": "Seleccione tu idioma",
+      "DATE": "Fecha",
+      "TITLE": "Título",
+      "TEXT": "Texto",
+      "SAVE": "Guardar",
+      "RESET": "Limpiar",
+      "MESSAGES": {
+        "SUCCESS": "¡La revisión se ha guardado correctamente!"
+      }
+    },
+    "RULES": {
+      "TITLE": "Reglas",
+      "RULE1": "Tacha aquellas palabras o expresiones incorrectas e indica entre llaves tú correction."
+    }
+  },
+  "VIEW": {
+    "TITLE": "Ver diario",
+    "FIELDS": {
+      "AUTHOR": "Autor",
+      "LANGUAGE": "Idioma",
+      "DATE": "Fecha",
+      "TITLE": "Título",
+      "ORIGINAL": "Original",
+      "REVIEW": "Revisión"
+    }
+  },
+  "MY_LIST": {
+    "TITLE": "Mis Diarios",
+    "SUBTITLE": "Aquí tienes tu histórico de diarios.",
+    "FIELDS": {
+      "AUTHOR": "Autor",
+      "LANGUAGE": "Idioma",
+      "DATE": "Fecha",
+      "TITLE": "Títuto",
+      "STATUS": "Estado",
+      "ACTIONS": "Acciones",
+      "VIEW": "Ver"
+    }
+  },
+  "REVIEW_LIST": {
+    "TITLE": "Revisiones",
+    "SUBTITLE": "Aquí tienes la lista de revisiones pendientes.",
+    "FIELDS": {
+      "AUTHOR": "Autor",
+      "LANGUAGE": "Idioma",
+      "DATE": "Fecha",
+      "TITLE": "Títuto",
+      "STATUS": "Estado",
+      "ACTIONS": "Acciones",
+      "REVIEW": "Revisar"
+    }
   }
 }
