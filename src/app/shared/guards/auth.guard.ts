@@ -9,16 +9,12 @@ import { AuthService } from '../services/interfaces/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(public authService: AuthService, public router: Router) {}
+  constructor(public authService: AuthService, public router: Router) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
-    return this.authService.user.pipe(
-      map((user) => {
-        if (!!user) {
-          return true;
-        }
-
-        return this.router.parseUrl('/home');
+    return this.authService.isAuthenticatedEvent.pipe(
+      map((isAuthenticated) => {
+        return isAuthenticated ? true : this.router.parseUrl('/home');
       })
     );
   }

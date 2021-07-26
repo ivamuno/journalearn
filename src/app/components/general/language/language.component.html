@@ -1,0 +1,25 @@
+<div class="modal" [ngClass]="{'is-active': isOpened}">
+    <div class="modal-background" (click)="close()"></div>
+
+    <div class="modal-content has-background-light">
+        <div class="box">
+            <div class="columns is-centered">
+                <div class="column is-full">
+                    <h2 class="title is-4">{{ 'LANGUAGE.TITLE' | translate }}</h2>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-full">
+                    <button class="button is-fullwidth" [ngClass]="{'is-success': language == 'en'}" (click)="choose('en')">English</button>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-full">
+                    <button class="button is-fullwidth" [ngClass]="{'is-success': language == 'es'}" (click)="choose('es')">Español</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>

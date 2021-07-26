@@ -2,6 +2,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JournalStoreService } from 'src/app/shared/services';
 import { Journal } from 'src/app/shared/services/interfaces/journal';
+
 import { ServiceError } from '../../../shared/services/service-error.model';
 
 @Component({

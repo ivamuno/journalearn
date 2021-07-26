@@ -1,12 +1,7 @@
 import { Observable } from 'rxjs';
-import { Journal, Languages } from 'src/app/shared/services/interfaces/journal';
+import { Journal } from 'src/app/shared/services/interfaces/journal';
 
 export abstract class JournalStoreService {
-  languagePaths: Record<Languages, string> = {
-    Spanish: 'assets/ESP.png',
-    English: 'assets/GBR.png',
-  };
-
   public abstract getByUser(userId: string): Observable<Journal[]>;
 
   public abstract getPending(): Observable<Journal[]>;

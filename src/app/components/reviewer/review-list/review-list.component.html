@@ -1,129 +1,129 @@
 <section class="section">
-    <div class="container is-widescreen">
-        <h1 class="title">Reviews</h1>
-        <h2 class="subtitle">Pending journals to be reviewed.</h2>
+  <div class="container is-widescreen">
+    <h1 class="title">{{ 'REVIEW_LIST.TITLE' | translate }}</h1>
+    <h2 class="subtitle">{{ 'REVIEW_LIST.SUBTITLE' | translate }}</h2>
 
-        <div class="table-container is-hidden-touch">
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <thead>
-                    <tr>
-                        <th [width]="'10%'">Author</th>
-                        <th [width]="'10%'">Language</th>
-                        <th [width]="'15%'">Date</th>
-                        <th [width]="'45%'">Title</th>
-                        <th [width]="'10%'">Status</th>
-                        <th [width]="'10%'">Actions</th>
-                    </tr>
-                </thead>
-                <tbody *ngIf="isLoading;else elseJournals">
-                    <tr>
-                        <td>
-                            <progress class="progress is-large is-light" max="100">60%</progress>
-                        </td>
-                        <td>
-                            <progress class="progress is-large is-light" max="100">60%</progress>
-                        </td>
-                        <td>
-                            <progress class="progress is-large is-light" max="100">60%</progress>
-                        </td>
-                        <td>
-                            <progress class="progress is-large is-light" max="100">60%</progress>
-                        </td>
-                        <td>
-                            <progress class="progress is-large is-light" max="100">60%</progress>
-                        </td>
-                        <td>
-                            <progress class="progress is-large is-light" max="100">60%</progress>
-                        </td>
-                    </tr>
-                </tbody>
-                <ng-template #elseJournals>
-                    <tbody>
-                        <tr *ngFor="let item of journals">
-                            <td>{{item.author}}</td>
-                            <td>
-                                <div class="icon-text">
-                                    <figure class="icon">
-                                        <img [src]="item.language.path">
-                                    </figure>
-                                    <span>{{item.language.name}}</span>
-                                </div>
-                            </td>
-                            <td>{{item.date | date:'EEE, LLL d, YYYY'}}</td>
-                            <td>{{item.title}}</td>
-                            <td>
-                                <span class="tag"
-                                    [ngClass]="item.status == 'Pending' ? 'is-warning' : 'is-success'">{{item.status}}</span>
-                            </td>
-                            <td>
-                                <div class="buttons are-small">
-                                    <a class="button is-dark is-outlined" [routerLink]="['/review', item.id]">
-                                        <span class="icon is-small">
-                                            <i class="fas fa-clipboard-check"></i>
-                                        </span>
-                                        <span>Review</span>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </ng-template>
-            </table>
-        </div>
-
-        <div class="table-container is-hidden-desktop">
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <tbody>
-                    <tr *ngFor="let item of journals">
-                        <td>
-                            <div class="columns is-multiline is-mobile is-vcentered">
-                                <div class="column is-one-third"><strong>Author</strong></div>
-                                <div class="column is-two-thirds">{{item.author}}</div>
-
-                                <div class="column is-one-third"><strong>Language</strong></div>
-                                <div class="column is-two-thirds">
-                                    <div class="icon-text">
-                                        <figure class="icon">
-                                            <img [src]="item.language.path">
-                                        </figure>
-                                        <span>{{item.language.name}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="column is-one-third"><strong>Date</strong></div>
-                                <div class="column is-two-thirds">{{item.date | date:'EEE, LLL d, YYYY'}}</div>
-
-                                <div class="column is-one-third"><strong>Title</strong></div>
-                                <div class="column is-two-thirds">{{item.title}}</div>
-
-                                <div class="column is-one-third"><strong>Status</strong></div>
-                                <div class="column is-two-thirds">
-                                    <span class="tag"
-                                        [ngClass]="item.status == 'Pending' ? 'is-warning' : 'is-success'">{{item.status}}</span>
-                                </div>
-
-                                <div class="column is-one-third"><strong>Actions</strong></div>
-                                <div class="column is-two-thirds">
-                                    <div class="buttons are-small">
-                                        <a class="button is-dark is-outlined" *ngIf="item.status == 'Pending'"
-                                            [routerLink]="['/review', item.id]"> <span class="icon is-small">
-                                                <i class="fas fa-clipboard-check"></i>
-                                            </span>
-                                            <span>Review</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-            
-        <div [ngClass]="{'is-hidden': !error.message}">
-            <div class="notification is-danger">
-              {{ error.code }} - {{ error.message }}
-            </div>
-        </div>
+    <div class="table-container is-hidden-touch">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th [width]="'10%'">{{ 'REVIEW_LIST.FIELDS.AUTHOR' | translate }}</th>
+            <th [width]="'10%'">{{ 'REVIEW_LIST.FIELDS.LANGUAGE' | translate }}</th>
+            <th [width]="'15%'">{{ 'REVIEW_LIST.FIELDS.DATE' | translate }}</th>
+            <th [width]="'45%'">{{ 'REVIEW_LIST.FIELDS.TITLE' | translate }}</th>
+            <th [width]="'10%'">{{ 'REVIEW_LIST.FIELDS.STATUS' | translate }}</th>
+            <th [width]="'10%'">{{ 'REVIEW_LIST.FIELDS.ACTIONS' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="isLoading;else elseJournals">
+          <tr>
+            <td>
+              <progress class="progress is-large is-light" max="100">60%</progress>
+            </td>
+            <td>
+              <progress class="progress is-large is-light" max="100">60%</progress>
+            </td>
+            <td>
+              <progress class="progress is-large is-light" max="100">60%</progress>
+            </td>
+            <td>
+              <progress class="progress is-large is-light" max="100">60%</progress>
+            </td>
+            <td>
+              <progress class="progress is-large is-light" max="100">60%</progress>
+            </td>
+            <td>
+              <progress class="progress is-large is-light" max="100">60%</progress>
+            </td>
+          </tr>
+        </tbody>
+        <ng-template #elseJournals>
+          <tbody>
+            <tr *ngFor="let item of journals">
+              <td>{{item.author}}</td>
+              <td>
+                <div class="icon-text">
+                  <figure class="icon">
+                    <img [src]="item.language.path">
+                  </figure>
+                  <span>{{item.language.name}}</span>
+                </div>
+              </td>
+              <td>{{item.date | date:'EEE, LLL d, YYYY'}}</td>
+              <td>{{item.title}}</td>
+              <td>
+                <span class="tag"
+                  [ngClass]="item.status == 'Pending' ? 'is-warning' : 'is-success'">{{item.status}}</span>
+              </td>
+              <td>
+                <div class="buttons are-small">
+                  <a class="button is-dark is-outlined" [routerLink]="['/review', item.id]">
+                    <span class="icon is-small">
+                      <i class="fas fa-clipboard-check"></i>
+                    </span>
+                    <span>{{ 'REVIEW_LIST.FIELDS.REVIEW' | translate }}</span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </ng-template>
+      </table>
     </div>
+
+    <div class="table-container is-hidden-desktop">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <tbody>
+          <tr *ngFor="let item of journals">
+            <td>
+              <div class="columns is-multiline is-mobile is-vcentered">
+                <div class="column is-one-third"><strong>{{ 'REVIEW_LIST.FIELDS.AUTHOR' | translate }}</strong></div>
+                <div class="column is-two-thirds">{{item.author}}</div>
+
+                <div class="column is-one-third"><strong>{{ 'REVIEW_LIST.FIELDS.LANGUAGE' | translate }}</strong></div>
+                <div class="column is-two-thirds">
+                  <div class="icon-text">
+                    <figure class="icon">
+                      <img [src]="item.language.path">
+                    </figure>
+                    <span>{{item.language.name}}</span>
+                  </div>
+                </div>
+
+                <div class="column is-one-third"><strong>{{ 'REVIEW_LIST.FIELDS.DATE' | translate }}</strong></div>
+                <div class="column is-two-thirds">{{item.date | date:'EEE, LLL d, YYYY'}}</div>
+
+                <div class="column is-one-third"><strong>{{ 'REVIEW_LIST.FIELDS.TITLE' | translate }}</strong></div>
+                <div class="column is-two-thirds">{{item.title}}</div>
+
+                <div class="column is-one-third"><strong>{{ 'REVIEW_LIST.FIELDS.STATUS' | translate }}</strong></div>
+                <div class="column is-two-thirds">
+                  <span class="tag"
+                    [ngClass]="item.status == 'Pending' ? 'is-warning' : 'is-success'">{{item.status}}</span>
+                </div>
+
+                <div class="column is-one-third"><strong>{{ 'REVIEW_LIST.FIELDS.ACTIONS' | translate }}</strong></div>
+                <div class="column is-two-thirds">
+                  <div class="buttons are-small">
+                    <a class="button is-dark is-outlined" *ngIf="item.status == 'Pending'"
+                      [routerLink]="['/review', item.id]"> <span class="icon is-small">
+                        <i class="fas fa-clipboard-check"></i>
+                      </span>
+                      <span>{{ 'REVIEW_LIST.FIELDS.REVIEW' | translate }}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div [ngClass]="{'is-hidden': !error.message}">
+      <div class="notification is-danger">
+        {{ error.code }} - {{ error.message }}
+      </div>
+    </div>
+  </div>
 </section>
