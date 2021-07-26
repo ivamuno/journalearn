@@ -1,4 +1,12 @@
 {
+  "APP": {
+    "HOME": "Home",
+    "NEW": "New",
+    "LIST": "My Journals",
+    "REVIEW": "Reviews",
+    "LOGIN": "Log in",
+    "LOGOUT": "Log out"
+  },
   "HOME": {
     "TITLE": "The most effective way to learn writing in another language",
     "SUBTITLE": "Take a while to write about your experiences and feelings. Do not waste your time over-thinking, use the most common vocabulary which you use daily basis. Then, share to obtain reviews from natives and learn.",

@@ -23,7 +23,6 @@ import {
   ViewJournalComponent,
 } from './components';
 import { LanguageComponent } from './components/general/language/language.component';
-
 import { AuthMockService, JournalMockService } from './shared/services';
 import { AuthService } from './shared/services/interfaces/auth.service';
 import { JournalStoreService } from './shared/services/interfaces/journal-service';
@@ -45,7 +44,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AuthComponent,
     ReviewListComponent,
     ErrorComponent,
-    LanguageComponent
+    LanguageComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,14 +59,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
-      }
+      },
     }),
   ],
-  providers: [
-    { provide: JournalStoreService, useClass: JournalMockService },
-    { provide: AuthService, useClass: AuthMockService },
-    LanguageService
-  ],
+  providers: [{ provide: JournalStoreService, useClass: JournalMockService }, { provide: AuthService, useClass: AuthMockService }, LanguageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

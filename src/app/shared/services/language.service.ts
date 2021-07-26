@@ -22,7 +22,7 @@ export class Language {
   providedIn: 'root',
 })
 export class LanguageService {
-  private static languages: Language[] = [
+  private static readonly languages: Language[] = [
     { key: LanguageKeys.English, name: LanguageNames.English, path: 'assets/GBR.png' },
     { key: LanguageKeys.Spanish, name: LanguageNames.Spanish, path: 'assets/ESP.png' },
   ];
@@ -50,10 +50,10 @@ export class LanguageService {
   }
 
   public static getLanguageByKey(key: LanguageKeys): Language | undefined {
-    return LanguageService.languages.find((l) => l.key == key);
+    return LanguageService.languages.find((l) => l.key === key);
   }
 
-  public static getLanguageByName(anme: LanguageNames): Language | undefined {
-    return LanguageService.languages.find((l) => l.name == anme);
+  public static getLanguageByName(name: LanguageNames): Language | undefined {
+    return LanguageService.languages.find((l) => l.name === name);
   }
 }

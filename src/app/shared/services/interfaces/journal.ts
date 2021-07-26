@@ -1,4 +1,4 @@
-import { LanguageNames } from "../language.service";
+import { LanguageNames } from '../language.service';
 
 export enum JournalStatus {
   Pending = 'Pending',

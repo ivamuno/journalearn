@@ -1,28 +1,29 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { UserInfo } from './interfaces/user-info';
+import * as firebaseui_es from '@ivamuno/firebaseui-es';
 import firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { AuthService } from './interfaces/auth.service';
+import { UserInfo } from './interfaces/user-info';
+import { LanguageKeys, LanguageService } from './language.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthFirestoreService extends AuthService {
-  ui: firebaseui.auth.AuthUI;
+  ui: any;
 
   isAuthenticatingEvent = new EventEmitter<boolean>();
   isAuthenticatedEvent = new EventEmitter<boolean>();
 
   user = new Observable<UserInfo | undefined>();
+  language: string;
 
-  constructor(
-    private readonly afAuth: AngularFireAuth,
-    router: Router
-  ) {
+  constructor(private readonly afAuth: AngularFireAuth, private readonly languageService: LanguageService, router: Router) {
     super(router);
 
     this.user = afAuth.authState.pipe(
@@ -42,19 +43,26 @@ export class AuthFirestoreService extends AuthService {
       })
     );
 
+    this.languageService.isChangedEvent.subscribe((l) => (this.language = l));
+
     this.underlyingInit();
   }
 
-  protected async underlyingStart(): Promise<void> {    
+  protected async underlyingStart(): Promise<void> {
     const app = await this.afAuth.app;
-    const uiConfig: firebaseui.auth.Config = {
+    const uiConfig = {
       signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
       callbacks: {
         signInSuccessWithAuthResult: this.onLoginSuccessful.bind(this),
       },
     };
 
-    this.ui = new firebaseui.auth.AuthUI(app.auth());
+    if (this.language === LanguageKeys.Spanish) {
+      this.ui = new firebaseui_es.auth.AuthUI(app.auth());
+    } else {
+      this.ui = new firebaseui.auth.AuthUI(app.auth());
+    }
+
     this.ui.start('#firebaseui-auth-container', uiConfig);
     this.ui.disableAutoSignIn();
   }

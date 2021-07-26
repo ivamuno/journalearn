@@ -10,7 +10,8 @@
       </div>
 
       <a id="navBurger" role="button" class="navbar-burger" data-target="navMenu" aria-label="menu"
-        aria-expanded="false" (click)="isNavBurgerActive=true" [ngClass]="{'is-active': isNavBurgerActive }">
+        aria-expanded="false" (click)="isNavBurgerActive=!isNavBurgerActive"
+        [ngClass]="{'is-active': isNavBurgerActive }">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -18,27 +19,27 @@
     </div>
     <div class="navbar-menu" id="navMenu" [ngClass]="{'is-active': isNavBurgerActive }">
       <div class="navbar-start">
-        <a class="navbar-item" [routerLink]="['/home']" routerLinkActive="is-active" (click)="isNavBurgerActive=false">
-          Home
+        <a class="navbar-item" [routerLink]="['/home']" routerLinkActive="is-active" (click)="closeNavBurger()">
+          {{ 'APP.HOME' | translate }}
         </a>
         <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/new']" routerLinkActive="is-active"
-          (click)="isNavBurgerActive=false">
-          New
+          (click)="closeNavBurger()">
+          {{ 'APP.NEW' | translate }}
         </a>
         <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/journals']" routerLinkActive="is-active"
-          (click)="isNavBurgerActive=false">
-          List
+          (click)="closeNavBurger()">
+          {{ 'APP.LIST' | translate }}
         </a>
         <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/reviews']" routerLinkActive="is-active"
-          (click)="isNavBurgerActive=false">
-          Reviews
+          (click)="closeNavBurger()">
+          {{ 'APP.REVIEW' | translate }}
         </a>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
             <a class="button is-light is-outlined" *ngIf="!isAuthenticated" (click)="openAuthModal()">
-              <strong>Log in</strong>
+              <strong>{{ 'APP.LOGIN' | translate }}</strong>
             </a>
             <a class="button is-light is-outlined" *ngIf="!isAuthenticated" (click)="openLanguageModal()">
               <span class="icon is-small">
@@ -46,7 +47,7 @@
               </span>
             </a>
             <a class="button is-light is-outlined" *ngIf="isAuthenticated" (click)="logout()">
-              <strong>Log out</strong>
+              <strong>{{ 'APP.LOGOUT' | translate }}</strong>
             </a>
           </div>
         </div>

@@ -1,7 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
-import { JournalStoreService } from 'src/app/shared/services/interfaces/journal-service';
 import { Journal } from 'src/app/shared/services/interfaces/journal';
+import { JournalStoreService } from 'src/app/shared/services/interfaces/journal-service';
+
 import { ServiceError } from '../../../shared/services/service-error.model';
 
 @Component({

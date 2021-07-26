@@ -1,5 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
+
 import { LanguageService } from './shared/services/language.service';
 
 @Component({
@@ -24,15 +25,21 @@ export class AppComponent implements OnInit {
   }
 
   openAuthModal(): void {
+    this.closeNavBurger();
     this.authService.start();
   }
 
   openLanguageModal(): void {
-    console.log('openLanguageModal');
+    this.closeNavBurger();
     this.languageService.open();
   }
 
   logout(): void {
+    this.closeNavBurger();
     this.authService.logout();
+  }
+
+  closeNavBurger(): void {
+    this.isNavBurgerActive = false;
   }
 }

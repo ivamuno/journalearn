@@ -1,4 +1,12 @@
 {
+  "APP": {
+    "HOME": "Home",
+    "NEW": "Nuevo",
+    "LIST": "Mis Diarios",
+    "REVIEW": "Revisiones",
+    "LOGIN": "Iniciar Sesión",
+    "LOGOUT": "Cerrar Sesión"
+  },
   "HOME": {
     "TITLE": "La forma mas efectiva de aprender a escribir en otro idioma",
     "SUBTITLE": "Tomate unos pocos minutos para escribir tus experiencias y sentimientos, sin perder tiempo pensando y con el vocabulario mas usado, compartelo para que nativos te lo revisen y aprende.",

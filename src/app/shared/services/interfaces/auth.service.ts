@@ -1,6 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
 import { UserInfo } from './user-info';
 
 export abstract class AuthService {
@@ -9,10 +10,7 @@ export abstract class AuthService {
 
   user = new Observable<UserInfo | undefined>();
 
-  constructor(
-    protected readonly router: Router
-  ) {
-  }
+  constructor(protected readonly router: Router) {}
 
   protected underlyingInit(): void {
     this.user.subscribe(async (u) => {
