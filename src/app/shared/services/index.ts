@@ -8,3 +8,4 @@ export * from './interfaces/user-info';
 
 export * from './auth-firestore.service';
 export * from './journal-firestore.service';
+export * from './language.service';

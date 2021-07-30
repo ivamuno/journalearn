@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import * as firebaseui_es from '@ivamuno/firebaseui-es';
 import firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { AuthService } from './interfaces/auth.service';
 import { LanguageKeys, LanguageService } from './language.service';
@@ -33,11 +33,10 @@ export class AuthFirestoreService extends AuthService {
         }
 
         return undefined;
-      }),
-      tap(u => {
-        this.user.next(u);
       })
-    );
+    ).subscribe(u => {
+      this.user.next(u);
+    });
 
     this.languageService.isChangedEvent.subscribe((l) => (this.language = l));
 
@@ -73,6 +72,8 @@ export class AuthFirestoreService extends AuthService {
 
   private onLoginSuccessful(authResult: any): boolean {
     this.isAuthenticatingEvent.next(false);
-    return true;
+
+    // It means, no redirection is required.
+    return false;
   }
 }

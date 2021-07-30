@@ -23,10 +23,7 @@ import {
   ViewJournalComponent,
 } from './components';
 import { LanguageComponent } from './components/general/language/language.component';
-import { AuthMockService, JournalMockService } from './shared/services';
-import { AuthService } from './shared/services/interfaces/auth.service';
-import { JournalStoreService } from './shared/services/interfaces/journal-service';
-import { LanguageService } from './shared/services/language.service';
+import * as services from './shared/services';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -62,7 +59,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       },
     }),
   ],
-  providers: [{ provide: JournalStoreService, useClass: JournalMockService }, { provide: AuthService, useClass: AuthMockService }, LanguageService],
+  providers: [
+    { provide: services.JournalStoreService, useClass: services.JournalMockService },
+    { provide: services.AuthService, useClass: services.AuthFirestoreService },
+    services.LanguageService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
