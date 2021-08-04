@@ -2,6 +2,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 
 import * as fromApp from '../../../store/app.reducer';
+import * as ProfileActions from '../../../profile/store/profile.actions';
 
 export abstract class AuthService {
   isAuthenticatingEvent = new BehaviorSubject<boolean>(false);
@@ -33,6 +34,7 @@ export abstract class AuthService {
   protected abstract underlyingCancel(): Promise<void>;
 
   public async logout(): Promise<void> {
+    this.store.dispatch(new ProfileActions.Logout());
     this.underlyingLogout();
   }
 

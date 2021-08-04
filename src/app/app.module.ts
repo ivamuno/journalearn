@@ -69,7 +69,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   providers: [
     { provide: services.JournalStoreService, useClass: services.JournalMockService },
-    { provide: services.AuthService, useClass: services.AuthFirestoreService },
+    { provide: services.AuthService, useClass: services.AuthMockService },
     services.LanguageService],
   bootstrap: [AppComponent],
 })
