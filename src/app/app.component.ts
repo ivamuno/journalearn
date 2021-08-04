@@ -1,7 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
+import { Store } from '@ngrx/store';
 
 import { LanguageService } from './shared/services/language.service';
+import * as fromApp from './store/app.reducer';
+import { AuthService } from './shared/services';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +16,14 @@ export class AppComponent implements OnInit {
   isNavBurgerActive = false;
   title = 'journal-me';
 
-  constructor(private readonly authService: AuthService, private readonly languageService: LanguageService) {
-    this.authService.isAuthenticatedEvent.subscribe((value) => {
-      this.isAuthenticated = value;
+  constructor(
+    private readonly authService: AuthService,
+    private readonly store: Store<fromApp.AppState>,
+    private readonly languageService: LanguageService
+  ) {
+    authService.init();
+    this.store.select('profileState').subscribe(({ profile }) => {
+      this.isAuthenticated = !!profile;
     });
   }
 

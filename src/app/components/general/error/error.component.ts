@@ -13,7 +13,6 @@ export class ErrorComponent implements OnInit, OnDestroy {
   error: ServiceError;
 
   ngOnInit(): void {
-    console.log('error', this.error);
   }
 
   ngOnDestroy(): void {}

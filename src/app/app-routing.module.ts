@@ -9,6 +9,7 @@ import {
   ReviewListComponent,
   ViewJournalComponent,
 } from './components';
+import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
@@ -31,10 +32,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'reviews', component: ReviewListComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

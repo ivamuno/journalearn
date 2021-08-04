@@ -1,12 +1,14 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
+import { Store } from '@ngrx/store';
+import { v4 as uuidv4 } from 'uuid';
+
 import { Journal, JournalStatus } from 'src/app/shared/services/interfaces/journal';
 import { JournalStoreService } from 'src/app/shared/services/interfaces/journal-service';
 import { LanguageNames } from 'src/app/shared/services/language.service';
-import { v4 as uuidv4 } from 'uuid';
 
 import { ServiceError } from '../../../shared/services/service-error.model';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-new-journal',
@@ -28,13 +30,16 @@ export class NewJournalComponent implements OnInit {
     text: new FormControl(null),
   });
 
-  constructor(private readonly journalStoreService: JournalStoreService, private readonly authService: AuthService) {}
+  constructor(
+    private readonly journalStoreService: JournalStoreService,
+    private readonly store: Store<fromApp.AppState>
+  ) { }
 
   ngOnInit(): void {
     this.isSaved = false;
 
-    this.authService.user.subscribe((u) => {
-      this.author = u?.uid || '';
+    this.store.select('profileState').subscribe(({ profile }) => {
+      this.author = profile?.uid || '';
     });
   }
 

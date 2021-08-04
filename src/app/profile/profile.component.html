@@ -1,0 +1,73 @@
+<section class="section">
+  <div class="container is-widescreen is-info">
+    <div class="columns">
+      <div class="column">
+        <form [formGroup]="profileForm">
+          <h1 class="title">{{ 'PROFILE.TITLE' | translate }}</h1>
+
+          <div class="field">
+            <label class="label">{{ 'NEW.FIELDS.FIRST_NAME' | translate }}</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" formControlName="firstName">
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">{{ 'NEW.FIELDS.LAST_NAME' | translate }}</label>
+            <div class="control has-icons-left">
+              <div class="control has-icons-left">
+                <input class="input" type="text" formControlName="lastName">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">{{ 'NEW.FIELDS.DESCRIPTION' | translate }}</label>
+            <div class="control">
+              <textarea class="textarea" formControlName="description"></textarea>
+            </div>
+          </div>
+
+          <div [ngClass]="{'is-hidden': isSaved}">
+            <div class="field is-grouped">
+              <div class="control">
+                <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
+                  <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                  </span>
+                  <span>{{ 'NEW.FIELDS.SAVE' | translate }}</span>
+                </button>
+              </div>
+              <div class="control">
+                <button class="button" [disabled]="isSaving ? 'disabled' : ''" (click)="cancel()">
+                  <span class="icon is-small">
+                    <i class="fas fa-times"></i>
+                  </span>
+                  <span>{{ 'NEW.FIELDS.RESET' | translate }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="{'is-hidden': !isSaved}">
+            <div class="notification is-success">
+              {{ 'NEW.MESSAGES.SUCCESS' | translate }}
+            </div>
+          </div>
+
+          <div [ngClass]="{'is-hidden': !error.message}">
+            <div class="notification is-danger">
+              {{ error.code }} - {{ error.message }}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,9 +1,10 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/interfaces/auth.service';
+import { Store } from '@ngrx/store';
+
 import { Journal } from 'src/app/shared/services/interfaces/journal';
 import { JournalStoreService } from 'src/app/shared/services/interfaces/journal-service';
-
 import { ServiceError } from '../../../shared/services/service-error.model';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-journals-list',
@@ -16,14 +17,17 @@ export class JournalsListComponent implements OnInit {
   journals: Journal[] = [];
   error: ServiceError;
 
-  constructor(private readonly journalStoreService: JournalStoreService, private readonly authService: AuthService) {}
+  constructor(
+    private readonly journalStoreService: JournalStoreService,
+    private readonly store: Store<fromApp.AppState>
+  ) { }
 
   ngOnInit(): void {
     this.isLoading = true;
     this.error = new ServiceError();
 
-    this.authService.user.subscribe((u) => {
-      this.journalStoreService.getByUser(u?.uid || '').subscribe(
+    this.store.select('profileState').subscribe(({ profile }) => {
+      this.journalStoreService.getByUser(profile?.uid || '').subscribe(
         (result: Journal[]) => {
           this.journals = result;
           this.isLoading = false;
