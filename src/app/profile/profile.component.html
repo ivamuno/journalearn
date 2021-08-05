@@ -2,17 +2,21 @@
   <div class="container is-widescreen is-info">
     <form [formGroup]="profileForm">
       <h1 class="title">{{ 'PROFILE.TITLE' | translate }}</h1>
+      <h2 class="subtitle">{{ 'PROFILE.SUBTITLE' | translate }}</h2>
 
-      <div class="tile is-vertical">
-        <div class="tile">
-          <div class="tile is-parent is-3 is-justify-content-center is-align-items-center">
-            <div class="user-avatar--initials has-background-dark is-flex is-justify-content-center is-align-items-center">
-              <span>IM</span>
+      <section class="section has-background-info my-5">
+        <h1 class="title is-4">{{ 'PROFILE.TITLE_BASIC' | translate }}</h1>
+        <div class="columns">
+          <div class="column is-one-quarter is-flex is-justify-content-center is-align-items-center">
+            <div
+              class="user-avatar--initials has-background-dark is-flex is-justify-content-center is-align-items-center">
+              <span class="is-size-1 has-text-weight-bold">{{ initials }}</span>
             </div>
           </div>
-          <div class="tile is-parent is-vertical">
-            <div class="tile is-child field">
-              <label class="label">{{ 'NEW.FIELDS.FIRST_NAME' | translate }}</label>
+
+          <div class="column">
+            <div class="field">
+              <label class="label">{{ 'PROFILE.FIELDS.FIRST_NAME' | translate }}</label>
               <div class="control has-icons-left">
                 <input class="input" type="text" formControlName="firstName">
                 <span class="icon is-small is-left">
@@ -21,8 +25,8 @@
               </div>
             </div>
 
-            <div class="tile is-child field">
-              <label class="label">{{ 'NEW.FIELDS.LAST_NAME' | translate }}</label>
+            <div class="field">
+              <label class="label">{{ 'PROFILE.FIELDS.LAST_NAME' | translate }}</label>
               <div class="control has-icons-left">
                 <div class="control has-icons-left">
                   <input class="input" type="text" formControlName="lastName">
@@ -34,42 +38,76 @@
             </div>
           </div>
         </div>
-        <div class="tile is-parent">
-          <div class="tile is-child">
-            <div class="field">
-              <label class="label">{{ 'NEW.FIELDS.DESCRIPTION' | translate }}</label>
-              <div class="control">
-                <textarea class="textarea" formControlName="description"></textarea>
-              </div>
-            </div>
 
-            <div [ngClass]="{'is-hidden': isSaved}">
-              <div class="field is-grouped">
-                <div class="control">
-                  <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
-                    <span class="icon is-small">
-                      <i class="fas fa-check"></i>
-                    </span>
-                    <span>{{ 'NEW.FIELDS.SAVE' | translate }}</span>
-                  </button>
-                </div>
-                <div class="control">
-                  <button class="button" [disabled]="isSaving ? 'disabled' : ''" (click)="cancel()">
-                    <span class="icon is-small">
-                      <i class="fas fa-times"></i>
-                    </span>
-                    <span>{{ 'NEW.FIELDS.RESET' | translate }}</span>
-                  </button>
-                </div>
-              </div>
+        <div class="field">
+          <label class="label">{{ 'PROFILE.FIELDS.DESCRIPTION' | translate }}</label>
+          <div class="control">
+            <textarea class="textarea" formControlName="description"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="section has-background-info my-5">
+        <h1 class="title is-4">{{ 'PROFILE.TITLE_LANGUAGE' | translate }}</h1>
+        <div class="field">
+          <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_NATIVE' | translate }}</label>
+          <div class="control has-icons-left">
+            <div class="select">
+              <select formControlName="nativeLanguage">
+                <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
+                <option *ngFor="let language of languages" [ngValue]="language">
+                  {{language}}
+                </option>
+              </select>
             </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_WRITE' | translate }}</label>
+          <div class="control has-icons-left">
+            <div class="select">
+              <select formControlName="writeLanguage">
+                <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
+                <option *ngFor="let language of languages" [ngValue]="language">
+                  {{language}}
+                </option>
+              </select>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div [ngClass]="{'is-hidden': isSaved}">
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
+              <span class="icon is-small">
+                <i class="fas fa-check"></i>
+              </span>
+              <span>{{ 'PROFILE.FIELDS.SAVE' | translate }}</span>
+            </button>
+          </div>
+          <div class="control">
+            <button class="button" [disabled]="isSaving ? 'disabled' : ''" (click)="cancel()">
+              <span class="icon is-small">
+                <i class="fas fa-times"></i>
+              </span>
+              <span>{{ 'PROFILE.FIELDS.RESET' | translate }}</span>
+            </button>
           </div>
         </div>
       </div>
 
       <div [ngClass]="{'is-hidden': !isSaved}">
         <div class="notification is-success">
-          {{ 'NEW.MESSAGES.SUCCESS' | translate }}
+          {{ 'PROFILE.MESSAGES.SUCCESS' | translate }}
         </div>
       </div>
 

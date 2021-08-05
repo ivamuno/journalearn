@@ -110,5 +110,21 @@
       "ACTIONS": "Acciones",
       "REVIEW": "Revisar"
     }
+  },
+  "PROFILE": {
+    "TITLE": "Perfil",
+    "SUBTITLE": "Información sobre ti.",
+    "TITLE_BASIC": "Información Básica",
+    "TITLE_LANGUAGE": "Preferencias de Idioma",
+    "FIELDS": {
+      "FIRST_NAME": "Nombre",
+      "LAST_NAME": "Apellidos",
+      "DESCRIPTION": "Descripción",
+      "LANGUAGE_NATIVE": "Idioma Materna",
+      "LANGUAGE_WRITE": "Idioma de diario por defecto",
+      "CHOOSE_LANGUAGE": "Seleccione tu idioma",
+      "SAVE": "Guardar",
+      "RESET": "Limpiar"
+    }
   }
 }

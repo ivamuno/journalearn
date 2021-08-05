@@ -109,5 +109,21 @@
       "ACTIONS": "Actions",
       "REVIEW": "Review"
     }
+  },
+  "PROFILE": {
+    "TITLE": "Profile",
+    "SUBTITLE": "Information about yourself.",
+    "TITLE_BASIC": "Basic Information",
+    "TITLE_LANGUAGE": "Language Preferences",
+    "FIELDS": {
+      "FIRST_NAME": "First Name",
+      "LAST_NAME": "Last Name",
+      "DESCRIPTION": "Description",
+      "LANGUAGE_NATIVE": "Native Language",
+      "LANGUAGE_WRITE": "Default Language for journal",
+      "CHOOSE_LANGUAGE": "Choose your language",
+      "SAVE": "Save",
+      "RESET": "Reset"
+    }
   }
 }
