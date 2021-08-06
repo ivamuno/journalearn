@@ -3,11 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Journal, JournalStatus } from 'src/app/shared/services/interfaces/journal';
-import { JournalStoreService } from 'src/app/shared/services/interfaces/journal-service';
-import { LanguageNames } from 'src/app/shared/services/language.service';
-
-import { ServiceError } from '../../../shared/services/service-error.model';
+import { Journal, JournalStatus, JournalStoreService, LanguageNames, ServiceError } from '../../../shared/services';
 import * as fromApp from '../../../store/app.reducer';
 
 @Component({

@@ -1,10 +1,12 @@
 import { Action } from '@ngrx/store';
 
-import { UserInfo } from '../../shared/services';
+import { ServiceError, UserInfo } from '../../shared/services';
 
-export const AUTHENTICATE_SUCCESS: string = '[Auth] Success';
-export const AUTHENTICATE_INCOMPLETE: string = '[Auth] Incomplete';
-export const LOGOUT: string = '[Auth] Logout';
+export const AUTHENTICATE_SUCCESS: string = '[Profile] Auth Success';
+export const PROFILE_COMPLETE: string = '[Profile] Complete';
+export const PROFILE_INCOMPLETE: string = '[Profile] Incomplete';
+export const PROFILE_FAILS: string = '[Profile] Fails';
+export const LOGOUT: string = '[Profile] Logout';
 
 export class AuthenticateSuccess implements Action {
   readonly type = AUTHENTICATE_SUCCESS;
@@ -16,13 +18,31 @@ export class AuthenticateSuccess implements Action {
   ) { }
 }
 
-export class AuthenticateIncomplete implements Action {
-  readonly type = AUTHENTICATE_INCOMPLETE;
+export class ProfileComplete implements Action {
+  readonly type = PROFILE_COMPLETE;
 
   constructor(
     public payload: {
       profile: UserInfo
     }
+  ) { }
+}
+
+export class ProfileIncomplete implements Action {
+  readonly type = PROFILE_INCOMPLETE;
+
+  constructor(
+    public payload: {
+      profile: UserInfo
+    }
+  ) { }
+}
+
+export class ProfileFails implements Action {
+  readonly type = PROFILE_FAILS;
+
+  constructor(
+    public payload: ServiceError
   ) { }
 }
 
@@ -32,5 +52,7 @@ export class Logout implements Action {
 
 export type ActionType =
   | AuthenticateSuccess
-  | AuthenticateIncomplete
-  | Logout;
+  | Logout
+  | ProfileComplete
+  | ProfileIncomplete
+  | ProfileFails;

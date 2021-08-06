@@ -1,9 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { LanguageService } from './shared/services/language.service';
+import { AuthService, LanguageService, UserInfo } from './shared/services';
 import * as fromApp from './store/app.reducer';
-import { AuthService } from './shared/services';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +14,7 @@ export class AppComponent implements OnInit {
   isAuthenticated = false;
   isNavBurgerActive = false;
   title = 'journal-me';
+  initials: string = '';
 
   constructor(
     private readonly authService: AuthService,
@@ -24,11 +24,16 @@ export class AppComponent implements OnInit {
     authService.init();
     this.store.select('profileState').subscribe(({ profile }) => {
       this.isAuthenticated = !!profile;
+      if (profile) {
+        this.initials = UserInfo.getInitials(profile.firstName, profile.lastName);
+      } else {
+        this.initials = '';
+      }
     });
   }
 
   ngOnInit(): void {
-    this.languageService.set(LanguageService.DefaultLanguage);
+    this.languageService.set(navigator.language);
   }
 
   openAuthModal(): void {

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Journal } from 'src/app/shared/services/interfaces/journal';
+import { Journal } from 'src/app/shared/services/models/journal.model';
 
 export abstract class JournalStoreService {
   public abstract getByUser(userId: string): Observable<Journal[]>;

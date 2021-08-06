@@ -1,9 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { Journal } from 'src/app/shared/services/interfaces/journal';
-import { JournalStoreService } from 'src/app/shared/services/interfaces/journal-service';
-import { ServiceError } from '../../../shared/services/service-error.model';
+import { Journal, JournalStoreService, ServiceError } from '../../../shared/services';
 import * as fromApp from '../../../store/app.reducer';
 
 @Component({

@@ -13,10 +13,11 @@ export function profileReducer(
   state: ProfileState = initialState,
   action: any
 ): ProfileState {
-  console.log('profileReducer', state, action);
+  console.log('profileReducer', action, state);
   switch (action.type) {
     case ProfileActions.AUTHENTICATE_SUCCESS:
-    case ProfileActions.AUTHENTICATE_INCOMPLETE:
+    case ProfileActions.PROFILE_COMPLETE:
+    case ProfileActions.PROFILE_INCOMPLETE:
       return {
         ...state,
         profile: action.payload.profile

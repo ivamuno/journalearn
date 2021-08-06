@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Journal, JournalStatus } from 'src/app/shared/services/interfaces/journal';
-
-import { JournalStoreService } from './interfaces/journal-service';
-import { LanguageNames, LanguageService } from './language.service';
-import { ServiceError } from './service-error.model';
+import { Journal, JournalStatus } from 'src/app/shared/services/models/journal.model';
+import { JournalStoreService, LanguageNames, LanguageService } from '..';
+import { ServiceError } from '../models/service-error.model';
+import { FirestoreError } from './firestore-error';
 
 class JournalDb {
   public author: string;
@@ -16,29 +15,6 @@ class JournalDb {
   public status: JournalStatus;
   public text: string;
   public review: string;
-}
-
-class FirestoreError {
-  public code:
-    | 'cancelled'
-    | 'unknown'
-    | 'invalid-argument'
-    | 'deadline-exceeded'
-    | 'not-found'
-    | 'already-exists'
-    | 'permission-denied'
-    | 'resource-exhausted'
-    | 'failed-precondition'
-    | 'aborted'
-    | 'out-of-range'
-    | 'unimplemented'
-    | 'internal'
-    | 'unavailable'
-    | 'data-loss'
-    | 'unauthenticated';
-  public message: string;
-  public name: string;
-  public stack: string;
 }
 
 const journalCollectionKey = 'journals';

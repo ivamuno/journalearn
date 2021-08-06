@@ -1,8 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { JournalStoreService } from 'src/app/shared/services';
-import { Journal } from 'src/app/shared/services/interfaces/journal';
 
-import { ServiceError } from '../../../shared/services/service-error.model';
+import { JournalStoreService, Journal, ServiceError } from '../../../shared/services';
 
 @Component({
   selector: 'app-review-list',
@@ -15,7 +13,7 @@ export class ReviewListComponent implements OnInit {
   journals: Journal[] = [];
   error: ServiceError;
 
-  constructor(private readonly journalStoreService: JournalStoreService) {}
+  constructor(private readonly journalStoreService: JournalStoreService) { }
 
   ngOnInit(): void {
     this.isLoading = true;

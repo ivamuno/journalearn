@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { AuthService } from '../interfaces/auth.service';
 import * as fromApp from '../../../store/app.reducer';
 import * as ProfileActions from '../../../profile/store/profile.actions';
-import { LanguageKeys } from '..';
+import { AuthService, UserInfo, LanguageKeys, LanguageService } from '..';
 
 @Injectable({
   providedIn: 'root',
@@ -39,43 +38,38 @@ export class AuthMockService extends AuthService {
   protected async underlyingLogout(): Promise<void> { }
 
   private onCompleteLoginSuccessful(): void {
-    console.log('dispatch AuthenticateIncomplete onLoginSuccessful')
     this.store.dispatch(new ProfileActions.AuthenticateSuccess({
-      profile: {
-        email: 'complete@email.com',
-        firstName: 'User',
-        lastName: 'Complete',
-        phoneNumber: '999 66 66 66',
-        photoURL: '',
-        providerId: '',
-        uid: 'COMP00pndUbBW8W7Xgc51lWNAqC3',
-        language: {
-          native: { key: LanguageKeys.English, name: '', path: '' },
-          write: { key: LanguageKeys.English, name: '', path: '' }
-        },
-        isComplete: true
-      }
+      profile: new UserInfo(
+        'complete@email.com',
+        'User',
+        'Complete',
+        '',
+        '999 66 66 66',
+        '',
+        '',
+        'COMP00pndUbBW8W7Xgc51lWNAqC3',
+        {
+          native: LanguageService.getLanguageByKey(LanguageKeys.Spanish),
+          write: LanguageService.getLanguageByKey(LanguageKeys.English)
+        }
+      )
     }));
     this.isAuthenticatingEvent.next(false);
   }
 
   private onIncompleteLoginSuccessful(): void {
-    console.log('dispatch AuthenticateIncomplete onLoginSuccessful')
-    this.store.dispatch(new ProfileActions.AuthenticateIncomplete({
-      profile: {
-        email: 'incomplete@email.com',
-        firstName: 'User',
-        lastName: 'Incomplete',
-        phoneNumber: '666 77 77 77',
-        photoURL: '',
-        providerId: '',
-        uid: 'INCOMP99aERT9984asXCsd6156aa',
-        language: {
-          native: { key: LanguageKeys.English, name: '', path: '' },
-          write: { key: LanguageKeys.English, name: '', path: '' }
-        },
-        isComplete: false
-      }
+    this.store.dispatch(new ProfileActions.AuthenticateSuccess({
+      profile: new UserInfo(
+        'incomplete@email.com',
+        '',
+        '',
+        '',
+        '666 77 77 77',
+        '',
+        '',
+        'INCOMP99aERT9984asXCsd6156aa',
+        undefined
+      )
     }));
     this.isAuthenticatingEvent.next(false);
   }

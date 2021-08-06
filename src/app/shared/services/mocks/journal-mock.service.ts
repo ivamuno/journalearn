@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
-import { Journal, JournalStatus } from 'src/app/shared/services/interfaces/journal';
 
-import { JournalStoreService } from '../interfaces/journal-service';
-import { LanguageNames, LanguageService } from '../language.service';
-import { ServiceError } from '../service-error.model';
+import { LanguageNames, LanguageService, Journal, JournalStatus, JournalStoreService, ServiceError } from '..';
 
 @Injectable({
   providedIn: 'root',

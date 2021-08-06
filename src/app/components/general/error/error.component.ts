@@ -1,6 +1,6 @@
 import { Component, Injectable, Input, OnDestroy, OnInit } from '@angular/core';
 
-import { ServiceError } from '../../../shared/services/service-error.model';
+import { ServiceError } from '../../../shared/services';
 
 @Component({
   selector: 'app-error',

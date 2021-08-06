@@ -2,10 +2,8 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { JournalStoreService } from 'src/app/shared/services';
-import { Journal, JournalStatus } from 'src/app/shared/services/interfaces/journal';
 
-import { ServiceError } from '../../../shared/services/service-error.model';
+import { JournalStoreService, Journal, JournalStatus, ServiceError } from '../../../shared/services';
 
 @Component({
   selector: 'app-review-journal',
@@ -24,7 +22,7 @@ export class ReviewJournalComponent implements OnInit {
   error: ServiceError;
   reviewError: ServiceError;
 
-  constructor(private readonly journalStoreService: JournalStoreService, private readonly route: ActivatedRoute) {}
+  constructor(private readonly journalStoreService: JournalStoreService, private readonly route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.isLoading = true;

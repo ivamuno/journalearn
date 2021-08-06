@@ -49,6 +49,11 @@
             <a class="button is-light is-outlined" *ngIf="isAuthenticated" (click)="logout()">
               <strong>{{ 'APP.LOGOUT' | translate }}</strong>
             </a>
+            <a class="mb-2" *ngIf="isAuthenticated" [routerLink]="['/profile']">
+              <div class="profile-initials has-background-primary is-flex is-justify-content-center is-align-items-center">
+                <span class="has-text-weight-bold has-text-dark">{{ initials }}</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>

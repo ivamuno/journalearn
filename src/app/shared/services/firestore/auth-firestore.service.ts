@@ -6,12 +6,12 @@ import firebase from 'firebase/app';
 import * as firebaseui_es from '@ivamuno/firebaseui-es';
 import * as firebaseui from 'firebaseui';
 
-import { AuthService } from './interfaces/auth.service';
-import { LanguageKeys, LanguageService } from './language.service';
+import { AuthService } from '../interfaces/auth.service';
+import { LanguageKeys, LanguageService } from '../language.service';
 
-import * as ProfileActions from '../../profile/store/profile.actions';
-import * as fromApp from '../../store/app.reducer';
-import { UserInfo } from './interfaces/user-info';
+import * as ProfileActions from '../../../profile/store/profile.actions';
+import * as fromApp from '../../../store/app.reducer';
+import { UserInfo } from '../models/user-info.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -46,8 +46,7 @@ export class AuthFirestoreService extends AuthService {
       return;
     }
 
-    console.log('dispatch AuthenticateIncomplete underlyingInit')
-    this.store.dispatch(new ProfileActions.AuthenticateIncomplete({
+    this.store.dispatch(new ProfileActions.AuthenticateSuccess({
       profile: userInfo
     }));
   }
@@ -94,34 +93,26 @@ export class AuthFirestoreService extends AuthService {
   }
 
   private onLoginSuccessful(authResult: any): boolean {
-    try {
-      console.log('dispatch AuthenticateIncomplete onLoginSuccessful')
-      this.store.dispatch(new ProfileActions.AuthenticateIncomplete({
-        profile: this.convertFirebaseUser2UserInfo(authResult.user)
-      }));
-      this.isAuthenticatingEvent.next(false);
-    } catch (error) {
-      console.log('error', error);
-    }
+    this.store.dispatch(new ProfileActions.AuthenticateSuccess({
+      profile: this.convertFirebaseUser2UserInfo(authResult.user)
+    }));
+    this.isAuthenticatingEvent.next(false);
 
     // It means, no redirection is required.
     return false;
   }
 
   private convertFirebaseUser2UserInfo(firebaseUser: firebase.User): UserInfo {
-    return {
-      email: firebaseUser.email || '',
-      phoneNumber: firebaseUser.phoneNumber || '',
-      photoURL: firebaseUser.photoURL || '',
-      providerId: firebaseUser.providerId || '',
-      uid: firebaseUser.uid || '',
-      firstName: '',
-      lastName: '',
-      language: {
-        native: { key: LanguageKeys.English, name: '', path: '' },
-        write: { key: LanguageKeys.English, name: '', path: '' }
-      },
-      isComplete: false
-    }
+    return new UserInfo(
+      firebaseUser.email || '',
+      '',
+      '',
+      '',
+      firebaseUser.phoneNumber || '',
+      firebaseUser.photoURL || '',
+      firebaseUser.providerId || '',
+      firebaseUser.uid || '',
+      undefined
+    );
   }
 }

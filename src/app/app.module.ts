@@ -68,9 +68,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     EffectsModule.forRoot([ProfileEffects])
   ],
   providers: [
-    { provide: services.JournalStoreService, useClass: services.JournalMockService },
     { provide: services.AuthService, useClass: services.AuthMockService },
-    services.LanguageService],
+    { provide: services.JournalStoreService, useClass: services.JournalMockService },
+    { provide: services.ProfileStoreService, useClass: services.ProfileFirestoreService },
+    services.LanguageService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

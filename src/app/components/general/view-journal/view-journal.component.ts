@@ -1,9 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { JournalStoreService } from 'src/app/shared/services';
-import { Journal } from 'src/app/shared/services/interfaces/journal';
 
-import { ServiceError } from '../../../shared/services/service-error.model';
+import { JournalStoreService, Journal, ServiceError } from '../../../shared/services';
 
 @Component({
   selector: 'app-view-journal',
@@ -16,7 +14,7 @@ export class ViewJournalComponent implements OnInit {
   journal: Journal = new Journal();
   error: ServiceError;
 
-  constructor(private readonly journalStoreService: JournalStoreService, private readonly route: ActivatedRoute) {}
+  constructor(private readonly journalStoreService: JournalStoreService, private readonly route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;

@@ -32,7 +32,7 @@ export class LanguageService {
   public isChoosingEvent = new EventEmitter<boolean>();
   public isChangedEvent = new Subject<string>();
 
-  constructor(private readonly translateService: TranslateService) {}
+  constructor(private readonly translateService: TranslateService) { }
 
   public open(): void {
     this.isChoosingEvent.emit(true);
@@ -43,12 +43,16 @@ export class LanguageService {
   }
 
   public set(language: string): void {
+    if (!Object.values(LanguageKeys).filter(l => l === language)) {
+      language = LanguageService.DefaultLanguage;
+    }
+
     this.translateService.use(language);
     this.isChangedEvent.next(language);
     this.isChoosingEvent.emit(false);
   }
 
-  public static getLanguageByKey(key: LanguageKeys): Language | undefined {
+  public static getLanguageByKey(key: LanguageKeys | undefined): Language | undefined {
     return LanguageService.languages.find((l) => l.key === key);
   }
 
