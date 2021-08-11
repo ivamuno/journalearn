@@ -1,10 +1,11 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
-import { LanguageNames, UserInfo, ServiceError, ProfileStoreService, LanguageService } from '../shared/services';
+import { LanguageNames, UserInfo, ServiceError, LanguageService, ProfileStoreService } from '../shared/services';
 import * as fromApp from '../store/app.reducer';
+import * as ProfileActions from './store/profile.actions';
 
 @Component({
   selector: 'app-profile',
@@ -13,9 +14,10 @@ import * as fromApp from '../store/app.reducer';
 })
 @Injectable()
 export class ProfileComponent implements OnInit {
+  isLoading: boolean;
   isSaving: boolean;
   isSaved: boolean;
-  languages: string[] = Object.keys(LanguageNames);
+  languages: string[] = Object.values(LanguageNames);
   initials: string;
   error: ServiceError = new ServiceError();
 
@@ -36,13 +38,13 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.isSaved = false;
     this.profileForm.valueChanges.subscribe(val => {
       this.initials = UserInfo.getInitials(val.firstName, val.lastName);
     });
 
-    this.store.select('profileState').pipe(take(1)).toPromise().then(({ profile }) => {
-      console.log('this.profile', profile);
+    this.store.select('profileState').pipe(first()).toPromise().then(({ profile }) => {
       if (profile) {
         this.profile = profile;
         const controls = this.profileForm.controls;
@@ -52,7 +54,11 @@ export class ProfileComponent implements OnInit {
         controls.nativeLanguage.setValue(profile?.language?.native?.name);
         controls.writeLanguage.setValue(profile?.language?.write?.name);
       }
+
+      this.isLoading = false;
     });
+
+    this.store.select('profileState').subscribe()
   }
 
   async submit(): Promise<void> {
@@ -70,8 +76,13 @@ export class ProfileComponent implements OnInit {
         write: LanguageService.getLanguageByName(controls.writeLanguage.value)
       }
     };
-    console.log('this.profile', this.profile);
-    await this.profileStoreService.set(this.profile);
+
+    try {
+      await this.profileStoreService.set(this.profile);
+      this.store.dispatch(new ProfileActions.ProfileUpdate({ profile: this.profile }));
+    } catch (error) {
+      this.error = error;
+    }
 
     this.isSaving = false;
     this.profileForm.enable();

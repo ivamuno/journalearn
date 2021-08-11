@@ -9,10 +9,10 @@ import * as firebaseui from 'firebaseui';
 import { AuthService } from '../interfaces/auth.service';
 import { LanguageKeys, LanguageService } from '../language.service';
 
-import * as ProfileActions from '../../../profile/store/profile.actions';
 import * as fromApp from '../../../store/app.reducer';
 import { UserInfo } from '../models/user-info.model';
 import { map } from 'rxjs/operators';
+import { ProfileStoreService } from '..';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +24,10 @@ export class AuthFirestoreService extends AuthService {
   constructor(
     private readonly afAuth: AngularFireAuth,
     private readonly languageService: LanguageService,
-    protected readonly store: Store<fromApp.AppState>
+    store: Store<fromApp.AppState>,
+    profileStoreService: ProfileStoreService
   ) {
-    super(store);
+    super(store, profileStoreService);
 
     this.languageService.isChangedEvent.subscribe((l) => (this.language = l));
   }
@@ -46,9 +47,7 @@ export class AuthFirestoreService extends AuthService {
       return;
     }
 
-    this.store.dispatch(new ProfileActions.AuthenticateSuccess({
-      profile: userInfo
-    }));
+    await this.complete(userInfo);
   }
 
   protected async underlyingStart(): Promise<void> {
@@ -93,10 +92,7 @@ export class AuthFirestoreService extends AuthService {
   }
 
   private onLoginSuccessful(authResult: any): boolean {
-    this.store.dispatch(new ProfileActions.AuthenticateSuccess({
-      profile: this.convertFirebaseUser2UserInfo(authResult.user)
-    }));
-    this.isAuthenticatingEvent.next(false);
+    this.complete(this.convertFirebaseUser2UserInfo(authResult.user)).then(_ => { });
 
     // It means, no redirection is required.
     return false;

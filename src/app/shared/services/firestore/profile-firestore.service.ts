@@ -33,14 +33,12 @@ export class ProfileFirestoreService extends ProfileStoreService {
   }
 
   public get(id: string): Observable<UserInfo | undefined> {
-    console.log('ProfileFirestoreService.get.request', id);
     return this.angularFirestore
       .collection<ProfileDb>(profileCollectionKey)
       .doc(id)
       .snapshotChanges()
       .pipe(
         map((x) => {
-          console.log('ProfileFirestoreService.get.response', x.payload.data());
           return this.convertTo(x.payload.id, x.payload.data());
         }),
         catchError((error: FirestoreError) => {

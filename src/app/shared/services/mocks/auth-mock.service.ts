@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as fromApp from '../../../store/app.reducer';
-import * as ProfileActions from '../../../profile/store/profile.actions';
-import { AuthService, UserInfo, LanguageKeys, LanguageService } from '..';
+import { AuthService, UserInfo, LanguageKeys, LanguageService, ProfileStoreService } from '..';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthMockService extends AuthService {
-  constructor(store: Store<fromApp.AppState>) {
-    super(store);
+  constructor(
+    store: Store<fromApp.AppState>,
+    profileStoreService: ProfileStoreService
+  ) {
+    super(store, profileStoreService);
   }
 
   protected async underlyingInit(): Promise<void> {
@@ -25,11 +27,14 @@ export class AuthMockService extends AuthService {
         `<div class="firebaseui-card-actions"><div class="firebaseui-form-actions">` +
         `<button id="firebaseui-auth-container-complete" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Complete</button>` +
         `<button id="firebaseui-auth-container-incomplete" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Incomplete</button>` +
+        `<button id="firebaseui-auth-container-error" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Error</button>` +
         `</div></div></form></div>`;
       const buttonComplete = document.querySelector('#firebaseui-auth-container-complete');
-      buttonComplete?.addEventListener('click', this.onCompleteLoginSuccessful.bind(this));
+      buttonComplete?.addEventListener('click', this.onCompleteLogin.bind(this));
       const buttonIncomplete = document.querySelector('#firebaseui-auth-container-incomplete');
-      buttonIncomplete?.addEventListener('click', this.onIncompleteLoginSuccessful.bind(this));
+      buttonIncomplete?.addEventListener('click', this.onIncompleteLogin.bind(this));
+      const buttonError = document.querySelector('#firebaseui-auth-container-error');
+      buttonError?.addEventListener('click', this.onErrorLogin.bind(this));
     }
   }
 
@@ -37,40 +42,48 @@ export class AuthMockService extends AuthService {
 
   protected async underlyingLogout(): Promise<void> { }
 
-  private onCompleteLoginSuccessful(): void {
-    this.store.dispatch(new ProfileActions.AuthenticateSuccess({
-      profile: new UserInfo(
-        'complete@email.com',
-        'User',
-        'Complete',
-        '',
-        '999 66 66 66',
-        '',
-        '',
-        'COMP00pndUbBW8W7Xgc51lWNAqC3',
-        {
-          native: LanguageService.getLanguageByKey(LanguageKeys.Spanish),
-          write: LanguageService.getLanguageByKey(LanguageKeys.English)
-        }
-      )
-    }));
-    this.isAuthenticatingEvent.next(false);
+  private async onCompleteLogin(): Promise<void> {
+    await this.complete(new UserInfo(
+      'complete@email.com',
+      'User',
+      'Complete',
+      '',
+      '999 66 66 66',
+      '',
+      '',
+      'COMP00pndUbBW8W7Xgc51lWNAqC3',
+      {
+        native: LanguageService.getLanguageByKey(LanguageKeys.Spanish),
+        write: LanguageService.getLanguageByKey(LanguageKeys.English)
+      }
+    ));
   }
 
-  private onIncompleteLoginSuccessful(): void {
-    this.store.dispatch(new ProfileActions.AuthenticateSuccess({
-      profile: new UserInfo(
-        'incomplete@email.com',
-        '',
-        '',
-        '',
-        '666 77 77 77',
-        '',
-        '',
-        'INCOMP99aERT9984asXCsd6156aa',
-        undefined
-      )
-    }));
-    this.isAuthenticatingEvent.next(false);
+  private async onIncompleteLogin(): Promise<void> {
+    await this.complete(new UserInfo(
+      'incomplete@email.com',
+      '',
+      '',
+      '',
+      '666 77 77 77',
+      '',
+      '',
+      'INCOMP99aERT9984asXCsd6156aa',
+      undefined
+    ));
+  }
+
+  private async onErrorLogin(): Promise<void> {
+    await this.complete(new UserInfo(
+      'error@email.com',
+      'User',
+      'Error',
+      '',
+      '999 66 66 66',
+      '',
+      '',
+      'COMP00pndUb-error-Xgc51lWNAqC3',
+      undefined
+    ));
   }
 }

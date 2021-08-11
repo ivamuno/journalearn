@@ -1,12 +1,14 @@
-import { UserInfo } from "../../shared/services";
+import { ServiceError, UserInfo } from "../../shared/services";
 import * as ProfileActions from "./profile.actions";
 
 export interface ProfileState {
   profile: UserInfo | undefined;
+  error: ServiceError | undefined;
 }
 
 const initialState: ProfileState = {
-  profile: undefined
+  profile: undefined,
+  error: undefined
 };
 
 export function profileReducer(
@@ -15,17 +17,25 @@ export function profileReducer(
 ): ProfileState {
   console.log('profileReducer', action, state);
   switch (action.type) {
-    case ProfileActions.AUTHENTICATE_SUCCESS:
     case ProfileActions.PROFILE_COMPLETE:
     case ProfileActions.PROFILE_INCOMPLETE:
+    case ProfileActions.PROFILE_UPDATE:
       return {
         ...state,
-        profile: action.payload.profile
+        profile: JSON.parse(JSON.stringify(action.payload.profile)),
+        error: undefined
+      };
+    case ProfileActions.PROFILE_FAILS:
+      return {
+        ...state,
+        profile: undefined,
+        error: action.payload.error
       };
     case ProfileActions.LOGOUT:
       return {
         ...state,
-        profile: undefined
+        profile: undefined,
+        error: undefined
       };
     default:
       return state;

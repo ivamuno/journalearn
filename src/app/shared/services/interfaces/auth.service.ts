@@ -3,13 +3,17 @@ import { BehaviorSubject } from 'rxjs';
 
 import * as fromApp from '../../../store/app.reducer';
 import * as ProfileActions from '../../../profile/store/profile.actions';
+import { ProfileStoreService } from './profile-service';
+import { UserInfo } from '..';
+import { first } from 'rxjs/operators';
 
 export abstract class AuthService {
   isAuthenticatingEvent = new BehaviorSubject<boolean>(false);
   isAuthenticatedEvent = new BehaviorSubject<boolean>(false);
 
   constructor(
-    protected store: Store<fromApp.AppState>
+    protected store: Store<fromApp.AppState>,
+    private readonly profileStoreService: ProfileStoreService
   ) {
   }
 
@@ -39,4 +43,19 @@ export abstract class AuthService {
   }
 
   protected abstract underlyingLogout(): Promise<void>;
+
+  protected async complete(userInfo: UserInfo): Promise<void> {
+    try {
+      const profile = await this.profileStoreService.get(userInfo.uid).pipe(first()).toPromise();
+      if (profile && profile.firstName) {
+        this.store.dispatch(new ProfileActions.ProfileComplete({ profile }));
+      } else {
+        this.store.dispatch(new ProfileActions.ProfileIncomplete({ profile: userInfo }));
+      }
+    } catch (error) {
+      this.store.dispatch(new ProfileActions.ProfileFails(error));
+    }
+
+    this.isAuthenticatingEvent.next(false);
+  }
 }

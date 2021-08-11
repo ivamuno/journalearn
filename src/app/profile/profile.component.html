@@ -18,21 +18,29 @@
             <div class="field">
               <label class="label">{{ 'PROFILE.FIELDS.FIRST_NAME' | translate }}</label>
               <div class="control has-icons-left">
-                <input class="input" type="text" formControlName="firstName">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-user"></i>
-                </span>
+                <div [ngClass]="{'is-invisible': isLoading}">
+                  <input class="input" type="text" formControlName="firstName">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                </div>
+                <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                  <progress class="progress is-large is-light" max="100">60%</progress>
+                </div>
               </div>
             </div>
 
             <div class="field">
               <label class="label">{{ 'PROFILE.FIELDS.LAST_NAME' | translate }}</label>
               <div class="control has-icons-left">
-                <div class="control has-icons-left">
+                <div [ngClass]="{'is-invisible': isLoading}">
                   <input class="input" type="text" formControlName="lastName">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
+                </div>
+                <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                  <progress class="progress is-large is-light" max="100">60%</progress>
                 </div>
               </div>
             </div>
@@ -52,16 +60,21 @@
         <div class="field">
           <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_NATIVE' | translate }}</label>
           <div class="control has-icons-left">
-            <div class="select">
-              <select formControlName="nativeLanguage">
-                <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
-                <option *ngFor="let language of languages" [ngValue]="language">
-                  {{language}}
-                </option>
-              </select>
+            <div [ngClass]="{'is-invisible': isLoading}">
+              <div class="select">
+                <select formControlName="nativeLanguage">
+                  <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
+                  <option *ngFor="let language of languages" [ngValue]="language">
+                    {{language}}
+                  </option>
+                </select>
+              </div>
+              <div class="icon is-small is-left">
+                <i class="fas fa-globe"></i>
+              </div>
             </div>
-            <div class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
+            <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+              <progress class="progress is-large is-light" max="100">60%</progress>
             </div>
           </div>
         </div>
@@ -69,16 +82,21 @@
         <div class="field">
           <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_WRITE' | translate }}</label>
           <div class="control has-icons-left">
-            <div class="select">
-              <select formControlName="writeLanguage">
-                <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
-                <option *ngFor="let language of languages" [ngValue]="language">
-                  {{language}}
-                </option>
-              </select>
+            <div [ngClass]="{'is-invisible': isLoading}">
+              <div class="select">
+                <select formControlName="writeLanguage">
+                  <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
+                  <option *ngFor="let language of languages" [ngValue]="language">
+                    {{language}}
+                  </option>
+                </select>
+              </div>
+              <div class="icon is-small is-left">
+                <i class="fas fa-globe"></i>
+              </div>
             </div>
-            <div class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
+            <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+              <progress class="progress is-large is-light" max="100">60%</progress>
             </div>
           </div>
         </div>

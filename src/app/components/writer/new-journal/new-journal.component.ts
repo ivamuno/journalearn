@@ -15,7 +15,7 @@ import * as fromApp from '../../../store/app.reducer';
 export class NewJournalComponent implements OnInit {
   isSaving: boolean;
   isSaved: boolean;
-  languages: string[] = Object.keys(LanguageNames);
+  languages: string[] = Object.values(LanguageNames);
   author: string;
   error: ServiceError = new ServiceError();
 

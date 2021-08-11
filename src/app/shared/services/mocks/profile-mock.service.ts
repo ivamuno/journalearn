@@ -30,11 +30,11 @@ export class ProfileMockService extends ProfileStoreService {
     const promise = new Promise<UserInfo | undefined>((resolve, reject) => {
       setTimeout(resolve, 3000);
       if (id.includes('error')) {
-        const user: UserInfo | undefined = this.users.find(u => u.uid === id);
-        return resolve(user);
+        return reject(this.defaultError);
       }
 
-      return reject(this.defaultError);
+      const user: UserInfo | undefined = this.users.find(u => u.uid === id);
+      return resolve(user);
     });
     return from(promise);
   }

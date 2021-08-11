@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { environment } from '../environments/environment';
 import * as fromApp from './store/app.reducer';
@@ -65,12 +66,17 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       },
     }),
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([ProfileEffects])
+    EffectsModule.forRoot([ProfileEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    })
   ],
   providers: [
     { provide: services.AuthService, useClass: services.AuthMockService },
     { provide: services.JournalStoreService, useClass: services.JournalMockService },
-    { provide: services.ProfileStoreService, useClass: services.ProfileFirestoreService },
+    { provide: services.ProfileStoreService, useClass: services.ProfileMockService },
     services.LanguageService
   ],
   bootstrap: [AppComponent],
