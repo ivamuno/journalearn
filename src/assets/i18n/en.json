@@ -42,15 +42,15 @@
       "TITLE": "Title",
       "TEXT": "Text",
       "SAVE": "Save",
-      "RESET": "Reset",
-      "MESSAGES": {
-        "SUCCESS": "The journal has been saved successfully!"
-      }
+      "RESET": "Reset"
     },
     "RULES": {
       "TITLE": "Rules",
       "RULE1": "Underline words and expressions which you searched in a dictionary.",
       "RULE2": "Use brackets '[]' to include words and expressions in your own language."
+    },
+    "MESSAGES": {
+      "SUCCESS": "The journal has been saved successfully!"
     }
   },
   "REVIEW": {
@@ -63,14 +63,14 @@
       "TITLE": "Title",
       "TEXT": "Text",
       "SAVE": "Save",
-      "RESET": "Reset",
-      "MESSAGES": {
-        "SUCCESS": "The review has been saved successfully!"
-      }
+      "RESET": "Reset"
     },
     "RULES": {
       "TITLE": "Rules",
       "RULE1": "Strike incorrect words and expressions and indicate within curly brackets your review."
+    },
+    "MESSAGES": {
+      "SUCCESS": "The review has been saved successfully!"
     }
   },
   "VIEW": {
@@ -124,6 +124,17 @@
       "CHOOSE_LANGUAGE": "Choose your language",
       "SAVE": "Save",
       "RESET": "Reset"
+    },
+    "MESSAGES": {
+      "ERROR": "An error occurred saving the profile",
+      "SUCCESS": "The profile has been saved successfully!"
+    }
+  },
+  "FORM": {
+    "ERRORS": {
+      "REQUIRED": "Required.",
+      "MINLENGTH": "Must be at least {{value}} characters long.",
+      "MAXLENGTH": "Must be at most {{value}} characters long."
     }
   }
 }

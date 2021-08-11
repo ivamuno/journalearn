@@ -19,7 +19,8 @@
               <label class="label">{{ 'PROFILE.FIELDS.FIRST_NAME' | translate }}</label>
               <div class="control has-icons-left">
                 <div [ngClass]="{'is-invisible': isLoading}">
-                  <input class="input" type="text" formControlName="firstName">
+                  <input class="input" type="text" formControlName="firstName"
+                    [ngClass]="{'is-danger': hasError(firstName)}">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
@@ -28,13 +29,17 @@
                   <progress class="progress is-large is-light" max="100">60%</progress>
                 </div>
               </div>
+              <p class="help is-danger" *ngIf="hasError(firstName)">
+                {{ getFirstError(firstName) }}
+              </p>
             </div>
 
             <div class="field">
               <label class="label">{{ 'PROFILE.FIELDS.LAST_NAME' | translate }}</label>
               <div class="control has-icons-left">
                 <div [ngClass]="{'is-invisible': isLoading}">
-                  <input class="input" type="text" formControlName="lastName">
+                  <input class="input" type="text" formControlName="lastName"
+                    [ngClass]="{'is-danger': hasError(lastName)}">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
@@ -43,6 +48,9 @@
                   <progress class="progress is-large is-light" max="100">60%</progress>
                 </div>
               </div>
+              <p class="help is-danger" *ngIf="hasError(lastName)">
+                {{ getFirstError(lastName) }}
+              </p>
             </div>
           </div>
         </div>
@@ -50,8 +58,12 @@
         <div class="field">
           <label class="label">{{ 'PROFILE.FIELDS.DESCRIPTION' | translate }}</label>
           <div class="control">
-            <textarea class="textarea" formControlName="description"></textarea>
+            <textarea class="textarea" formControlName="description"
+              [ngClass]="{'is-danger': hasError(description)}"></textarea>
           </div>
+          <p class="help is-danger" *ngIf="hasError(description)">
+            {{ getFirstError(description) }}
+          </p>
         </div>
       </section>
 
@@ -61,7 +73,7 @@
           <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_NATIVE' | translate }}</label>
           <div class="control has-icons-left">
             <div [ngClass]="{'is-invisible': isLoading}">
-              <div class="select">
+              <div class="select" [ngClass]="{'is-danger': hasError(nativeLanguage)}">
                 <select formControlName="nativeLanguage">
                   <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
                   <option *ngFor="let language of languages" [ngValue]="language">
@@ -77,13 +89,16 @@
               <progress class="progress is-large is-light" max="100">60%</progress>
             </div>
           </div>
+          <p class="help is-danger" *ngIf="hasError(nativeLanguage)">
+            {{ getFirstError(nativeLanguage) }}
+          </p>
         </div>
 
         <div class="field">
           <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_WRITE' | translate }}</label>
           <div class="control has-icons-left">
             <div [ngClass]="{'is-invisible': isLoading}">
-              <div class="select">
+              <div class="select" [ngClass]="{'is-danger': hasError(writeLanguage)}">
                 <select formControlName="writeLanguage">
                   <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
                   <option *ngFor="let language of languages" [ngValue]="language">
@@ -99,39 +114,28 @@
               <progress class="progress is-large is-light" max="100">60%</progress>
             </div>
           </div>
+          <p class="help is-danger" *ngIf="hasError(writeLanguage)">
+            {{ getFirstError(writeLanguage) }}
+          </p>
         </div>
       </section>
 
-      <div [ngClass]="{'is-hidden': isSaved}">
-        <div class="field is-grouped">
-          <div class="control">
-            <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
-              <span class="icon is-small">
-                <i class="fas fa-check"></i>
-              </span>
-              <span>{{ 'PROFILE.FIELDS.SAVE' | translate }}</span>
-            </button>
-          </div>
-          <div class="control">
-            <button class="button" [disabled]="isSaving ? 'disabled' : ''" (click)="cancel()">
-              <span class="icon is-small">
-                <i class="fas fa-times"></i>
-              </span>
-              <span>{{ 'PROFILE.FIELDS.RESET' | translate }}</span>
-            </button>
-          </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-success" [ngClass]="{'is-loading': isSaving}" (click)="submit()">
+            <span class="icon is-small">
+              <i class="fas fa-check"></i>
+            </span>
+            <span>{{ 'PROFILE.FIELDS.SAVE' | translate }}</span>
+          </button>
         </div>
-      </div>
-
-      <div [ngClass]="{'is-hidden': !isSaved}">
-        <div class="notification is-success">
-          {{ 'PROFILE.MESSAGES.SUCCESS' | translate }}
-        </div>
-      </div>
-
-      <div [ngClass]="{'is-hidden': !error.message}">
-        <div class="notification is-danger">
-          {{ error.code }} - {{ error.message }}
+        <div class="control">
+          <button class="button" [disabled]="isSaving ? 'disabled' : ''" (click)="cancel()">
+            <span class="icon is-small">
+              <i class="fas fa-times"></i>
+            </span>
+            <span>{{ 'PROFILE.FIELDS.RESET' | translate }}</span>
+          </button>
         </div>
       </div>
     </form>

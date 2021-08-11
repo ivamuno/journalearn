@@ -30,6 +30,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^5.0.1",
     "bulma": "^0.9.3",
+    "bulma-toast": "^2.3.1",
     "firebase": "^8.2.6",
     "firebaseui": "^4.7.3",
     "rxjs": "~6.6.0",

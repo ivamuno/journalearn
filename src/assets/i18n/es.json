@@ -42,15 +42,15 @@
       "TITLE": "Título",
       "TEXT": "Texto",
       "SAVE": "Guardar",
-      "RESET": "Limpiar",
-      "MESSAGES": {
-        "SUCCESS": "¡El diario se ha guardado correctamente!"
-      }
+      "RESET": "Limpiar"
     },
     "RULES": {
       "TITLE": "Reglas",
       "RULE1": "Subraya aquellas palabras o expresiones que buscaste en el diccionario.",
       "RULE2": "Usa corchetes '[]' para incluir palabras o expresiones en tu propio idioma."
+    },
+    "MESSAGES": {
+      "SUCCESS": "¡El diario se ha guardado correctamente!"
     }
   },
   "REVIEW": {
@@ -64,14 +64,14 @@
       "TITLE": "Título",
       "TEXT": "Texto",
       "SAVE": "Guardar",
-      "RESET": "Limpiar",
-      "MESSAGES": {
-        "SUCCESS": "¡La revisión se ha guardado correctamente!"
-      }
+      "RESET": "Limpiar"
     },
     "RULES": {
       "TITLE": "Reglas",
       "RULE1": "Tacha aquellas palabras o expresiones incorrectas e indica entre llaves tú correction."
+    },
+    "MESSAGES": {
+      "SUCCESS": "¡La revisión se ha guardado correctamente!"
     }
   },
   "VIEW": {
@@ -125,6 +125,17 @@
       "CHOOSE_LANGUAGE": "Seleccione tu idioma",
       "SAVE": "Guardar",
       "RESET": "Limpiar"
+    },
+    "MESSAGES": {
+      "ERROR": "Ha ocurrido un error guardando el perfil",
+      "SUCCESS": "¡El perfil se ha guardado correctamente!"
+    }
+  },
+  "FORM": {
+    "ERRORS": {
+      "REQUIRED": "Obligatorio.",
+      "MINLENGTH": "Mínimo {{value}} caracteres.",
+      "MAXLENGTH": "Máximo {{value}} caracteres."
     }
   }
 }

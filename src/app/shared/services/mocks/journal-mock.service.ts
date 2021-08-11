@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 
 import { LanguageNames, LanguageService, Journal, JournalStatus, JournalStoreService, ServiceError } from '..';
+import { MockHelper } from './mock.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -61,73 +62,63 @@ export class JournalMockService extends JournalStoreService {
   }
 
   public getByUser(userId: string): Observable<Journal[]> {
-    const promise = new Promise<Journal[]>((resolve, reject) => {
-      setTimeout(resolve, 3000);
+    const promise = async () => {
+      await MockHelper.delay();
       if (this.getByUserCounter++ % 2 === 0) {
-        return resolve(this.journals);
+        return this.journals;
       }
 
-      return reject(this.defaultError);
-    });
-    return from(promise);
+      throw this.defaultError;
+    };
+
+    return from(promise());
   }
 
   public getPending(): Observable<Journal[]> {
-    const promise = new Promise<Journal[]>((resolve, reject) => {
-      setTimeout(resolve, 3000);
+    const promise = async () => {
+      await MockHelper.delay();
       if (this.getPendingCounter++ % 2 === 0) {
-        return resolve(this.journals);
+        return this.journals;
       }
 
-      return reject(this.defaultError);
-    });
+      throw this.defaultError;
+    };
 
-    return from(promise);
+    return from(promise());
   }
 
   public async add(journal: Journal): Promise<void> {
-    const promise = new Promise<void>((resolve, reject) => {
-      setTimeout(resolve, 3000);
-      if (journal.title.includes('Error')) {
-        return reject(this.defaultError);
-      }
-
-      return resolve();
-    });
-
-    return promise;
+    await MockHelper.delay();
+    if (journal.title.includes('Error')) {
+      throw this.defaultError;
+    }
   }
 
   public get(id: string): Observable<Journal> {
-    const promise = new Promise<Journal>((resolve, reject) => {
-      setTimeout(resolve, 3000);
+    const promise = async () => {
+      await MockHelper.delay();
       const journal = this.journals.find((j) => j.id === id) || new Journal();
       if (journal.title.includes('Error')) {
-        return reject(this.defaultError);
+        throw this.defaultError;
       }
 
-      return resolve(journal);
-    });
+      return journal;
+    };
 
-    return from(promise);
+    return from(promise());
   }
 
   public async review(journal: Journal): Promise<void> {
-    const promise = new Promise<void>((resolve, reject) => {
-      setTimeout(resolve, 3000);
-      if (journal.review.includes('Error')) {
-        return reject(this.defaultError);
-      }
+    await MockHelper.delay();
+    if (journal.review.includes('Error')) {
+      throw this.defaultError;
+    }
 
-      this.journals
-        .filter((j) => j.id === journal.id)
-        .map((j) => {
-          j.review = journal.review;
-          j.status = journal.status;
-        });
-      return resolve();
-    });
-
-    return promise;
+    this.journals
+      .filter((j) => j.id === journal.id)
+      .map((j) => {
+        j.review = journal.review;
+        j.status = journal.status;
+      });
   }
 }
