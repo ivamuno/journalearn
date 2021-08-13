@@ -1,5 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 
@@ -7,7 +7,7 @@ import { LanguageNames, UserInfo, LanguageService, ProfileStoreService } from '.
 import * as fromApp from '../store/app.reducer';
 import * as ProfileActions from './store/profile.actions';
 import { ToastService } from '../shared/services/firestore/toast.service';
-import { TranslateService } from '@ngx-translate/core';
+import { FormHelper } from '../shared/form.helper';
 
 @Component({
   selector: 'app-profile',
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
     private readonly store: Store<fromApp.AppState>,
     private readonly profileStoreService: ProfileStoreService,
     private readonly toastService: ToastService,
-    private readonly translateService: TranslateService
+    readonly formHelper: FormHelper
   ) {
     this.profileForm = new FormGroup({
       firstName: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
 
   async submit(): Promise<void> {
     if (!this.profileForm.valid) {
-      this.validateAllFormFields(this.profileForm);
+      this.formHelper.validateAllFormFields(this.profileForm);
       return;
     }
 
@@ -106,9 +106,9 @@ export class ProfileComponent implements OnInit {
     try {
       await this.profileStoreService.set(this.profile);
       this.store.dispatch(new ProfileActions.ProfileUpdate({ profile: this.profile }));
-      this.toastService.add('is-success', 'PROFILE.MESSAGES.SUCCESS');
+      this.toastService.addSuccess('PROFILE.MESSAGES.SUCCESS');
     } catch (error) {
-      this.toastService.add('is-danger', 'PROFILE.MESSAGES.ERROR');
+      this.toastService.addError('PROFILE.MESSAGES.ERROR');
     }
 
     this.isSaving = false;
@@ -117,32 +117,5 @@ export class ProfileComponent implements OnInit {
 
   cancel(): void {
     this.profileForm.reset();
-  }
-
-  hasError(control: AbstractControl): boolean {
-    return control.invalid && (control.dirty || control.touched);
-  }
-
-  getFirstError(control: AbstractControl): string {
-    const errors = Object.entries(control.errors || {});
-    if (errors.length > 0) {
-      const error = errors[0];
-      const errorKey = `FORM.ERRORS.${error[0].toUpperCase()}`;
-      const param = error[1].requiredLength;
-      return this.translateService.instant(errorKey, { value: param });
-    }
-
-    return '';
-  }
-
-  validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach((field) => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
-        this.validateAllFormFields(control);
-      }
-    });
   }
 }

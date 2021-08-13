@@ -70,7 +70,9 @@
       "RULE1": "Strike incorrect words and expressions and indicate within curly brackets your review."
     },
     "MESSAGES": {
-      "SUCCESS": "The review has been saved successfully!"
+      "SUCCESS": "The review has been saved successfully!",
+      "ERROR_LOADING": "An error occurred getting the journal",
+      "ERROR_SAVING": "An error occurred saving the journal"
     }
   },
   "VIEW": {
@@ -82,6 +84,9 @@
       "TITLE": "Title",
       "ORIGINAL": "Original",
       "REVIEW": "Review"
+    },
+    "MESSAGES": {
+      "ERROR": "An error occurred getting the journal"
     }
   },
   "MY_LIST": {
@@ -95,6 +100,9 @@
       "STATUS": "Status",
       "ACTIONS": "Actions",
       "VIEW": "View"
+    },
+    "MESSAGES": {
+      "ERROR": "An error occurred getting the journals"
     }
   },
   "REVIEW_LIST": {
@@ -108,6 +116,9 @@
       "STATUS": "Status",
       "ACTIONS": "Actions",
       "REVIEW": "Review"
+    },
+    "MESSAGES": {
+      "ERROR": "An error occurred getting the journals"
     }
   },
   "PROFILE": {

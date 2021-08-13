@@ -4,7 +4,7 @@ import { MockHelper } from './mock.helper';
 
 export class ProfileMockService extends ProfileStoreService {
   private readonly users: UserInfo[];
-  private readonly defaultError: ServiceError = { code: 'unknown', message: 'errorMessage', name: 'errorName', stack: 'errorStack' };
+  private readonly defaultError: ServiceError = new ServiceError();
 
   constructor() {
     super();

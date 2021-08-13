@@ -71,7 +71,9 @@
       "RULE1": "Tacha aquellas palabras o expresiones incorrectas e indica entre llaves tú correction."
     },
     "MESSAGES": {
-      "SUCCESS": "¡La revisión se ha guardado correctamente!"
+      "SUCCESS": "¡La revisión se ha guardado correctamente!",
+      "ERROR_LOADING": "Ha ocurrido un error obteniendo el diario.",
+      "ERROR_SAVING": "Ha ocurrido un error guardando el diario."
     }
   },
   "VIEW": {
@@ -83,6 +85,9 @@
       "TITLE": "Título",
       "ORIGINAL": "Original",
       "REVIEW": "Revisión"
+    },
+    "MESSAGES": {
+      "ERROR": "Ha ocurrido un error obteniendo el diario."
     }
   },
   "MY_LIST": {
@@ -96,6 +101,9 @@
       "STATUS": "Estado",
       "ACTIONS": "Acciones",
       "VIEW": "Ver"
+    },
+    "MESSAGES": {
+      "ERROR": "Ha ocurrido un error obteniendo los diarios."
     }
   },
   "REVIEW_LIST": {
@@ -109,6 +117,9 @@
       "STATUS": "Estado",
       "ACTIONS": "Acciones",
       "REVIEW": "Revisar"
+    },
+    "MESSAGES": {
+      "ERROR": "Ha ocurrido un error obteniendo los diarios."
     }
   },
   "PROFILE": {

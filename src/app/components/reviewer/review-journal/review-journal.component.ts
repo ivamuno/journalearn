@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { JournalStoreService, Journal, JournalStatus, ServiceError } from '../../../shared/services';
+import { ToastService } from '../../../shared/services/firestore/toast.service';
 
 @Component({
   selector: 'app-review-journal',
@@ -20,20 +21,23 @@ export class ReviewJournalComponent implements OnInit {
   });
   journal: Journal = new Journal();
   error: ServiceError;
-  reviewError: ServiceError;
 
-  constructor(private readonly journalStoreService: JournalStoreService, private readonly route: ActivatedRoute) { }
+  constructor(
+    private readonly journalStoreService: JournalStoreService,
+    private readonly route: ActivatedRoute,
+    private readonly toastService: ToastService
+  ) { }
 
   ngOnInit(): void {
     this.isLoading = true;
     this.journal = new Journal();
-    this.reviewError = new ServiceError();
 
     const id = this.route.snapshot.params.id;
     this.journalStoreService
       .get(id)
       .pipe(first())
-      .subscribe(
+      .toPromise()
+      .then(
         (result: Journal) => {
           this.journal = result;
           this.reviewForm = new FormGroup({
@@ -42,7 +46,11 @@ export class ReviewJournalComponent implements OnInit {
           this.isLoading = false;
         },
         (err: ServiceError) => {
-          this.error = err;
+          if (err.isAccessDenied()) {
+            this.error = err;
+          } else {
+            this.toastService.addError('REVIEW.MESSAGES.ERROR_LOADING');
+          }
         }
       );
   }
@@ -64,14 +72,13 @@ export class ReviewJournalComponent implements OnInit {
       review: this.reviewForm.value.text,
     };
 
-    this.journalStoreService
-      .review(journal)
-      .then(() => {
-        this.isSaved = true;
-      })
-      .catch((err: ServiceError) => {
-        this.reviewError = err;
-      });
+    try {
+      await this.journalStoreService.review(journal);
+      this.isSaved = true;
+      this.toastService.addSuccess('REVIEW.MESSAGES.SUCCESS');
+    } catch {
+      this.toastService.addError('REVIEW.MESSAGES.ERROR_SAVING');
+    }
 
     this.isSaving = false;
   }

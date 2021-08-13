@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 
-import { JournalStoreService, Journal, ServiceError } from '../../../shared/services';
+import { JournalStoreService, Journal } from '../../../shared/services';
+import { ToastService } from '../../../shared/services/firestore/toast.service';
 
 @Component({
   selector: 'app-review-list',
@@ -11,22 +12,25 @@ import { JournalStoreService, Journal, ServiceError } from '../../../shared/serv
 export class ReviewListComponent implements OnInit {
   isLoading: boolean;
   journals: Journal[] = [];
-  error: ServiceError;
 
-  constructor(private readonly journalStoreService: JournalStoreService) { }
+  constructor(
+    private readonly journalStoreService: JournalStoreService,
+    private readonly toastService: ToastService
+  ) { }
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.error = new ServiceError();
 
-    this.journalStoreService.getPending().subscribe(
-      (result: Journal[]) => {
-        this.journals = result;
-        this.isLoading = false;
-      },
-      (err: ServiceError) => {
-        this.error = err;
-      }
-    );
+    this.journalStoreService.getPending().pipe().toPromise()
+      .then(
+        (result: Journal[]) => {
+          this.journals = result;
+          this.isLoading = false;
+        },
+        () => {
+          this.toastService.addError('REVIEW_LIST.MESSAGES.ERROR');
+          this.isLoading = false;
+        }
+      );
   }
 }

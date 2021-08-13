@@ -3,9 +3,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { UserInfo, LanguageService, ProfileStoreService, ServiceError } from '..';
+import { UserInfo, LanguageService, ProfileStoreService } from '..';
 import { LanguageNames } from '../language.service';
 import { FirestoreError } from './firestore-error';
+import { FirestoreServiceHelper } from './firestore.service.helper';
 
 class ProfileDb {
   public id: string;
@@ -42,7 +43,7 @@ export class ProfileFirestoreService extends ProfileStoreService {
           return this.convertTo(x.payload.id, x.payload.data());
         }),
         catchError((error: FirestoreError) => {
-          throw this.convertFirestoreError2ServiceError(error);
+          throw FirestoreServiceHelper.convertFirestoreError2ServiceError(error);
         })
       );
   }
@@ -55,7 +56,7 @@ export class ProfileFirestoreService extends ProfileStoreService {
       .doc(user.uid)
       .set(userDb)
       .catch((error: FirestoreError) => {
-        throw this.convertFirestoreError2ServiceError(error);
+        throw FirestoreServiceHelper.convertFirestoreError2ServiceError(error);
       });
   }
 
@@ -95,14 +96,5 @@ export class ProfileFirestoreService extends ProfileStoreService {
         write: LanguageService.getLanguageByName(profile.language.write as LanguageNames)
       }
     );
-  }
-
-  private convertFirestoreError2ServiceError(error: FirestoreError): ServiceError {
-    return {
-      code: error.code,
-      message: error.message,
-      name: error.name,
-      stack: error.stack,
-    };
   }
 }

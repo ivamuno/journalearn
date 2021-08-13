@@ -9,7 +9,7 @@ import { MockHelper } from './mock.helper';
 })
 export class JournalMockService extends JournalStoreService {
   private readonly journals: Journal[] = [];
-  private readonly defaultError: ServiceError = { code: 'unknown', message: 'errorMessage', name: 'errorName', stack: 'errorStack' };
+  private readonly defaultError: ServiceError = new ServiceError();
   private getByUserCounter = 0;
   private getPendingCounter = 0;
 

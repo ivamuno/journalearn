@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Journal, JournalStatus } from 'src/app/shared/services/models/journal.model';
 import { JournalStoreService, LanguageNames, LanguageService } from '..';
-import { ServiceError } from '../models/service-error.model';
 import { FirestoreError } from './firestore-error';
+import { FirestoreServiceHelper } from './firestore.service.helper';
 
 class JournalDb {
   public author: string;
@@ -38,7 +38,7 @@ export class JournalFirestoreService extends JournalStoreService {
           });
         }),
         catchError((error: FirestoreError) => {
-          throw this.convertFirestoreError2ServiceError(error);
+          throw FirestoreServiceHelper.convertFirestoreError2ServiceError(error);
         })
       );
   }
@@ -54,7 +54,7 @@ export class JournalFirestoreService extends JournalStoreService {
           });
         }),
         catchError((error: FirestoreError) => {
-          throw this.convertFirestoreError2ServiceError(error);
+          throw FirestoreServiceHelper.convertFirestoreError2ServiceError(error);
         })
       );
   }
@@ -65,7 +65,7 @@ export class JournalFirestoreService extends JournalStoreService {
       .collection(journalCollectionKey)
       .add(journalDb)
       .catch((error: FirestoreError) => {
-        throw this.convertFirestoreError2ServiceError(error);
+        throw FirestoreServiceHelper.convertFirestoreError2ServiceError(error);
       });
   }
 
@@ -78,7 +78,7 @@ export class JournalFirestoreService extends JournalStoreService {
         status: journal.status,
       })
       .catch((error: FirestoreError) => {
-        throw this.convertFirestoreError2ServiceError(error);
+        throw FirestoreServiceHelper.convertFirestoreError2ServiceError(error);
       });
   }
 
@@ -92,7 +92,7 @@ export class JournalFirestoreService extends JournalStoreService {
           return this.convertTo(x.payload.id, x.payload.data() as JournalDb);
         }),
         catchError((error: FirestoreError) => {
-          throw this.convertFirestoreError2ServiceError(error);
+          throw FirestoreServiceHelper.convertFirestoreError2ServiceError(error);
         })
       );
   }
@@ -122,15 +122,6 @@ export class JournalFirestoreService extends JournalStoreService {
       status: journal.status,
       text: journal.text,
       review: journal.review,
-    };
-  }
-
-  private convertFirestoreError2ServiceError(error: FirestoreError): ServiceError {
-    return {
-      code: error.code,
-      message: error.message,
-      name: error.name,
-      stack: error.stack,
     };
   }
 }

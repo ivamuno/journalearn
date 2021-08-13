@@ -100,18 +100,6 @@
                 </div>
               </div>
             </div>
-
-            <div [ngClass]="{'is-hidden': !isSaved}">
-              <div class="notification is-success">
-                {{ 'REVIEW.MESSAGES.SUCCESS' | translate }}
-              </div>
-            </div>
-
-            <div [ngClass]="{'is-hidden': !reviewError.message}">
-              <div class="notification is-danger">
-                {{ reviewError.code }} - {{ reviewError.message }}
-              </div>
-            </div>
           </form>
         </div>
       </div>

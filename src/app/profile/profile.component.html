@@ -20,7 +20,7 @@
               <div class="control has-icons-left">
                 <div [ngClass]="{'is-invisible': isLoading}">
                   <input class="input" type="text" formControlName="firstName"
-                    [ngClass]="{'is-danger': hasError(firstName)}">
+                    [ngClass]="{'is-danger': formHelper.hasError(firstName)}">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
@@ -29,8 +29,8 @@
                   <progress class="progress is-large is-light" max="100">60%</progress>
                 </div>
               </div>
-              <p class="help is-danger" *ngIf="hasError(firstName)">
-                {{ getFirstError(firstName) }}
+              <p class="help is-danger" *ngIf="formHelper.hasError(firstName)">
+                {{ formHelper.getFirstError(firstName) }}
               </p>
             </div>
 
@@ -39,7 +39,7 @@
               <div class="control has-icons-left">
                 <div [ngClass]="{'is-invisible': isLoading}">
                   <input class="input" type="text" formControlName="lastName"
-                    [ngClass]="{'is-danger': hasError(lastName)}">
+                    [ngClass]="{'is-danger': formHelper.hasError(lastName)}">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
@@ -48,8 +48,8 @@
                   <progress class="progress is-large is-light" max="100">60%</progress>
                 </div>
               </div>
-              <p class="help is-danger" *ngIf="hasError(lastName)">
-                {{ getFirstError(lastName) }}
+              <p class="help is-danger" *ngIf="formHelper.hasError(lastName)">
+                {{ formHelper.getFirstError(lastName) }}
               </p>
             </div>
           </div>
@@ -59,10 +59,10 @@
           <label class="label">{{ 'PROFILE.FIELDS.DESCRIPTION' | translate }}</label>
           <div class="control">
             <textarea class="textarea" formControlName="description"
-              [ngClass]="{'is-danger': hasError(description)}"></textarea>
+              [ngClass]="{'is-danger': formHelper.hasError(description)}"></textarea>
           </div>
-          <p class="help is-danger" *ngIf="hasError(description)">
-            {{ getFirstError(description) }}
+          <p class="help is-danger" *ngIf="formHelper.hasError(description)">
+            {{ formHelper.getFirstError(description) }}
           </p>
         </div>
       </section>
@@ -73,7 +73,7 @@
           <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_NATIVE' | translate }}</label>
           <div class="control has-icons-left">
             <div [ngClass]="{'is-invisible': isLoading}">
-              <div class="select" [ngClass]="{'is-danger': hasError(nativeLanguage)}">
+              <div class="select" [ngClass]="{'is-danger': formHelper.hasError(nativeLanguage)}">
                 <select formControlName="nativeLanguage">
                   <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
                   <option *ngFor="let language of languages" [ngValue]="language">
@@ -89,8 +89,8 @@
               <progress class="progress is-large is-light" max="100">60%</progress>
             </div>
           </div>
-          <p class="help is-danger" *ngIf="hasError(nativeLanguage)">
-            {{ getFirstError(nativeLanguage) }}
+          <p class="help is-danger" *ngIf="formHelper.hasError(nativeLanguage)">
+            {{ formHelper.getFirstError(nativeLanguage) }}
           </p>
         </div>
 
@@ -98,7 +98,7 @@
           <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_WRITE' | translate }}</label>
           <div class="control has-icons-left">
             <div [ngClass]="{'is-invisible': isLoading}">
-              <div class="select" [ngClass]="{'is-danger': hasError(writeLanguage)}">
+              <div class="select" [ngClass]="{'is-danger': formHelper.hasError(writeLanguage)}">
                 <select formControlName="writeLanguage">
                   <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
                   <option *ngFor="let language of languages" [ngValue]="language">
@@ -114,8 +114,8 @@
               <progress class="progress is-large is-light" max="100">60%</progress>
             </div>
           </div>
-          <p class="help is-danger" *ngIf="hasError(writeLanguage)">
-            {{ getFirstError(writeLanguage) }}
+          <p class="help is-danger" *ngIf="formHelper.hasError(writeLanguage)">
+            {{ formHelper.getFirstError(writeLanguage) }}
           </p>
         </div>
       </section>

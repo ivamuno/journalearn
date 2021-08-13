@@ -1,7 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 
-import { Journal, JournalStoreService, ServiceError } from '../../../shared/services';
+import { Journal, JournalStoreService } from '../../../shared/services';
+import { ToastService } from '../../../shared/services/firestore/toast.service';
 import * as fromApp from '../../../store/app.reducer';
 
 @Component({
@@ -13,27 +15,29 @@ import * as fromApp from '../../../store/app.reducer';
 export class JournalsListComponent implements OnInit {
   isLoading: boolean;
   journals: Journal[] = [];
-  error: ServiceError;
 
   constructor(
     private readonly journalStoreService: JournalStoreService,
-    private readonly store: Store<fromApp.AppState>
+    private readonly store: Store<fromApp.AppState>,
+    private readonly toastService: ToastService
   ) { }
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.error = new ServiceError();
 
-    this.store.select('profileState').subscribe(({ profile }) => {
-      this.journalStoreService.getByUser(profile?.uid || '').subscribe(
-        (result: Journal[]) => {
-          this.journals = result;
-          this.isLoading = false;
-        },
-        (err: ServiceError) => {
-          this.error = err;
-        }
-      );
-    });
+    this.store.select('profileState').pipe(first()).toPromise()
+      .then(({ profile }) => {
+        this.journalStoreService.getByUser(profile?.uid || '').pipe().toPromise()
+          .then(
+            (result: Journal[]) => {
+              this.journals = result;
+              this.isLoading = false;
+            },
+            () => {
+              this.toastService.addError('MY_LIST.MESSAGES.ERROR');
+              this.isLoading = false;
+            }
+          );
+      });
   }
 }

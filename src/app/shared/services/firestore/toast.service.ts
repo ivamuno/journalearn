@@ -6,9 +6,17 @@ import { toast, ToastType } from 'bulma-toast';
   providedIn: 'root',
 })
 export class ToastService {
-  constructor(private readonly translateService: TranslateService) {}
+  constructor(private readonly translateService: TranslateService) { }
 
-  public add(type: ToastType, key: string, interpolateParams?: Object): void {
+  public addError(key: string, interpolateParams?: Object): void {
+    this.add('is-danger', key, interpolateParams);
+  }
+
+  public addSuccess(key: string, interpolateParams?: Object): void {
+    this.add('is-success', key, interpolateParams);
+  }
+
+  private add(type: ToastType, key: string, interpolateParams?: Object): void {
     toast({
       message: this.translateService.instant(key, interpolateParams),
       type: type,
