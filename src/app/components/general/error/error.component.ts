@@ -1,4 +1,6 @@
-import { Component, Injectable, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 import { ServiceError } from '../../../shared/services';
 
@@ -9,11 +11,19 @@ import { ServiceError } from '../../../shared/services';
 })
 @Injectable()
 export class ErrorComponent implements OnInit, OnDestroy {
-  @Input()
-  error: ServiceError;
+  errorSubscription: Subscription;
+  error: ServiceError | undefined;
+
+  constructor(private readonly errorService: ErrorService) {}
 
   ngOnInit(): void {
+    this.errorSubscription = this.errorService.errorEvent.subscribe((e) => {
+      this.error = e;
+      console.log('ErrorComponent.error', this.error);
+    });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
+  }
 }

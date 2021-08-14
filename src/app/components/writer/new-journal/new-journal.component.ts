@@ -1,6 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
+import { i18nKeys } from 'src/app/shared/i18n.keys';
+import { ErrorService } from 'src/app/shared/services/error.service';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Journal, JournalStatus, JournalStoreService, LanguageNames, ServiceError } from '../../../shared/services';
@@ -13,11 +16,11 @@ import * as fromApp from '../../../store/app.reducer';
 })
 @Injectable()
 export class NewJournalComponent implements OnInit {
+  i18nKeys = i18nKeys;
   isSaving: boolean;
   isSaved: boolean;
   languages: string[] = Object.values(LanguageNames);
-  author: string;
-  error: ServiceError = new ServiceError();
+  error: ServiceError;
 
   createForm: FormGroup = new FormGroup({
     author: new FormControl(null),
@@ -28,42 +31,39 @@ export class NewJournalComponent implements OnInit {
 
   constructor(
     private readonly journalStoreService: JournalStoreService,
-    private readonly store: Store<fromApp.AppState>
-  ) { }
+    private readonly store: Store<fromApp.AppState>,
+    private readonly errorService: ErrorService
+  ) {}
 
   ngOnInit(): void {
     this.isSaved = false;
-
-    this.store.select('profileState').subscribe(({ profile }) => {
-      this.author = profile?.uid || '';
-    });
   }
 
   async submit(): Promise<void> {
     this.isSaving = true;
     this.createForm.disable();
-    const newJournal: Journal = {
-      id: uuidv4(),
-      author: this.author,
-      language: {
-        name: this.createForm.value.language,
-        path: '',
-      },
-      date: new Date(Date.now()),
-      status: JournalStatus.Pending,
-      title: this.createForm.value.title,
-      text: this.createForm.value.text,
-      review: '',
-    };
 
-    this.journalStoreService
-      .add(newJournal)
-      .then(() => {
-        this.isSaved = true;
-      })
-      .catch((err: ServiceError) => {
-        this.error = err;
-      });
+    try {
+      const { profile } = await this.store.select('profileState').pipe(first()).toPromise();
+      const newJournal: Journal = {
+        id: uuidv4(),
+        author: profile?.uid || '',
+        language: {
+          name: this.createForm.value.language,
+          path: '',
+        },
+        date: new Date(Date.now()),
+        status: JournalStatus.Pending,
+        title: this.createForm.value.title,
+        text: this.createForm.value.text,
+        review: '',
+      };
+      await this.journalStoreService.add(newJournal);
+      this.isSaved = true;
+      this.errorService.addSuccessNotification(i18nKeys.NEW.MESSAGES.SUCCESS);
+    } catch {
+      this.errorService.addErrorNotification(i18nKeys.NEW.MESSAGES.ERROR);
+    }
 
     this.isSaving = false;
   }

@@ -8,10 +8,7 @@ import { AuthService, UserInfo, LanguageKeys, LanguageService, ProfileStoreServi
   providedIn: 'root',
 })
 export class AuthMockService extends AuthService {
-  constructor(
-    store: Store<fromApp.AppState>,
-    profileStoreService: ProfileStoreService
-  ) {
+  constructor(store: Store<fromApp.AppState>, profileStoreService: ProfileStoreService) {
     super(store, profileStoreService);
   }
 
@@ -38,52 +35,24 @@ export class AuthMockService extends AuthService {
     }
   }
 
-  protected async underlyingCancel(): Promise<void> { }
+  protected async underlyingCancel(): Promise<void> {}
 
-  protected async underlyingLogout(): Promise<void> { }
+  protected async underlyingLogout(): Promise<void> {}
 
   private async onCompleteLogin(): Promise<void> {
-    await this.complete(new UserInfo(
-      'complete@email.com',
-      'User',
-      'Complete',
-      '',
-      '999 66 66 66',
-      '',
-      '',
-      'COMP00pndUbBW8W7Xgc51lWNAqC3',
-      {
+    await this.complete(
+      new UserInfo('complete@email.com', 'User', 'Complete', '', '999 66 66 66', '', '', 'COMP00pndUbBW8W7Xgc51lWNAqC3', {
         native: LanguageService.getLanguageByKey(LanguageKeys.Spanish),
-        write: LanguageService.getLanguageByKey(LanguageKeys.English)
-      }
-    ));
+        write: LanguageService.getLanguageByKey(LanguageKeys.English),
+      })
+    );
   }
 
   private async onIncompleteLogin(): Promise<void> {
-    await this.complete(new UserInfo(
-      'incomplete@email.com',
-      '',
-      '',
-      '',
-      '666 77 77 77',
-      '',
-      '',
-      'INCOMP99aERT9984asXCsd6156aa',
-      undefined
-    ));
+    await this.complete(new UserInfo('incomplete@email.com', '', '', '', '666 77 77 77', '', '', 'INCOMP99aERT9984asXCsd6156aa', undefined));
   }
 
   private async onErrorLogin(): Promise<void> {
-    await this.complete(new UserInfo(
-      'error@email.com',
-      'User',
-      'Error',
-      '',
-      '999 66 66 66',
-      '',
-      '',
-      'COMP00pndUb-error-Xgc51lWNAqC3',
-      undefined
-    ));
+    await this.complete(new UserInfo('error@email.com', 'User', 'Error', '', '999 66 66 66', '', '', 'COMP00pndUb-error-Xgc51lWNAqC3', undefined));
   }
 }

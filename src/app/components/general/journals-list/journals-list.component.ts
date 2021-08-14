@@ -1,9 +1,10 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
+import { i18nKeys } from 'src/app/shared/i18n.keys';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 import { Journal, JournalStoreService } from '../../../shared/services';
-import { ToastService } from '../../../shared/services/firestore/toast.service';
 import * as fromApp from '../../../store/app.reducer';
 
 @Component({
@@ -13,13 +14,15 @@ import * as fromApp from '../../../store/app.reducer';
 })
 @Injectable()
 export class JournalsListComponent implements OnInit {
+  i18nKeys = i18nKeys;
+  
   isLoading: boolean;
   journals: Journal[] = [];
 
   constructor(
     private readonly journalStoreService: JournalStoreService,
     private readonly store: Store<fromApp.AppState>,
-    private readonly toastService: ToastService
+    private readonly errorService: ErrorService
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +37,7 @@ export class JournalsListComponent implements OnInit {
               this.isLoading = false;
             },
             () => {
-              this.toastService.addError('MY_LIST.MESSAGES.ERROR');
+              this.errorService.addErrorNotification(i18nKeys.MY_LIST.MESSAGES.ERROR);
               this.isLoading = false;
             }
           );

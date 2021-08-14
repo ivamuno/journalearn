@@ -11,14 +11,21 @@ export abstract class AuthService {
   isAuthenticatingEvent = new BehaviorSubject<boolean>(false);
   isAuthenticatedEvent = new BehaviorSubject<boolean>(false);
 
-  constructor(
-    protected store: Store<fromApp.AppState>,
-    private readonly profileStoreService: ProfileStoreService
-  ) {
-  }
+  constructor(protected store: Store<fromApp.AppState>, private readonly profileStoreService: ProfileStoreService) {}
 
   public init(): void {
-    this.underlyingInit();
+    const rawProfile = localStorage.getItem('profile');
+    if (!rawProfile || rawProfile === '') {
+      this.underlyingInit();
+      return;
+    }
+
+    const profile = JSON.parse(rawProfile);
+    if (profile && profile.firstName) {
+      this.store.dispatch(new ProfileActions.ProfileComplete({ profile }));
+    } else {
+      this.store.dispatch(new ProfileActions.ProfileIncomplete({ profile }));
+    }
   }
 
   protected abstract underlyingInit(): Promise<void>;

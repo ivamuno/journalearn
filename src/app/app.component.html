@@ -20,26 +20,26 @@
     <div class="navbar-menu" id="navMenu" [ngClass]="{'is-active': isNavBurgerActive }">
       <div class="navbar-start">
         <a class="navbar-item" [routerLink]="['/home']" routerLinkActive="is-active" (click)="closeNavBurger()">
-          {{ 'APP.HOME' | translate }}
+          {{ i18nKeys.APP.HOME | translate }}
         </a>
         <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/new']" routerLinkActive="is-active"
           (click)="closeNavBurger()">
-          {{ 'APP.NEW' | translate }}
+          {{ i18nKeys.APP.NEW | translate }}
         </a>
         <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/journals']" routerLinkActive="is-active"
           (click)="closeNavBurger()">
-          {{ 'APP.LIST' | translate }}
+          {{ i18nKeys.APP.LIST | translate }}
         </a>
         <a class="navbar-item" *ngIf="isAuthenticated" [routerLink]="['/reviews']" routerLinkActive="is-active"
           (click)="closeNavBurger()">
-          {{ 'APP.REVIEW' | translate }}
+          {{ i18nKeys.APP.REVIEW | translate }}
         </a>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
             <a class="button is-light is-outlined" *ngIf="!isAuthenticated" (click)="openAuthModal()">
-              <strong>{{ 'APP.LOGIN' | translate }}</strong>
+              <strong>{{ i18nKeys.APP.LOGIN | translate }}</strong>
             </a>
             <a class="button is-light is-outlined" *ngIf="!isAuthenticated" (click)="openLanguageModal()">
               <span class="icon is-small">
@@ -47,7 +47,7 @@
               </span>
             </a>
             <a class="button is-light is-outlined" *ngIf="isAuthenticated" (click)="logout()">
-              <strong>{{ 'APP.LOGOUT' | translate }}</strong>
+              <strong>{{ i18nKeys.APP.LOGOUT | translate }}</strong>
             </a>
             <a class="mb-2" *ngIf="isAuthenticated" [routerLink]="['/profile']">
               <div class="profile-initials has-background-primary is-flex is-justify-content-center is-align-items-center">
@@ -63,6 +63,7 @@
 
 <div class="columns is-flex-direction-column is-fullheight-100vh">
   <div class="column">
+    <app-error></app-error>
     <router-outlet></router-outlet>
   </div>
 

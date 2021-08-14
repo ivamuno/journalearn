@@ -1,7 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
+import { i18nKeys } from 'src/app/shared/i18n.keys';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 import { JournalStoreService, Journal } from '../../../shared/services';
-import { ToastService } from '../../../shared/services/firestore/toast.service';
 
 @Component({
   selector: 'app-review-list',
@@ -12,10 +13,11 @@ import { ToastService } from '../../../shared/services/firestore/toast.service';
 export class ReviewListComponent implements OnInit {
   isLoading: boolean;
   journals: Journal[] = [];
+  i18nKeys = i18nKeys;
 
   constructor(
     private readonly journalStoreService: JournalStoreService,
-    private readonly toastService: ToastService
+    private readonly errorService: ErrorService
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class ReviewListComponent implements OnInit {
           this.isLoading = false;
         },
         () => {
-          this.toastService.addError('REVIEW_LIST.MESSAGES.ERROR');
+          this.errorService.addErrorNotification(i18nKeys.REVIEW_LIST.MESSAGES.ERROR);
           this.isLoading = false;
         }
       );

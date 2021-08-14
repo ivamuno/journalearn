@@ -1,18 +1,18 @@
 <section class="section">
     <div class="container is-widescreen">
-        <h1 class="title">{{ 'MY_LIST.TITLE' | translate }}</h1>
-        <h2 class="subtitle">{{ 'MY_LIST.SUBTITLE' | translate }}</h2>
+        <h1 class="title">{{ i18nKeys.MY_LIST.TITLE | translate }}</h1>
+        <h2 class="subtitle">{{ i18nKeys.MY_LIST.SUBTITLE | translate }}</h2>
 
         <div class="table-container is-hidden-touch">
             <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                 <thead>
                     <tr>
-                        <th [width]="'10%'">{{ 'MY_LIST.FIELDS.AUTHOR' | translate }}</th>
-                        <th [width]="'10%'">{{ 'MY_LIST.FIELDS.LANGUAGE' | translate }}</th>
-                        <th [width]="'15%'">{{ 'MY_LIST.FIELDS.DATE' | translate }}</th>
-                        <th [width]="'45%'">{{ 'MY_LIST.FIELDS.TITLE' | translate }}</th>
-                        <th [width]="'10%'">{{ 'MY_LIST.FIELDS.STATUS' | translate }}</th>
-                        <th [width]="'10%'">{{ 'MY_LIST.FIELDS.ACTIONS' | translate }}</th>
+                        <th [width]="'10%'">{{ i18nKeys.MY_LIST.FIELDS.AUTHOR | translate }}</th>
+                        <th [width]="'10%'">{{ i18nKeys.MY_LIST.FIELDS.LANGUAGE | translate }}</th>
+                        <th [width]="'15%'">{{ i18nKeys.MY_LIST.FIELDS.DATE | translate }}</th>
+                        <th [width]="'45%'">{{ i18nKeys.MY_LIST.FIELDS.TITLE | translate }}</th>
+                        <th [width]="'10%'">{{ i18nKeys.MY_LIST.FIELDS.STATUS | translate }}</th>
+                        <th [width]="'10%'">{{ i18nKeys.MY_LIST.FIELDS.ACTIONS | translate }}</th>
                     </tr>
                 </thead>
                 <tbody *ngIf="isLoading;else elseJournals">
@@ -61,7 +61,7 @@
                                         <span class="icon is-small">
                                             <i class="fas fa-eye"></i>
                                         </span>
-                                        <span>{{ 'MY_LIST.FIELDS.VIEW' | translate }}</span>
+                                        <span>{{ i18nKeys.MY_LIST.FIELDS.VIEW | translate }}</span>
                                     </a>
                                 </div>
                             </td>
@@ -77,10 +77,10 @@
                     <tr *ngFor="let item of journals">
                         <td>
                             <div class="columns is-multiline is-mobile is-vcentered">
-                                <div class="column is-one-third"><strong>{{ 'MY_LIST.FIELDS.AUTHOR' | translate }}</strong></div>
+                                <div class="column is-one-third"><strong>{{ i18nKeys.MY_LIST.FIELDS.AUTHOR | translate }}</strong></div>
                                 <div class="column is-two-thirds">{{item.author}}</div>
 
-                                <div class="column is-one-third"><strong>{{ 'MY_LIST.FIELDS.LANGUAGE' | translate }}</strong></div>
+                                <div class="column is-one-third"><strong>{{ i18nKeys.MY_LIST.FIELDS.LANGUAGE | translate }}</strong></div>
                                 <div class="column is-two-thirds">
                                     <div class="icon-text">
                                         <figure class="icon">
@@ -90,19 +90,19 @@
                                     </div>
                                 </div>
 
-                                <div class="column is-one-third"><strong>{{ 'MY_LIST.FIELDS.DATE' | translate }}</strong></div>
+                                <div class="column is-one-third"><strong>{{ i18nKeys.MY_LIST.FIELDS.DATE | translate }}</strong></div>
                                 <div class="column is-two-thirds">{{item.date | date:'EEE, LLL d, YYYY'}}</div>
 
-                                <div class="column is-one-third"><strong>{{ 'MY_LIST.FIELDS.TITLE' | translate }}</strong></div>
+                                <div class="column is-one-third"><strong>{{ i18nKeys.MY_LIST.FIELDS.TITLE | translate }}</strong></div>
                                 <div class="column is-two-thirds">{{item.title}}</div>
 
-                                <div class="column is-one-third"><strong>{{ 'MY_LIST.FIELDS.STATUS' | translate }}</strong></div>
+                                <div class="column is-one-third"><strong>{{ i18nKeys.MY_LIST.FIELDS.STATUS | translate }}</strong></div>
                                 <div class="column is-two-thirds">
                                     <span class="tag"
                                         [ngClass]="item.status == 'Pending' ? 'is-warning' : 'is-success'">{{item.status}}</span>
                                 </div>
 
-                                <div class="column is-one-third"><strong>{{ 'MY_LIST.FIELDS.ACTIONS' | translate }}</strong></div>
+                                <div class="column is-one-third"><strong>{{ i18nKeys.MY_LIST.FIELDS.ACTIONS | translate }}</strong></div>
                                 <div class="column is-two-thirds">
                                     <div class="buttons are-small">
                                         <a class="button is-dark is-outlined" *ngIf="item.status !== 'Pending'"
@@ -110,7 +110,7 @@
                                             <span class="icon is-small">
                                                 <i class="fas fa-eye"></i>
                                             </span>
-                                            <span>{{ 'MY_LIST.FIELDS.VIEW' | translate }}</span>
+                                            <span>{{ i18nKeys.MY_LIST.FIELDS.VIEW | translate }}</span>
                                         </a>
                                     </div>
                                 </div>

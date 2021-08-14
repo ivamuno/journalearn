@@ -2,9 +2,10 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { i18nKeys } from 'src/app/shared/i18n.keys';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 import { JournalStoreService, Journal, JournalStatus, ServiceError } from '../../../shared/services';
-import { ToastService } from '../../../shared/services/firestore/toast.service';
 
 @Component({
   selector: 'app-review-journal',
@@ -21,12 +22,13 @@ export class ReviewJournalComponent implements OnInit {
   });
   journal: Journal = new Journal();
   error: ServiceError;
+  i18nKeys = i18nKeys;
 
   constructor(
     private readonly journalStoreService: JournalStoreService,
     private readonly route: ActivatedRoute,
-    private readonly toastService: ToastService
-  ) { }
+    private readonly errorService: ErrorService
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -49,7 +51,7 @@ export class ReviewJournalComponent implements OnInit {
           if (err.isAccessDenied()) {
             this.error = err;
           } else {
-            this.toastService.addError('REVIEW.MESSAGES.ERROR_LOADING');
+            this.errorService.addErrorNotification(i18nKeys.REVIEW.MESSAGES.ERROR_LOADING);
           }
         }
       );
@@ -75,9 +77,9 @@ export class ReviewJournalComponent implements OnInit {
     try {
       await this.journalStoreService.review(journal);
       this.isSaved = true;
-      this.toastService.addSuccess('REVIEW.MESSAGES.SUCCESS');
+      this.errorService.addSuccessNotification(i18nKeys.REVIEW.MESSAGES.SUCCESS);
     } catch {
-      this.toastService.addError('REVIEW.MESSAGES.ERROR_SAVING');
+      this.errorService.addErrorNotification(i18nKeys.REVIEW.MESSAGES.ERROR_SAVING);
     }
 
     this.isSaving = false;

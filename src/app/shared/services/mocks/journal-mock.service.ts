@@ -97,7 +97,12 @@ export class JournalMockService extends JournalStoreService {
   public get(id: string): Observable<Journal> {
     const promise = async () => {
       await MockHelper.delay();
-      const journal = this.journals.find((j) => j.id === id) || new Journal();
+      const journal = this.journals.find((j) => j.id === id);
+
+      if (!journal) {
+        throw new ServiceError('not-found');
+      }
+
       if (journal.title.includes('Error')) {
         throw this.defaultError;
       }

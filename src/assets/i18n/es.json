@@ -50,7 +50,8 @@
       "RULE2": "Usa corchetes '[]' para incluir palabras o expresiones en tu propio idioma."
     },
     "MESSAGES": {
-      "SUCCESS": "¡El diario se ha guardado correctamente!"
+      "SUCCESS": "¡El diario se ha guardado correctamente!",
+      "ERROR": "Ha ocurrido un error creando los diarios."
     }
   },
   "REVIEW": {

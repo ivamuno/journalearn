@@ -1,4 +1,4 @@
-<section class="hero is-large is-danger">
+<section *ngIf="error" class="hero is-large is-danger">
   <div class="hero-body">
     <p class="title">
       {{ error.code }}

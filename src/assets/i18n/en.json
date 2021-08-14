@@ -50,7 +50,8 @@
       "RULE2": "Use brackets '[]' to include words and expressions in your own language."
     },
     "MESSAGES": {
-      "SUCCESS": "The journal has been saved successfully!"
+      "SUCCESS": "The journal has been saved successfully!",
+      "ERROR": "An error occurred creating the journal"
     }
   },
   "REVIEW": {

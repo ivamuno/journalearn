@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { AuthService, LanguageService, UserInfo } from './shared/services';
 import * as fromApp from './store/app.reducer';
+import { i18nKeys } from './shared/i18n.keys';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import * as fromApp from './store/app.reducer';
 })
 @Injectable()
 export class AppComponent implements OnInit {
+  i18nKeys = i18nKeys;
+
   isAuthenticated = false;
   isNavBurgerActive = false;
   title = 'journal-me';
@@ -21,7 +24,6 @@ export class AppComponent implements OnInit {
     private readonly store: Store<fromApp.AppState>,
     private readonly languageService: LanguageService
   ) {
-    authService.init();
     this.store.select('profileState').subscribe(({ profile }) => {
       this.isAuthenticated = !!profile;
       if (profile) {
@@ -33,6 +35,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.init();
     this.languageService.set(navigator.language);
   }
 

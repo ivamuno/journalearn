@@ -1,11 +1,11 @@
 <section class="section">
   <div class="container is-widescreen is-info">
     <form [formGroup]="profileForm">
-      <h1 class="title">{{ 'PROFILE.TITLE' | translate }}</h1>
-      <h2 class="subtitle">{{ 'PROFILE.SUBTITLE' | translate }}</h2>
+      <h1 class="title">{{ i18nKeys.PROFILE.TITLE | translate }}</h1>
+      <h2 class="subtitle">{{ i18nKeys.PROFILE.SUBTITLE | translate }}</h2>
 
       <section class="section has-background-info my-5">
-        <h1 class="title is-4">{{ 'PROFILE.TITLE_BASIC' | translate }}</h1>
+        <h1 class="title is-4">{{ i18nKeys.PROFILE.TITLE_BASIC | translate }}</h1>
         <div class="columns">
           <div class="column is-one-quarter is-flex is-justify-content-center is-align-items-center">
             <div
@@ -16,7 +16,7 @@
 
           <div class="column">
             <div class="field">
-              <label class="label">{{ 'PROFILE.FIELDS.FIRST_NAME' | translate }}</label>
+              <label class="label">{{ i18nKeys.PROFILE.FIELDS.FIRST_NAME | translate }}</label>
               <div class="control has-icons-left">
                 <div [ngClass]="{'is-invisible': isLoading}">
                   <input class="input" type="text" formControlName="firstName"
@@ -35,7 +35,7 @@
             </div>
 
             <div class="field">
-              <label class="label">{{ 'PROFILE.FIELDS.LAST_NAME' | translate }}</label>
+              <label class="label">{{ i18nKeys.PROFILE.FIELDS.LAST_NAME | translate }}</label>
               <div class="control has-icons-left">
                 <div [ngClass]="{'is-invisible': isLoading}">
                   <input class="input" type="text" formControlName="lastName"
@@ -56,7 +56,7 @@
         </div>
 
         <div class="field">
-          <label class="label">{{ 'PROFILE.FIELDS.DESCRIPTION' | translate }}</label>
+          <label class="label">{{ i18nKeys.PROFILE.FIELDS.DESCRIPTION | translate }}</label>
           <div class="control">
             <textarea class="textarea" formControlName="description"
               [ngClass]="{'is-danger': formHelper.hasError(description)}"></textarea>
@@ -68,14 +68,14 @@
       </section>
 
       <section class="section has-background-info my-5">
-        <h1 class="title is-4">{{ 'PROFILE.TITLE_LANGUAGE' | translate }}</h1>
+        <h1 class="title is-4">{{ i18nKeys.PROFILE.TITLE_LANGUAGE | translate }}</h1>
         <div class="field">
-          <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_NATIVE' | translate }}</label>
+          <label class="label">{{ i18nKeys.PROFILE.FIELDS.LANGUAGE_NATIVE | translate }}</label>
           <div class="control has-icons-left">
             <div [ngClass]="{'is-invisible': isLoading}">
               <div class="select" [ngClass]="{'is-danger': formHelper.hasError(nativeLanguage)}">
                 <select formControlName="nativeLanguage">
-                  <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
+                  <option [ngValue]="null" disabled>{{ i18nKeys.PROFILE.FIELDS.CHOOSE_LANGUAGE | translate }}</option>
                   <option *ngFor="let language of languages" [ngValue]="language">
                     {{language}}
                   </option>
@@ -95,12 +95,12 @@
         </div>
 
         <div class="field">
-          <label class="label">{{ 'PROFILE.FIELDS.LANGUAGE_WRITE' | translate }}</label>
+          <label class="label">{{ i18nKeys.PROFILE.FIELDS.LANGUAGE_WRITE | translate }}</label>
           <div class="control has-icons-left">
             <div [ngClass]="{'is-invisible': isLoading}">
               <div class="select" [ngClass]="{'is-danger': formHelper.hasError(writeLanguage)}">
                 <select formControlName="writeLanguage">
-                  <option [ngValue]="null" disabled>{{ 'PROFILE.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
+                  <option [ngValue]="null" disabled>{{ i18nKeys.PROFILE.FIELDS.CHOOSE_LANGUAGE | translate }}</option>
                   <option *ngFor="let language of languages" [ngValue]="language">
                     {{language}}
                   </option>
@@ -126,7 +126,7 @@
             <span class="icon is-small">
               <i class="fas fa-check"></i>
             </span>
-            <span>{{ 'PROFILE.FIELDS.SAVE' | translate }}</span>
+            <span>{{ i18nKeys.PROFILE.FIELDS.SAVE | translate }}</span>
           </button>
         </div>
         <div class="control">
@@ -134,7 +134,7 @@
             <span class="icon is-small">
               <i class="fas fa-times"></i>
             </span>
-            <span>{{ 'PROFILE.FIELDS.RESET' | translate }}</span>
+            <span>{{ i18nKeys.PROFILE.FIELDS.RESET | translate }}</span>
           </button>
         </div>
       </div>

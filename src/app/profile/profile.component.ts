@@ -6,8 +6,9 @@ import { first } from 'rxjs/operators';
 import { LanguageNames, UserInfo, LanguageService, ProfileStoreService } from '../shared/services';
 import * as fromApp from '../store/app.reducer';
 import * as ProfileActions from './store/profile.actions';
-import { ToastService } from '../shared/services/firestore/toast.service';
 import { FormHelper } from '../shared/form.helper';
+import { ErrorService } from '../shared/services/error.service';
+import { i18nKeys } from '../shared/i18n.keys';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,8 @@ import { FormHelper } from '../shared/form.helper';
 })
 @Injectable()
 export class ProfileComponent implements OnInit {
+  i18nKeys = i18nKeys;
+
   isLoading: boolean;
   isSaving: boolean;
   languages: string[] = Object.values(LanguageNames);
@@ -43,7 +46,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private readonly store: Store<fromApp.AppState>,
     private readonly profileStoreService: ProfileStoreService,
-    private readonly toastService: ToastService,
+    private readonly errorService: ErrorService,
     readonly formHelper: FormHelper
   ) {
     this.profileForm = new FormGroup({
@@ -106,9 +109,9 @@ export class ProfileComponent implements OnInit {
     try {
       await this.profileStoreService.set(this.profile);
       this.store.dispatch(new ProfileActions.ProfileUpdate({ profile: this.profile }));
-      this.toastService.addSuccess('PROFILE.MESSAGES.SUCCESS');
+      this.errorService.addSuccessNotification(i18nKeys.PROFILE.MESSAGES.SUCCESS);
     } catch (error) {
-      this.toastService.addError('PROFILE.MESSAGES.ERROR');
+      this.errorService.addErrorNotification(i18nKeys.PROFILE.MESSAGES.ERROR);
     }
 
     this.isSaving = false;

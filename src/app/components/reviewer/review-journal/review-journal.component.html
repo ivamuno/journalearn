@@ -1,126 +1,123 @@
-<app-error [error]="error" *ngIf="error;else elseError"></app-error>
-<ng-template #elseError>
-  <section class="section">
-    <div class="container is-widescreen">
-      <div class="columns">
-        <div class="column">
-          <form [formGroup]="reviewForm">
-            <h1 class="title">{{ 'REVIEW.TITLE' | translate }}</h1>
+<section *ngIf="!!error" class="section">
+  <div class="container is-widescreen">
+    <div class="columns">
+      <div class="column">
+        <form [formGroup]="reviewForm">
+          <h1 class="title">{{ i18nKeys.REVIEW.TITLE | translate }}</h1>
 
-            <div class="field">
-              <label class="label">{{ 'REVIEW.FIELDS.AUTHOR' | translate }}</label>
-              <div class="control has-icons-left">
-                <div [ngClass]="{'is-invisible': isLoading}">
-                  <input class="input" type="text" [value]="journal.author" disabled>
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-user"></i>
-                  </span>
-                </div>
-                <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
-                  <progress class="progress is-large is-light" max="100">60%</progress>
-                </div>
+          <div class="field">
+            <label class="label">{{ i18nKeys.REVIEW.FIELDS.AUTHOR | translate }}</label>
+            <div class="control has-icons-left">
+              <div [ngClass]="{'is-invisible': isLoading}">
+                <input class="input" type="text" [value]="journal.author" disabled>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+              <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                <progress class="progress is-large is-light" max="100">60%</progress>
               </div>
             </div>
+          </div>
 
-            <div class="field">
-              <label class="label">{{ 'REVIEW.FIELDS.LANGUAGE' | translate }}</label>
-              <div class="control has-icons-left">
-                <div [ngClass]="{'is-invisible': isLoading}">
-                  <input class="input" type="text" [value]="journal.language.name" disabled>
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-globe"></i>
-                  </span>
-                </div>
-                <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
-                  <progress class="progress is-large is-light" max="100">60%</progress>
-                </div>
+          <div class="field">
+            <label class="label">{{ i18nKeys.REVIEW.FIELDS.LANGUAGE | translate }}</label>
+            <div class="control has-icons-left">
+              <div [ngClass]="{'is-invisible': isLoading}">
+                <input class="input" type="text" [value]="journal.language.name" disabled>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-globe"></i>
+                </span>
+              </div>
+              <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                <progress class="progress is-large is-light" max="100">60%</progress>
               </div>
             </div>
+          </div>
 
-            <div class="field">
-              <label class="label">{{ 'REVIEW.FIELDS.DATE' | translate }}</label>
-              <div class="control has-icons-left">
-                <div [ngClass]="{'is-invisible': isLoading}">
-                  <input class="input" type="text" [value]="journal.date | date:'EEE, LLL d, YYYY'" disabled>
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-calendar-day"></i>
-                  </span>
-                </div>
-                <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
-                  <progress class="progress is-large is-light" max="100">60%</progress>
-                </div>
+          <div class="field">
+            <label class="label">{{ i18nKeys.REVIEW.FIELDS.DATE | translate }}</label>
+            <div class="control has-icons-left">
+              <div [ngClass]="{'is-invisible': isLoading}">
+                <input class="input" type="text" [value]="journal.date | date:'EEE, LLL d, YYYY'" disabled>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-calendar-day"></i>
+                </span>
+              </div>
+              <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                <progress class="progress is-large is-light" max="100">60%</progress>
               </div>
             </div>
+          </div>
 
-            <div class="field">
-              <label class="label">{{ 'REVIEW.FIELDS.TITLE' | translate }}</label>
-              <div class="control has-icons-left">
-                <div [ngClass]="{'is-invisible': isLoading}">
-                  <input class="input" type="text" [value]="journal.title" disabled>
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-heading"></i>
-                  </span>
-                </div>
-                <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
-                  <progress class="progress is-large is-light" max="100">60%</progress>
-                </div>
+          <div class="field">
+            <label class="label">{{ i18nKeys.REVIEW.FIELDS.TITLE | translate }}</label>
+            <div class="control has-icons-left">
+              <div [ngClass]="{'is-invisible': isLoading}">
+                <input class="input" type="text" [value]="journal.title" disabled>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-heading"></i>
+                </span>
+              </div>
+              <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                <progress class="progress is-large is-light" max="100">60%</progress>
               </div>
             </div>
+          </div>
 
-            <div class="field">
-              <label class="label">{{ 'REVIEW.FIELDS.TEXT' | translate }}</label>
+          <div class="field">
+            <label class="label">{{ i18nKeys.REVIEW.FIELDS.TEXT | translate }}</label>
+            <div class="control">
+              <div [ngClass]="{'is-invisible': isLoading}">
+                <textarea class="textarea" formControlName="text" [value]="journal.review || journal.text"></textarea>
+              </div>
+              <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
+                <progress class="progress is-large is-light" max="100">60%</progress>
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="{'is-hidden': isSaved}">
+            <div class="field is-grouped">
               <div class="control">
-                <div [ngClass]="{'is-invisible': isLoading}">
-                  <textarea class="textarea" formControlName="text" [value]="journal.review || journal.text"></textarea>
-                </div>
-                <div *ngIf="isLoading" class="is-flex is-overlay is-justify-content-center is-align-items-center">
-                  <progress class="progress is-large is-light" max="100">60%</progress>
-                </div>
+                <button class="button is-success" [ngClass]="{'is-loading': isSaving}"
+                  [disabled]="isLoading ? 'disabled' : ''" (click)="submit()">
+                  <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                  </span>
+                  <span>{{ i18nKeys.REVIEW.FIELDS.SAVE | translate }}</span>
+                </button>
+              </div>
+              <div class="control">
+                <button class="button" [disabled]="isLoading || isSaving ? 'disabled' : ''" (click)="cancel()">
+                  <span class="icon is-small">
+                    <i class="fas fa-times"></i>
+                  </span>
+                  <span>{{ i18nKeys.REVIEW.FIELDS.RESET | translate }}</span>
+                </button>
               </div>
             </div>
-
-            <div [ngClass]="{'is-hidden': isSaved}">
-              <div class="field is-grouped">
-                <div class="control">
-                  <button class="button is-success" [ngClass]="{'is-loading': isSaving}"
-                    [disabled]="isLoading ? 'disabled' : ''" (click)="submit()">
-                    <span class="icon is-small">
-                      <i class="fas fa-check"></i>
-                    </span>
-                    <span>{{ 'REVIEW.FIELDS.SAVE' | translate }}</span>
-                  </button>
-                </div>
-                <div class="control">
-                  <button class="button" [disabled]="isLoading || isSaving ? 'disabled' : ''" (click)="cancel()">
-                    <span class="icon is-small">
-                      <i class="fas fa-times"></i>
-                    </span>
-                    <span>{{ 'REVIEW.FIELDS.RESET' | translate }}</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column">
-          <article class="message">
-            <div class="message-header">
-              <p>{{ 'REVIEW.RULES.TITLE' | translate }}</p>
-            </div>
-            <div class="message-body">
-              <div class="content">
-                <ul>
-                  <li>{{ 'REVIEW.RULES.RULE1' | translate }}</li>
-                </ul>
-
-                <p [innerHTML]="'REVIEW.EXAMPLE' | translate"></p>
-              </div>
-            </div>
-          </article>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
-  </section>
-</ng-template>
+    <div class="columns">
+      <div class="column">
+        <article class="message">
+          <div class="message-header">
+            <p>{{ i18nKeys.REVIEW.RULES.TITLE | translate }}</p>
+          </div>
+          <div class="message-body">
+            <div class="content">
+              <ul>
+                <li>{{ i18nKeys.REVIEW.RULES.RULE1 | translate }}</li>
+              </ul>
+
+              <p [innerHTML]="'REVIEW.EXAMPLE' | translate"></p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

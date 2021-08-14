@@ -1,4 +1,5 @@
 import { Component, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { i18nKeys } from 'src/app/shared/i18n.keys';
 import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { LanguageService } from 'src/app/shared/services/language.service';
 })
 @Injectable()
 export class LanguageComponent implements OnInit, OnDestroy {
+  i18nKeys = i18nKeys;
+
   isOpened = false;
   language: string;
 

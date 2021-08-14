@@ -3,24 +3,14 @@
     <div class="columns">
       <div class="column">
         <form [formGroup]="createForm">
-          <h1 class="title">{{ 'NEW.TITLE' | translate }}</h1>
-
+          <h1 class="title">{{ i18nKeys.NEW.TITLE | translate }}</h1>
+          
           <div class="field">
-            <label class="label">{{ 'NEW.FIELDS.AUTHOR' | translate }}</label>
-            <div class="control has-icons-left">
-              <input class="input" type="text" [value]="author" disabled>
-              <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">{{ 'NEW.FIELDS.LANGUAGE' | translate }}</label>
+            <label class="label">{{ i18nKeys.NEW.FIELDS.LANGUAGE | translate }}</label>
             <div class="control has-icons-left">
               <div class="select">
                 <select formControlName="language">
-                  <option [ngValue]="null" disabled>{{ 'NEW.FIELDS.CHOOSE_LANGUAGE' | translate }}</option>
+                  <option [ngValue]="null" disabled>{{ i18nKeys.NEW.FIELDS.CHOOSE_LANGUAGE | translate }}</option>
                   <option *ngFor="let language of languages" [ngValue]="language">
                     {{language}}
                   </option>
@@ -33,7 +23,7 @@
           </div>
 
           <div class="field">
-            <label class="label">{{ 'NEW.FIELDS.TITLE' | translate }}</label>
+            <label class="label">{{ i18nKeys.NEW.FIELDS.TITLE | translate }}</label>
             <div class="control has-icons-left">
               <input class="input" type="text" placeholder="My first journal" formControlName="title">
               <span class="icon is-small is-left">
@@ -43,7 +33,7 @@
           </div>
 
           <div class="field">
-            <label class="label">{{ 'NEW.FIELDS.TEXT' | translate }}</label>
+            <label class="label">{{ i18nKeys.NEW.FIELDS.TEXT | translate }}</label>
             <div class="control">
               <textarea class="textarea" formControlName="text"></textarea>
             </div>
@@ -56,7 +46,7 @@
                   <span class="icon is-small">
                     <i class="fas fa-check"></i>
                   </span>
-                  <span>{{ 'NEW.FIELDS.SAVE' | translate }}</span>
+                  <span>{{ i18nKeys.NEW.FIELDS.SAVE | translate }}</span>
                 </button>
               </div>
               <div class="control">
@@ -64,21 +54,9 @@
                   <span class="icon is-small">
                     <i class="fas fa-times"></i>
                   </span>
-                  <span>{{ 'NEW.FIELDS.RESET' | translate }}</span>
+                  <span>{{ i18nKeys.NEW.FIELDS.RESET | translate }}</span>
                 </button>
               </div>
-            </div>
-          </div>
-
-          <div [ngClass]="{'is-hidden': !isSaved}">
-            <div class="notification is-success">
-              {{ 'NEW.MESSAGES.SUCCESS' | translate }}
-            </div>
-          </div>
-
-          <div [ngClass]="{'is-hidden': !error.message}">
-            <div class="notification is-danger">
-              {{ error.code }} - {{ error.message }}
             </div>
           </div>
         </form>
@@ -88,16 +66,16 @@
       <div class="column">
         <article class="message">
           <div class="message-header">
-            <p>{{ 'NEW.RULES.TITLE' | translate }}</p>
+            <p>{{ i18nKeys.NEW.RULES.TITLE | translate }}</p>
           </div>
           <div class="message-body">
             <div class="content">
               <ul>
-                <li>{{ 'NEW.RULES.RULE1' | translate }}</li>
-                <li>{{ 'NEW.RULES.RULE2' | translate }}</li>
+                <li>{{ i18nKeys.NEW.RULES.RULE1 | translate }}</li>
+                <li>{{ i18nKeys.NEW.RULES.RULE2 | translate }}</li>
               </ul>
 
-              <p [innerHTML]="'NEW.EXAMPLE' | translate"></p>
+              <p [innerHTML]="i18nKeys.NEW.EXAMPLE | translate"></p>
             </div>
           </div>
         </article>
