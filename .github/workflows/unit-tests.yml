@@ -26,7 +26,6 @@ jobs:
         run: npm run test:ci
         env:
           CHROME_BIN: /usr/bin/google-chrome
-          NODE_OPTIONS: --openssl-legacy-provider
 
       - name: Publish test results
         uses: dorny/test-reporter@v1
