@@ -18,14 +18,11 @@ jobs:
         with:
           node-version: '16'
           cache: 'npm'
-          cache-dependency-path: journalearn/package-lock.json
 
       - name: Install dependencies
-        working-directory: journalearn
         run: npm ci
 
       - name: Run unit tests
-        working-directory: journalearn
         run: npm run test:ci
         env:
           CHROME_BIN: /usr/bin/google-chrome
@@ -36,7 +33,7 @@ jobs:
         if: always()
         with:
           name: JUnit Tests
-          path: journalearn/test-results/junit.xml
+          path: test-results/junit.xml
           reporter: java-junit
 
       - name: Upload coverage report
@@ -44,12 +41,12 @@ jobs:
         if: always()
         with:
           name: coverage-report
-          path: journalearn/coverage/journal-me/lcov.info
+          path: coverage/journal-me/lcov.info
           retention-days: 30
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         if: always()
         with:
-          files: journalearn/coverage/journal-me/lcov.info
+          files: coverage/journal-me/lcov.info
           fail_ci_if_error: false
