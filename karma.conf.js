@@ -39,13 +39,13 @@ module.exports = function (config) {
       outputFile: 'junit.xml',
       useBrowserName: false
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: process.env.CI ? ['progress', 'junit', 'coverage'] : ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false,
-    restartOnFileChange: true
+    autoWatch: !process.env.CI,
+    browsers: process.env.CI ? ['ChromeHeadless'] : ['Chrome'],
+    singleRun: !!process.env.CI,
+    restartOnFileChange: !process.env.CI
   });
 };
