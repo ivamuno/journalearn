@@ -1,0 +1,55 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: journalearn/package-lock.json
+
+      - name: Install dependencies
+        working-directory: journalearn
+        run: npm ci
+
+      - name: Run unit tests
+        working-directory: journalearn
+        run: npm run test:ci
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+          NODE_OPTIONS: --openssl-legacy-provider
+
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: JUnit Tests
+          path: journalearn/test-results/junit.xml
+          reporter: java-junit
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: coverage-report
+          path: journalearn/coverage/journal-me/lcov.info
+          retention-days: 30
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          files: journalearn/coverage/journal-me/lcov.info
+          fail_ci_if_error: false

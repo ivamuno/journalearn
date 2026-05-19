@@ -96,7 +96,9 @@
             "styles": [
               "src/styles.sass"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/zone.js/dist/zone-testing.js"
+            ]
           }
         },
         "lint": {
