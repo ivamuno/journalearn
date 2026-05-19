@@ -98,7 +98,8 @@
             ],
             "scripts": [
               "node_modules/zone.js/dist/zone-testing.js"
-            ]
+            ],
+            "codeCoverage": true
           }
         },
         "lint": {
