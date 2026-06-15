@@ -1,7 +1,6 @@
-name: Debug Meticulous Events
+name: Debug Meticulous Check Run Events
 
 on:
-  status:
   check_run:
     types:
       - completed

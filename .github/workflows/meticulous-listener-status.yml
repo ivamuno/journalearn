@@ -1,0 +1,16 @@
+name: Debug Meticulous Status Events
+
+on:
+  status:
+  
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Event summary 1
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Actor: ${{ github.actor }}"
+
+      - name: Dump payload 1
+        run: echo '${{ toJson(github.event) }}' | jq .
