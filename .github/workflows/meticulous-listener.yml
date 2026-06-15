@@ -10,10 +10,10 @@ jobs:
   debug:
     runs-on: ubuntu-latest
     steps:
-      - name: Event summary
+      - name: Event summary 1
         run: |
           echo "Event: ${{ github.event_name }}"
           echo "Actor: ${{ github.actor }}"
 
-      - name: Dump payload
+      - name: Dump payload 1
         run: echo '${{ toJson(github.event) }}' | jq .
