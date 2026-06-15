@@ -4,9 +4,7 @@ on:
   check_run:
     types:
       - completed
-  push:
-    branches:
-      - main
+  push: {}
 jobs:
   debug:
     runs-on: ubuntu-latest
