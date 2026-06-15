@@ -1,0 +1,40 @@
+name: Meticulous
+
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+  workflow_dispatch: {}
+
+permissions:
+  actions: write
+  contents: read
+  issues: write
+  pull-requests: write
+  statuses: read
+
+jobs:
+  meticulous:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run Meticulous tests
+        uses: alwaysmeticulous/report-diffs-action/upload-assets@v1
+        with:
+          api-token: ${{ secrets.METICULOUS_API_TOKEN }}
+          github-token: ${{ github.token }}
+          app-directory: dist/journal-me
