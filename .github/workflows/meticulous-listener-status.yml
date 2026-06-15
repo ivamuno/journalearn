@@ -6,6 +6,9 @@ on:
 jobs:
   debug:
     runs-on: ubuntu-latest
+    if: |
+      contains(toJson(github.event.branches), '"name":"main"') &&
+      (github.event.state == 'success' || github.event.state == 'failure' || github.event.state == 'error')
     steps:
       - name: Event summary
         run: |
@@ -14,3 +17,26 @@ jobs:
 
       - name: Dump payload
         run: echo '${{ toJson(github.event) }}' | jq .
+
+      - name: Build channel data
+        run: |
+          OWNER=$(echo "$GITHUB_REPOSITORY" | cut -d'/' -f1)
+          REPO=$(echo "$GITHUB_REPOSITORY" | cut -d'/' -f2)
+          SHA="${{ github.event.sha }}"
+          BRANCH=$(echo '${{ toJson(github.event.branches) }}' | jq -r '.[0].name')
+          RUN_ID="$GITHUB_RUN_ID"
+          CHANNEL_TYPE="github_default"
+          SHA2="$GITHUB_SHA"
+          BRANCH2=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
+
+          CHANNEL_DATA=$(jq -n \
+            --arg owner "$OWNER" \
+            --arg repo "$REPO" \
+            --arg sha "$SHA" \
+            --arg sha2 "$SHA2" \
+            --arg branch "$BRANCH" \
+            --arg branch2 "$BRANCH2" \
+            --arg run_id "$RUN_ID" \
+            '{ owner: $owner, repo: $repo, sha: $sha, sha2: $sha2, branch: $branch, branch2: $branch2, run_id: $run_id }')
+
+          echo "CHANNEL_DATA=$CHANNEL_DATA"
