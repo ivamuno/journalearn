@@ -15,7 +15,7 @@ jobs:
           echo "Branches: ${{ github.event.branches }}"
           echo "Branches JSON: ${{ toJson(github.event.branches) }}"
           echo "Contains main: ${{ contains(toJson(github.event.branches), '"name":"main"') }}"
-          echo "Is final state: ${{ github.event.state == 'success' || github.event.state == 'failure' || github.event.state == 'error' }}"
+          echo "Is  final state: ${{ github.event.state == 'success' || github.event.state == 'failure' || github.event.state == 'error' }}"
 
       - name: Dump payload
         run: echo '${{ toJson(github.event) }}' | jq .
