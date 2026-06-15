@@ -6,14 +6,16 @@ on:
 jobs:
   debug:
     runs-on: ubuntu-latest
-    if: |
-      contains(toJson(github.event.branches), '"name":"main"') &&
-      (github.event.state == 'success' || github.event.state == 'failure' || github.event.state == 'error')
     steps:
       - name: Event summary
         run: |
           echo "Event: ${{ github.event_name }}"
           echo "Actor: ${{ github.actor }}"
+          echo "State: ${{ github.event.state }}"
+          echo "Branches: ${{ github.event.branches }}"
+          echo "Branches JSON: ${{ toJson(github.event.branches) }}"
+          echo "Contains main: ${{ contains(toJson(github.event.branches), '"name":"main"') }}"
+          echo "Is final state: ${{ github.event.state == 'success' || github.event.state == 'failure' || github.event.state == 'error' }}"
 
       - name: Dump payload
         run: echo '${{ toJson(github.event) }}' | jq .
